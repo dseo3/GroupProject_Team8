@@ -22,7 +22,10 @@
     background: linear-gradient(to top, #D8D8D8 25%,#8A74D4 80%);
 }
 
-.course_code {
-    
+.navbar-height {
+    display: flex;
+    text-align: space-around;
+    flex-direction: row;
+    justify-content: space-between;
+    min-height: 100;
 }
-
