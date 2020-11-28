@@ -8,67 +8,172 @@
     crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="script.js"></script>
 </head>
 <body>
-  <nav class="navbar is-danger" role="navigation" aria-label="main navigation">
-    <div class="navbar-brand">
-      <a class="navbar-item" href="/">
-        <img src="connector.png" title="Course Connector" alt="Course Connector" >
-      </a>
-    </div>
-  </nav>
+    <section class="section">
+        <div class="container">
+          <h1 class="is-size-1 has-text-centered">
+            Course Connector
+          </h1>
+          <h1 class="is-size-2 has-text-centered">
+            Select Your Major
+          </h1>
+        </div>
+      </section>
 
-
-  <section class="section">
-    <div class="container">
-      <h1 class="title">Set Your Preferences</h1>
-    </div>
-
-    <div class="dropdown">
-      <div class="dropdown-trigger">
-        <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
-          <span> Select Your Program </span>
-          <span class="icon is-small">
-            <i class="fas fa-angle-down" aria-hidden="true"></i>
-          </span>
-        </button>
-      </div>
-      <div class="dropdown-menu" id="dropdown-menu3" role="menu">
-        <div class="dropdown-content">
-          <a href="#" class="dropdown-item">
-            Overview
-          </a>
-          <a href="#" class="dropdown-item">
-            Modifiers
-          </a>
-          <a href="#" class="dropdown-item">
-            Grid
-          </a>
-          <a href="#" class="dropdown-item">
-            Form
-          </a>
-          <a href="#" class="dropdown-item">
-            Elements
-          </a>
-          <a href="#" class="dropdown-item">
-            Components
-          </a>
-          <a href="#" class="dropdown-item">
-            Layout
-          </a>
-          <hr class="dropdown-divider">
-          <a href="#" class="dropdown-item">
-            More
-          </a>
+      <div class="dropdown is-active">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+            <span>Select your Major</span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <a href="#" class="dropdown-item">
+              Accounting
+            </a>
+            <a class="dropdown-item">
+              Fine Art
+            </a>
+            <a href="#" class="dropdown-item is-active">
+              Information Science
+            </a>
+            <a href="#" class="dropdown-item">
+              Discrete Mathematics etc.
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-  
-  
-  
-  
-
-<script src="script.js"></script>
+      <button class="button is-light">Confirm Your Preferences</button>
+      <div class="card">
+        <header class="card-header">
+          <p class="card-header-title">
+            Component
+          </p>
+          <a href="#" class="card-header-icon" aria-label="more options">
+            <span class="icon">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </a>
+        </header>
+        
+        <div class="card-content">
+          <div class="content">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
+            <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
+            <br>
+            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
+          </div>
+        </div>
+        <footer class="card-footer">
+          <a href="#" class="card-footer-item">Skip</a>
+          <a href="#" class="card-footer-item">
+            <img src="heart_icon.png" width="30" height="30" alt="Like">
+          </a>
+        </footer>
+      </div>
+      <div class="tile is-parent is-6">
+        <article class="tile is-child notification is-light">
+          <p class="title">INST652</p>
+          <p class="subtitle">Design Thinking and Youth</p>
+        </article>
+      </div>
+      <div class="tile is-parent is-3">
+        <article class="tile is-child notification is-light">
+          <p class="title">Credits</p>
+          <p class="subtitle">3</p>
+        </article>
+      </div>
+      <button class="button is-light">
+        <img src="bookmark_icon.png" width="30" height="30" alt="Home">
+      </button>
+      <div class="tile is-parent is-3">
+        <article class="tile is-child notification is-light">
+          <p class="title">Grading Method</p>
+          <p class="subtitle">Pass/Fail</p>
+        </article>
+      </div>
+      <div class="tile is-vertical is-8">
+        <div class="tile">
+          <div class="tile is-parent">
+            <article class="tile is-child notification is-light">
+              <p class="title">Description</p>
+              <p class="subtitle">In case we want a subtitle</p>
+              <div class="content">
+                <p>This is an example of the description for a class here.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="dropdown is-active">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+            <span>Sections</span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <a href="#" class="dropdown-item">
+              0101
+            </a>
+            <a class="dropdown-item">
+              0102
+            </a>
+            <a href="#" class="dropdown-item is-active">
+              0103
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="tile is-parent is-8">
+        <article class="tile is-child notification is-light">
+          <p class="title">Average Grade</p>
+          <p class="subtitle">3.34 (B+)</p>
+        </article>
+      </div>
+      <button class="button is-light">Syllabus Repository</button>
+      <input class="input" type="text" placeholder="Search Course Connector">
+      <nav class="navbar is-light">
+        <nav class="navbar-height">
+          <a class="navbar-item">
+            <img src="hiclipart.com.png" width="30" height="30" alt="Home">
+          </a>
+        </nav>
+      </nav>
+      <div class="tile is-parent is-8">
+        <article class="tile is-child notification is-light">
+          <p class="title">Saved Courses</p>
+        </article>
+      </div>
+      <div id="navContainer">
+        <ul class="bookmarks">
+          <li>
+            <div class="course-code">
+              <p class="subtitle">INST 311</p>
+            </div>
+            <p class="subtitle">Information Organization</p>
+            <button class="button is-light">
+              <img src="bookmark_icon.png" width="30" height="30" alt="Home">
+            </button>
+          </li>
+        </ul>
+      </div>
+      <button class="button is-light">
+        <img src="i<3bulma.jpeg" width="30" height="30" alt="Home">
+      </button>
 </body>
 </html>
+
+
+
+
