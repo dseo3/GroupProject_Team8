@@ -3,48 +3,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Group Project INST377</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+    crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="styles.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
 </head>
 <body>
-    <section class="section">
-        <div class="container">
-          <h1 class="title">
-            Hello World!
-          </h1>
-          <p class="subtitle">
-            Course Connector with <strong>Bulma</strong>!
-          </p>
-        </div>
-      </section>
+  <nav class="navbar is-danger" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a class="navbar-item" href="/">
+        <img src="connector.png" title="Course Connector" alt="Course Connector" width="132" height="23">
+      </a>
+    </div>
+  </nav>
 
-      <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">
-            Component
-          </p>
-          <a href="#" class="card-header-icon" aria-label="more options">
-            <span class="icon">
-              <i class="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
-          </a>
-        </header>
-        
-        <div class="card-content">
-          <div class="content">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus nec iaculis mauris.
-            <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-            <br>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-          </div>
-        </div>
-        <footer class="card-footer">
-          <a href="#" class="card-footer-item">Save</a>
-          <a href="#" class="card-footer-item">Edit</a>
-          <a href="#" class="card-footer-item">Delete</a>
-        </footer>
+  
+  <div class="dropdown">
+    <div class="dropdown-trigger">
+      <button class="button" aria-haspopup="true" aria-controls="dropdown-menu3">
+        <span> Select Your Program </span>
+        <span class="icon is-small">
+          <i class="fas fa-angle-down" aria-hidden="true"></i>
+        </span>
+      </button>
+    </div>
+    <div class="dropdown-menu" id="dropdown-menu3" role="menu">
+      <div class="dropdown-content">
+        <a href="#" class="dropdown-item">
+          Overview
+        </a>
+        <a href="#" class="dropdown-item">
+          Modifiers
+        </a>
+        <a href="#" class="dropdown-item">
+          Grid
+        </a>
+        <a href="#" class="dropdown-item">
+          Form
+        </a>
+        <a href="#" class="dropdown-item">
+          Elements
+        </a>
+        <a href="#" class="dropdown-item">
+          Components
+        </a>
+        <a href="#" class="dropdown-item">
+          Layout
+        </a>
+        <hr class="dropdown-divider">
+        <a href="#" class="dropdown-item">
+          More
+        </a>
       </div>
+    </div>
+  </div>
+  
+  
 
+<script src="script.js"></script>
 </body>
 </html>
-
-<p> this is yomis addition to test: to be deleted</p>
