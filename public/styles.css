@@ -1,0 +1,28 @@
+
+.bookmarks {
+    position: relative;
+}
+
+.bookmarks li {
+    background-color: lightgrey;
+    list-style: none;
+    transition: 0.2s;
+    display: flex;
+    text-align: space-around;
+    flex-direction: row;
+    text-transform: capitalize;
+    margin-bottom: 20;
+    box-shadow: 10px 10px 8px #888888;
+    border-radius: 25px;
+    padding: 20px;
+    justify-content: space-between;
+} 
+
+.bookmarks li:nth-child() {
+    background: linear-gradient(to top, #D8D8D8 25%,#8A74D4 80%);
+}
+
+.course_code {
+    
+}
+
