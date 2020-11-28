@@ -4,12 +4,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Group Project INST377</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
 </head>
 <body>
     <section class="section">
         <div class="container">
-          <h1 class="title">
-            Hello World
+          <h1 class="is-size-1 has-text-centered">
+            Course Connector
+          </h1>
+          <h1 class="is-size-2 has-text-centered">
+            Select Your Major
           </h1>
           <p class="subtitle">
             My first website with <strong>Bulma</strong>!
@@ -17,6 +21,34 @@
         </div>
       </section>
 
+      <div class="dropdown is-active">
+        <div class="dropdown-trigger">
+          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+            <span>Select your Major</span>
+            <span class="icon is-small">
+              <i class="fas fa-angle-down" aria-hidden="true"></i>
+            </span>
+          </button>
+        </div>
+
+        <div class="dropdown-menu" id="dropdown-menu" role="menu">
+          <div class="dropdown-content">
+            <a href="#" class="dropdown-item">
+              Accounting
+            </a>
+            <a class="dropdown-item">
+              Fine Art
+            </a>
+            <a href="#" class="dropdown-item is-active">
+              Information Science
+            </a>
+            <a href="#" class="dropdown-item">
+              Discrete Mathematics etc.
+            </a>
+          </div>
+        </div>
+      </div>
+      <button class="button is-light">Confirm Your Preferences</button>
       <div class="card">
         <header class="card-header">
           <p class="card-header-title">
@@ -38,9 +70,9 @@
           </div>
         </div>
         <footer class="card-footer">
-          <a href="#" class="card-footer-item">Save</a>
-          <a href="#" class="card-footer-item">Edit</a>
-          <a href="#" class="card-footer-item">Delete</a>
+          <
+          <a href="#" class="card-footer-item">Skip</a>
+          <a href="#" class="card-footer-item">Like</a>
         </footer>
       </div>
 
