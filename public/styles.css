@@ -1,11 +1,9 @@
 
-.suggestions {
-    margin: 0;
-    padding: 0;
+.bookmarks {
     position: relative;
 }
 
-.suggestions li {
+.bookmarks li {
     background-color: lightgrey;
     list-style: none;
     transition: 0.2s;
@@ -20,6 +18,10 @@
     justify-content: space-between;
 } 
 
-.suggestions li:nth-child() {
+.bookmarks li:nth-child() {
     background: linear-gradient(to top, #D8D8D8 25%,#8A74D4 80%);
+}
+
+.course_code {
+    
 }
