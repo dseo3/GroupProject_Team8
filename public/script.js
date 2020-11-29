@@ -39,8 +39,6 @@ const suggestions = document.querySelector('.suggestions');
 searchInput.addEventListener('input', displayMatches);
 
 
-
-
 const search = document.querySelector('.dropdown');
 
 search.addEventListener('click', async (e) => {
@@ -59,4 +57,8 @@ search.addEventListener('click', async (e) => {
       console.log(fromServer)
 })
 .catch((err) => console.log(err));
+<<<<<<< HEAD
 });
+=======
+});
+>>>>>>> b86b43c3bfc1857660e5da740d4e4117dadc98d8
