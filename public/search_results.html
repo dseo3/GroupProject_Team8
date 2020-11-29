@@ -13,7 +13,123 @@
 </head>
     <body>
         <input class="input" type="text" placeholder="Search Course Connector">
-        
+
+        <div class="dropdown is-active">
+            <div class="dropdown-trigger">
+              <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                <span>Filter</span>
+                <span class="icon is-small">
+                  <i class="fas fa-angle-down" aria-hidden="true"></i>
+                </span>
+              </button>
+            </div>
+            
+                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                    <div class="dropdown-content">
+                        <form id="filters" onsubmit="applyFilter">
+                            <a href="#" class="dropdown-item">
+                                Course
+                                <input class="input" type="text" placeholder="Search Course Connector">
+                            </a>
+                            <a class="dropdown-item">
+                                Section
+                                <input class="input" type="text" placeholder="Search Course Connector">
+                            </a>
+                            <a class="dropdown-item">
+                                Term
+                                <div class="dropdown is-active">
+                                    <div class="dropdown-trigger">
+                                    <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                        <span>Select your Major</span>
+                                        <span class="icon is-small">
+                                        <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                        </span>
+                                    </button>
+                                    </div>
+                                    <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                    <div class="dropdown-content">
+                                        <a href="#" class="dropdown-item">
+                                        Accounting
+                                        </a>
+                                        <a class="dropdown-item">
+                                        Fine Art
+                                        </a>
+                                        <a href="#" class="dropdown-item is-active">
+                                        Information Science
+                                        </a>
+                                        <a href="#" class="dropdown-item">
+                                        Discrete Mathematics etc.
+                                        </a>
+                                    </div>
+                                    </div>
+                                </div>
+                            <div class="dropdown is-active">
+                                <div class="dropdown-trigger">
+                                <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
+                                    <span>Select your Major</span>
+                                    <span class="icon is-small">
+                                    <i class="fas fa-angle-down" aria-hidden="true"></i>
+                                    </span>
+                                </button>
+                                </div>
+                                <div class="dropdown-menu" id="dropdown-menu" role="menu">
+                                <div class="dropdown-content">
+                                    <a href="#" class="dropdown-item">
+                                    Accounting
+                                    </a>
+                                    <a class="dropdown-item">
+                                    Fine Art
+                                    </a>
+                                    <a href="#" class="dropdown-item is-active">
+                                    Information Science
+                                    </a>
+                                    <a href="#" class="dropdown-item">
+                                    Discrete Mathematics etc.
+                                    </a>
+                                </div>
+                                </div>
+                            </div>
+                            </a>
+                            <a class="dropdown-item">
+                                Open Section
+                                <input class="input" type="text" placeholder="Search Course Connector">
+                            </a>
+                            <a class="dropdown-item">
+                                Credit
+                                <input class="input" type="text" placeholder="Search Course Connector">
+                            </a>
+                            <a class="dropdown-item">
+                                Instructor
+                                <input class="input" type="text" placeholder="Search Course Connector">
+                            </a>
+                            <a class="dropdown-item">
+                                Course Days
+                                <input class="input" type="text" placeholder="Search Course Connector">
+                            </a>
+                            <a class="dropdown-item">
+                                Start Time
+                                <input class="input" type="text" placeholder="Search Course Connector">
+                            </a>
+                            <a class="dropdown-item">
+                                Delivery
+                                <input class="input" type="text" placeholder="Search Course Connector">
+                            </a>
+                            <a href="#" class="dropdown-item is-active">
+                            Information Science
+                            </a>
+                            <a href="#" class="dropdown-item">
+                            Discrete Mathematics etc.
+                            </a>
+                            <button class="button is-light">
+                                Apply Filters
+                            </button>
+                        </form>
+                    </div>
+                </div>
+        </div>
+
+
+
         <div class="tile is-vertical is-8">
             <div class="tile">
               <div class="tile is-parent">
