@@ -22,10 +22,17 @@
     background: linear-gradient(to top, #D8D8D8 25%,#8A74D4 80%);
 }
 
-.navbar-height {
+.navbar{
     display: flex;
-    text-align: space-around;
-    flex-direction: row;
-    justify-content: space-between;
-    min-height: 100;
+    align-items: flex-end;
+    justify-content: space-around;
+    position: fixed;
+    width: 100%;
+    bottom: 0; 
 }
+
+
+.hero-body{
+    background-color: red;
+}
+
