@@ -58,6 +58,29 @@ const suggestions = document.querySelector('.suggestions');
 
 searchInput.addEventListener('input', displayMatches);
 
+
+
+
+//perferences dropdown bar
+
+let dropdown = $('#grad-program');
+
+dropdown.empty();
+
+dropdown.append('<option selected="true" disabled>Choose Your Program</option>');
+dropdown.prop('selectedIndex', 0);
+
+const url = 'https://api.umd.io/v1/courses';
+
+// Populate dropdown majors
+$.getJSON(url, function (data) {
+  $.each(data, function (key, courses) {
+    dropdown.append($('<option></option>').attr('value', courses.dept_id).text(courses.department));
+  })
+});
+
+
+
 /*
 var dropdown = document.querySelector('dropdown');
 dropdown.addEventListener('click', function(event) {
