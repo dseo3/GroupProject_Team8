@@ -11,121 +11,117 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
     <script src="script.js"></script>
 </head>
-<body>
-    <section class="section">
-        <div class="container">
-          <h1 class="is-size-1 has-text-centered">
-            HOME
-          </h1>
-          <h1 class="is-size-2 has-text-centered">
-            Select Your Major
-          </h1>
-        </div>
-    </section>
-    <div class="card">
-        <header class="card-header">
-          <p class="card-header-title">
-            Component
-          </p>
-          <a href="#" class="card-header-icon" aria-label="more options">
-            <span class="icon">
-              <i class="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
-          </a>
-        </header>
-        
-        <div class="card-content">
-          <div class="content">
-            This is information about the class.
-            <a href="#">@bulmaio</a>. <a href="#">#css</a> <a href="#">#responsive</a>
-            <br>
-            <time datetime="2016-1-1">11:09 PM - 1 Jan 2016</time>
-          </div>
-        </div>
-        <footer class="card-footer">
-          <a href="#" class="card-footer-item">Skip</a>
-          <a href="#" class="card-footer-item">
-            <img src="heart_icon.png" width="30" height="30" alt="Like">
-          </a>
-        </footer>
-      </div>
 
-      <div class="tile is-parent is-6">
-        <article class="tile is-child notification is-light">
-          <p class="title">INST652</p>
-          <p class="subtitle">Design Thinking and Youth</p>
-        </article>
-      </div>
-      <div class="tile is-parent is-3">
-        <article class="tile is-child notification is-light">
-          <p class="title">Credits</p>
-          <p class="subtitle">3</p>
-        </article>
-      </div>
-      <button class="button is-light">
-        <img src="bookmark_icon.png" width="30" height="30" alt="Home">
-      </button>
-      <div class="tile is-parent is-3">
-        <article class="tile is-child notification is-light">
-          <p class="title">Grading Method</p>
-          <p class="subtitle">Pass/Fail</p>
-        </article>
-      </div>
-      <div class="tile is-vertical is-8">
-        <div class="tile">
-          <div class="tile is-parent">
-            <article class="tile is-child notification is-lighter">
-              <p class="title">Description</p>
-              <p class="subtitle">In case we want a subtitle</p>
-              <div class="content">
-                <p>This is an example of the description for a class here.</p>
-              </div>
-            </article>
-          </div>
+<body class="home">
+
+  <div class="global">
+  <!-- Golobal Header -->
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Course Connector
+          </h1>
         </div>
       </div>
-      <div class="dropdown is-active">
-        <div class="dropdown-trigger">
-          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-            <span>Sections</span>
-            <span class="icon is-small">
-              <i class="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
-          </button>
-        </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-          <div class="dropdown-content">
-            <a href="#" class="dropdown-item">
-              0101
-            </a>
-            <a class="dropdown-item">
-              0102
-            </a>
-            <a href="#" class="dropdown-item is-active">
-              0103
-            </a>
-          </div>
-        </div>
-      </div>
-      <div class="tile is-parent is-8">
-        <article class="tile is-child notification is-light">
-          <p class="title">Average Grade</p>
-          <p class="subtitle">3.34 (B+)</p>
-        </article>
-      </div>
-      <button class="button is-light">Syllabus Repository</button>
-      <input class="input" type="text" placeholder="Search Course Connector">
+    </section>
+
+    <!-- Golobal Navigation bar -->
+    <div class="navbar">
       <nav class="navbar is-light">
-        <nav class="navbar-height">
-          <a class="navbar-item" href="/">
-            <img src="connector.png" title="Course Connector" alt="Course Connector" width="132" height="23">
+          <a class="navbar-item" href="home.html">
+            <button> <i class="fas fa-home fa-4x"></i> </button>
           </a>
-          <a class="navbar-item">
-            <button class="button is-light">
-                <i class="fas fa-home"></i>         
-            </button>
+          <a class="navbar-item" href="search.html">
+            <button> <i class="fas fa-search fa-4x"></i> </button>
           </a>
-        </nav>
+          <a class="navbar-item" href="bookmarks.html">
+            <button> <i class="far fa-bookmark fa-4x"></i> </button>
+          </a>
+          <a class="navbar-item" href="preferences.html">
+            <button> <i class="fas fa-sliders-h fa-4x"></i> </button>
+          </a>
       </nav>
+    </div>
+  </div>
+ 
+
+
+  <section class="home-page">
+  <!-- Course Code and Title -->
+  <div class='course-title-home' > 
+    <div class="tile is-parent" >
+      <div class="tile is-child box" id="course-code">
+        <p class="title">INST703</p>
+        <p class="subtitle">Advanced Usability Testing</p>
+      </div>
+    </div>
+  </div>
+
+ <!-- Course Stat Tiles -->
+  <div class="course-stats">
+    <div class="tile is-ancestor">
+      <div class="tile is-parent">
+        <article class="tile is-child box" id="course-stat">
+          <p class="title">3</p>
+          <p class="subtitle">Credits</p>
+        </article>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child box" id="course-stat">
+          <p class="title">DSSP</p>
+          <p class="subtitle">Gen-Ed</p>
+        </article>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child box" id="course-stat">
+          <p class="title">Regular</p>
+          <p class="subtitle">Grading Method</p>
+        </article>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Course Description -->
+  <div class='course-description-home' > 
+    <div class="tile is-parent" >
+      <div class="tile is-child box" id="home-description">
+        <p class="title">Description</p>
+        <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Average Grade -->
+    <div class="tile is-parent" >
+      <div class="tile is-child box" id="average-grade">
+        <p class="title"> <b>Average Grade:</b> 3.34 (B+)</p>
+        </div>
+    </div>
+
+    <!-- Button to more detailed couse page -->
+    <a href="course.html" class="learn">
+      <button class="learn-more"> Learn More </button>
+    </a>
+
+    <!-- Button to save -->
+    
+      <button href="#" class="float">
+        <i class="far fa-heart fa-2x my-float"></i>
+      </button>
+     
+
+    <!-- Button to see next -->
+    
+      <button href="#" class="float-x">
+          <i class="fas fa-times fa-2x my-float"></i> 
+      </button>
+    
+  </section>
+    
+
+    
     </body>
 </html>
