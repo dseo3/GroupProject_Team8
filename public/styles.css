@@ -29,3 +29,7 @@
     justify-content: space-between;
     min-height: 100;
 }
+
+.dropdown {
+    text-align: center;
+}

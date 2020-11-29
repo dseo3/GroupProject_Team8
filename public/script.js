@@ -59,6 +59,13 @@ const suggestions = document.querySelector('.suggestions');
 searchInput.addEventListener('input', displayMatches);
 
 
+
+
+
+
+
+
+
 const search = document.querySelector('.dropdown');
 
 search.addEventListener('click', async (e) => {
@@ -78,3 +85,49 @@ search.addEventListener('click', async (e) => {
 })
 .catch((err) => console.log(err));
 });
+
+
+
+
+function dropDownSelect() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+
+
+
+
+
+  var $dropdowns = getAll('.dropdown is-active)');
+
+  if ($dropdowns.length > 0) {
+    $dropdowns.forEach(function ($el) {
+      $el.addEventListener('click', function (event) {
+        event.stopPropagation();
+        $el.classList.toggle('is-active');
+      });
+    });
+
+    document.addEventListener('click', function (event) {
+      closeDropdowns();
+    });
+  }
+
+  function closeDropdowns() {
+    $dropdowns.forEach(function ($el) {
+      $el.classList.remove('is-active');
+    });
+  }
