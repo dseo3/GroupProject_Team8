@@ -33,8 +33,24 @@ function displayMatches() {
     suggestions.innerHTML = placesHTML;       
 }
 
-function pageRedirect(){
+function pageRedirectHome() {
   window.location.href = "home.html";
+}
+
+function pageRedirectCourse() {
+    window.location.href = "course.html";
+}
+
+function pageRedirectBookmarks() {
+    window.location.href = "bookmarks.html";
+}
+
+function pageRedirectPreferences() {
+    window.location.href = "preferences.html";
+}
+
+function pageRedirectIndex() {
+    window.location.href = "index.html";
 }
     
 const searchInput = document.querySelector('.search');
