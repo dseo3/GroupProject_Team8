@@ -9,57 +9,63 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script src="script.js"></script>
 </head>
 <body>
+  <div class="global-features">
+    <!-- Golobal Header -->
+        <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+            <h1 class="title">
+                Course Connector
+            </h1>
+            </div>
+        </div>
+        </section>
+    
+        <!-- Golobal Navigation bar -->
+        <div class="navbar">
+        <nav class="navbar is-light">
+            <a class="navbar-item" href="home.html">
+                <button> <i class="fas fa-home fa-4x"></i> </button>
+            </a>
+            <a class="navbar-item" href="search.html">
+                <button> <i class="fas fa-search fa-4x"></i> </button>
+            </a>
+            <a class="navbar-item" href="bookmarks.html">
+                <button> <i class="far fa-bookmark fa-4x"></i> </button>
+            </a>
+            <a class="navbar-item" href="preferences.html">
+                <button> <i class="fas fa-sliders-h fa-4x"></i> </button>
+            </a>
+        </nav>
+        </div>
+  </div>
+
     <section class="section">
         <div class="container">
           <h1 class="is-size-1 has-text-centered">
-            Course Connector
-          </h1>
-          <h1 class="is-size-2 has-text-centered">
-            Select Your Major
+           Select Your Graduate Program
           </h1>
         </div>
     </section>
-      <div class="dropdown is-active">
-        <div class="dropdown-trigger">
-          <button class="button" aria-haspopup="true" aria-controls="dropdown-menu">
-            <span>Select your Major</span>
-            <span class="icon is-small">
-              <i class="fas fa-angle-down" aria-hidden="true"></i>
-            </span>
-          </button>
+
+    <!-- Dropdown bar -->
+    <div class="field has-addons">
+      <div class="control is-expanded">
+        <div class="select is-fullwidth">
+          <select name="grad-program" id="grad-program">
+            <!-- in JS need to add options values -->
+            <option value="Accounting">Accounting</option>
+            <option value="Additive Manufactuiring">Additive Manufactuiring</option>
+            <option value="Women's Studies">Women's Studies</option>
+          </select>
         </div>
-        <div class="dropdown-menu" id="dropdown-menu" role="menu">
-          <div class="dropdown-content">
-            <a href="#" class="dropdown-item">
-              Accounting
-            </a>
-            <a class="dropdown-item">
-              Fine Art
-            </a>
-            <a href="#" class="dropdown-item is-active">
-              Information Science
-            </a>
-            <a href="#" class="dropdown-item">
-              Discrete Mathematics etc.
-            </a>
-          </div>
-        </div>
+      </div>
+      <div class="control">
+        <button type="submit" class="button is-primary">Choose</button>
+      </div>
     </div>
-    <button class="button is-light">Confirm Your Preferences</button>
-    <nav class="navbar is-light">
-        <nav class="navbar-height">
-          <a class="navbar-item" href="/">
-            <img src="connector.png" title="Course Connector" alt="Course Connector" width="132" height="23">
-          </a>
-          <a class="navbar-item">
-            <button class="button is-light">
-              <img src="hiclipart.com.png" width="40" height="40" alt="Home">
-            </button>
-          </a>
-        </nav>
-      </nav>
+    <script src="script.js"></script>
     </body>
     </html>
