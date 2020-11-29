@@ -32,6 +32,10 @@ function displayMatches() {
     }
     suggestions.innerHTML = placesHTML;       
 }
+
+function pageRedirect(){
+  window.location.href = "home.html";
+}
     
 const searchInput = document.querySelector('.search');
 const suggestions = document.querySelector('.suggestions');
