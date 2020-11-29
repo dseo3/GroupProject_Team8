@@ -58,14 +58,15 @@ const suggestions = document.querySelector('.suggestions');
 
 searchInput.addEventListener('input', displayMatches);
 
+/*
+var dropdown = document.querySelector('dropdown');
+dropdown.addEventListener('click', function(event) {
+event.stopPropagation();
+dropdown.classList.toggle('is-active');
+});
+*/
 
-
-
-
-
-
-
-
+/*
 const search = document.querySelector('.dropdown');
 
 search.addEventListener('click', async (e) => {
@@ -86,9 +87,9 @@ search.addEventListener('click', async (e) => {
 .catch((err) => console.log(err));
 });
 
+*/
 
-
-
+/*
 function dropDownSelect() {
     document.getElementById("myDropdown").classList.toggle("show");
   }
@@ -106,12 +107,37 @@ function dropDownSelect() {
       }
     }
   }
+*/
+
+/* When the user clicks on the button,
+toggle between hiding and showing the dropdown content */
+
+
+/*function myFunction() {
+    document.getElementById("myDropdown").classList.toggle("show");
+  }
+  
+  // Close the dropdown menu if the user clicks outside of it
+  window.onclick = function(event) {
+    if (!event.target.matches('.dropbtn')) {
+      var dropdowns = document.getElementsByClassName("dropdown-content");
+      var i;
+      for (i = 0; i < dropdowns.length; i++) {
+        var openDropdown = dropdowns[i];
+        if (openDropdown.classList.contains('show')) {
+          openDropdown.classList.remove('show');
+        }
+      }
+    }
+  }
+*/
+/*
+var dropdown = document.querySelector('.dropdown');
+dropdown.classList.toggle('is-active');
 
 
 
-
-
-  var $dropdowns = getAll('.dropdown is-active)');
+  var $dropdowns = getAll('.dropdown is-active');
 
   if ($dropdowns.length > 0) {
     $dropdowns.forEach(function ($el) {
@@ -131,3 +157,4 @@ function dropDownSelect() {
       $el.classList.remove('is-active');
     });
   }
+*/
