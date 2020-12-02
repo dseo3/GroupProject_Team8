@@ -3,6 +3,7 @@ const proxyurl = "https://cors-anywhere.herokuapp.com/";
 const urlTerp = "https://api.planetterp.com/v1/grades?course=INST612"; // site that doesn’t send Access-Control-*
 let TotalClassGPA = 0.0;
 
+
 fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
   .then((response) => response.json())
   .then((data) => { 
@@ -25,7 +26,7 @@ fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example
 
     TotalClassGPA /= data.length;
     console.log(TotalClassGPA.toFixed(2));
-    avgGrade.innerHTML = "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
+    document.getElementById('avgGrade').innerHTML = "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
 
   });
   
