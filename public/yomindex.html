@@ -51,9 +51,58 @@
 <div class="dropdown">
   <button onclick="myFunction()" class="dropbtn">Dropdown</button>
   <div id="myDropdown" class="dropdown-content">
+<<<<<<< Updated upstream
     <a href="#home">Home</a>
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
+=======
+    <form id="filters" onsubmit="applyFilter">
+        <a href="#" class="dropdown-item">
+            Course
+            <input class="input" type="text" placeholder="Search Course Connector">
+        </a>
+        <a class="dropdown-item">
+            Section
+            <input class="input" type="text" placeholder="Search Course Connector">
+        </a>
+        <a class="dropdown-item">
+            Term
+        </a>
+        <a class="dropdown-item">
+            Open Section
+            <input class="input" type="text" placeholder="Search Course Connector">
+        </a>
+        <a class="dropdown-item">
+            Credit
+            <input class="input" type="text" placeholder="Search Course Connector">
+        </a>
+        <a class="dropdown-item">
+            Instructor
+            <input class="input" type="text" placeholder="Search Course Connector">
+        </a>
+        <a class="dropdown-item">
+            Course Days
+            <input class="input" type="text" placeholder="Search Course Connector">
+        </a>
+        <a class="dropdown-item">
+            Start Time
+            <input class="input" type="text" placeholder="Search Course Connector">
+        </a>
+        <a class="dropdown-item">
+            Delivery
+            <input class="input" type="text" placeholder="Search Course Connector">
+        </a>
+        <a href="#" class="dropdown-item is-active">
+        Information Science
+        </a>
+        <a href="#" class="dropdown-item">
+        Discrete Mathematics etc.
+        </a>
+        <button class="button is-light">
+            Apply Filters
+        </button>
+    </form>
+>>>>>>> Stashed changes
   </div>
 </div>
 
@@ -65,7 +114,11 @@ function myFunction() {
 }
 
 // Close the dropdown if the user clicks outside of it
+<<<<<<< Updated upstream
 window.onclick = function(event) {
+=======
+window.onclick("dropdown") = function(event) {
+>>>>>>> Stashed changes
   if (!event.target.matches('.dropbtn')) {
     var dropdowns = document.getElementsByClassName("dropdown-content");
     var i;
@@ -77,7 +130,20 @@ window.onclick = function(event) {
     }
   }
 }
+<<<<<<< Updated upstream
 </script>
 
 </body>
 </html>
+=======
+/* NEXT STEPS:
+
+1. figure out how to use the form to query the api again for new filtered results
+2. build the preferences page */
+</script>
+
+</body>
+</html>
+
+
+>>>>>>> Stashed changes
