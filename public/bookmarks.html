@@ -1,0 +1,74 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Project INST377</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="script.js"></script>
+</head>
+<body>
+  <div class="global-features">
+    <!-- Golobal Header -->
+        <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+            <h1 class="title">
+                Course Connector
+            </h1>
+            </div>
+        </div>
+        </section>
+    
+        <!-- Golobal Navigation bar -->
+        <div class="navbar">
+        <nav class="navbar is-light">
+            <a class="navbar-item" href="home.html">
+                <button> <i class="fas fa-home fa-4x"></i> </button>
+            </a>
+            <a class="navbar-item" href="search.html">
+                <button> <i class="fas fa-search fa-4x"></i> </button>
+            </a>
+            <a class="navbar-item" href="bookmarks.html">
+                <button> <i class="far fa-bookmark fa-4x"></i> </button>
+            </a>
+            <a class="navbar-item" href="preferences.html">
+                <button> <i class="fas fa-sliders-h fa-4x"></i> </button>
+            </a>
+        </nav>
+        </div>
+  </div>
+
+
+    <div class="tile is-parent is-8">
+        <article class="tile is-child notification is-light">
+          <p class="title">Saved Courses</p>
+        </article>
+    </div>
+
+    <div class="saved-list">
+      <ul>
+        <li>
+          <div class="tile is-parent" >
+              <div class="tile is-child box" id="saved-course">
+                <p class="title"> <b>INST311</b> <small>Information Organization</small>
+                  <button> <i class="far fa-bookmark fa-2x"></i> </button></p>
+                </div>
+            </div>
+        </li>
+        <li>
+          <div class="tile is-parent" >
+              <div class="tile is-child box" id="saved-course">
+                <p class="title"> <b>INST377</b> <small>Dynamic Web Applications</small>
+                  <button> <i class="far fa-bookmark fa-2x"></i> </button></p>
+                </div>
+            </div>
+        </li>
+      </ul>
+    </div>
+</body>
+</html>

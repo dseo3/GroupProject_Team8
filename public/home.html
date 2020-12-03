@@ -1,0 +1,127 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Group Project INST377</title>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+      crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="script.js"></script>
+</head>
+
+<body class="home-page">
+
+  <div class="global-features">
+  <!-- Golobal Header -->
+    <section class="hero is-primary">
+      <div class="hero-body">
+        <div class="container">
+          <h1 class="title">
+            Course Connector
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <!-- Golobal Navigation bar -->
+    <div class="navbar">
+      <nav class="navbar is-light">
+          <a class="navbar-item" href="home.html">
+            <button> <i class="fas fa-home fa-4x"></i> </button>
+          </a>
+          <a class="navbar-item" href="search.html">
+            <button> <i class="fas fa-search fa-4x"></i> </button>
+          </a>
+          <a class="navbar-item" href="bookmarks.html">
+            <button> <i class="far fa-bookmark fa-4x"></i> </button>
+          </a>
+          <a class="navbar-item" href="preferences.html">
+            <button> <i class="fas fa-sliders-h fa-4x"></i> </button>
+          </a>
+      </nav>
+    </div>
+  </div>
+ 
+
+
+  <section class="home">
+  <!-- Course Code and Title -->
+  <div class='course-title-home' > 
+    <div class="tile is-parent" >
+      <div class="tile is-child box" id="course-code">
+        <p class="title">INST612</p>
+        <p class="subtitle">Advanced Usability Testing</p>
+      </div>
+    </div>
+  </div>
+
+ <!-- Course Stat Tiles -->
+  <div class="course-stats">
+    <div class="tile is-ancestor">
+      <div class="tile is-parent">
+        <article class="tile is-child box" id="course-stat">
+          <p class="title">3</p>
+          <p class="subtitle">Credits</p>
+        </article>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child box" id="course-stat">
+          <p class="title">DSSP</p>
+          <p class="subtitle">Gen-Ed</p>
+        </article>
+      </div>
+      <div class="tile is-parent">
+        <article class="tile is-child box" id="course-stat">
+          <p class="title">Regular</p>
+          <p class="subtitle">Grading Method</p>
+        </article>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Course Description -->
+  <div class='course-description-home' > 
+    <div class="tile is-parent" >
+      <div class="tile is-child box" id="home-description">
+        <p class="title">Description</p>
+        <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+      </div>
+    </div>
+  </div>
+
+
+   <!-- Average Grade -->
+    <div class="tile is-parent" >
+      <div class="tile is-child box" id="average-grade">
+        <p id="avgGrade"> </p>
+        </div>
+    </div>
+
+    <!-- Button to more detailed couse page -->
+    <a href="course.html" class="learn">
+      <button class="learn-more"> Learn More </button>
+    </a>
+
+    <!-- Button to save -->
+    
+      <button href="#" class="float">
+        <i class="far fa-heart fa-2x my-float"></i>
+      </button>
+     
+
+    <!-- Button to see next -->
+    
+      <button href="#" class="float-x">
+          <i class="fas fa-times fa-2x my-float"></i> 
+      </button>
+    
+  </section>
+    
+
+    
+    </body>
+</html>
