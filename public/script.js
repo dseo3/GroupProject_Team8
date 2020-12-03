@@ -156,6 +156,100 @@ window.onload = async function getDepartments() {
   console.log(dep_list);
   //document.getElementById('grad-program').innerHTML = dep_list ;
 };
+
+
+// THIS IS THE SEARCH FILTERS JS
+const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202008"; // this will need to be several endpoints to allow for multiple filters
+
+window.onload = async function getDepartments() {
+  //get department data from api
+  const response = await fetch(dep_api_url);
+  const json = await response.json();
+
+  console.log(json);
+
+  //create a list of departments
+  var departments = json;
+  var dep_list = [];
+  for (var i = 0; i < departments.length; i++) {
+    dep_list.push(departments[i].department);
+  }
+
+  //add department list to drop down menu
+  var select = document.getElementById("grad-program");
+  for (var i in dep_list) {
+    var option = document.createElement("option");
+    option.text = option.value = dep_list[i];
+    select.add(option, 0);
+  }
+
+  console.log(dep_list);
+  //document.getElementById('grad-program').innerHTML = dep_list ;
+};
+
+
+
+
+
+const restaurants = [];
+fetch(endpoint)
+  .then(blob => blob.json())
+  .then(data => restaurants.push(...data));
+
+function findMatches(wordsToMatch, restaurants) {
+    return restaurants.filter(place => {
+        const regex = new RegExp(wordsToMatch, 'gi');
+        return place.name.match(regex) || place.zip.match(regex)
+    });
+}
+
+function displayMatches() {
+    const matchArray = findMatches(this.value, restaurants);
+    let placesHTML = []
+    if (this.value.length == 0) { 
+        placesHTML = [];
+    } 
+    else {placesHTML = matchArray.map((place) => `
+        
+    <li>
+        <span class="name">${place.name}</span><br>
+        <span class="category">${place.category}</span>
+        <address>${place.address_line_1}<br>
+        ${place.city}<br>
+        ${place.zip}<address>
+        </li>
+
+    </li>`).join('');
+    }
+    suggestions.innerHTML = placesHTML;       
+}
+
+function pageRedirectHome() {
+  window.location.href = "home.html";
+}
+
+function pageRedirectCourse() {
+    window.location.href = "course.html";
+}
+
+function pageRedirectBookmarks() {
+    window.location.href = "bookmarks.html";
+}
+
+function pageRedirectPreferences() {
+    window.location.href = "preferences.html";
+}
+
+function pageRedirectIndex() {
+    window.location.href = "index.html";
+}
+    
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+searchInput.addEventListener('input', displayMatches);
+
+
 //getDepartments();
 
 /*
