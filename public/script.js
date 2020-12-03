@@ -3,7 +3,6 @@ const proxyurl = "https://cors-anywhere.herokuapp.com/";
 const urlTerp = "https://api.planetterp.com/v1/grades?course=INST612"; // site that doesn’t send Access-Control-*
 let TotalClassGPA = 0.0;
 
-
 fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
   .then((response) => response.json())
   .then((data) => { 
@@ -26,11 +25,11 @@ fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example
 
     TotalClassGPA /= data.length;
     console.log(TotalClassGPA.toFixed(2));
-    document.getElementById('avgGrade').innerHTML = "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
+    avgGrade.innerHTML = "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
 
   });
   
-
+/* this is assignment 2 js
 const endpoint = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
 
 const restaurants = [];
@@ -90,11 +89,11 @@ const searchInput = document.querySelector('.search');
 const suggestions = document.querySelector('.suggestions');
 
 searchInput.addEventListener('input', displayMatches);
+*/
 
 
-
-
-//perferences dropdown bar
+/*
+//preferences dropdown bar
 
 let dropdown = $('#grad-program');
 
@@ -111,6 +110,41 @@ $.getJSON(url, function (data) {
     dropdown.append($('<option></option>').attr('value', courses.dept_id).text(courses.department));
   })
 });
+*/
+
+//PREFERENCES JAVASCRIPT
+
+const dep_api_url = 'https://api.umd.io/v0/courses/departments?semester=202008' ;
+
+
+   window.onload = async function getDepartments() {
+     //get department data from api
+     const response = await fetch(dep_api_url);
+     const json = await response.json();
+     
+     console.log(json);
+    
+     //create a list of departments
+                var departments = json
+                var dep_list = []
+            for (var i = 0; i < departments.length; i++) {
+                dep_list.push(departments[i].department);
+            }
+      
+      //add department list to drop down menu
+            var select = document.getElementById("grad-program");
+            for(var i in dep_list){
+              var option = document.createElement('option');
+              option.text = option.value = dep_list[i];
+              select.add(option, 0);
+
+            }
+            
+            
+            console.log(dep_list);
+            //document.getElementById('grad-program').innerHTML = dep_list ;
+   }
+   //getDepartments();
 
 
 
