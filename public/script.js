@@ -5,30 +5,46 @@ let TotalClassGPA = 0.0;
 
 fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
   .then((response) => response.json())
-  .then((data) => { 
-    data.forEach(item => {
-     
-      let total = item['A+'] * 4.0 + item['A'] * 4.0 + item['A-'] * 3.7 +
-       item['B+'] * 3.3 + item['B'] * 3.0 + item['B-'] * 2.7
-       + item['C+'] * 2.3 + item['C'] * 2.0 + item['C-'] * 1.7 + 
-       item['D+'] * 1.3 + item['D'] * 1.0 + item['D-'] * 0.7;
+  .then((data) => {
+    data.forEach((item) => {
+      let total =
+        item["A+"] * 4.0 +
+        item["A"] * 4.0 +
+        item["A-"] * 3.7 +
+        item["B+"] * 3.3 +
+        item["B"] * 3.0 +
+        item["B-"] * 2.7 +
+        item["C+"] * 2.3 +
+        item["C"] * 2.0 +
+        item["C-"] * 1.7 +
+        item["D+"] * 1.3 +
+        item["D"] * 1.0 +
+        item["D-"] * 0.7;
 
-      let numStudents = item['A+'] + item['A'] + item['A-'] + 
-      item['B+'] + item['B'] + item['B-'] +
-      item['C+'] + item['C'] + item['C-'] +
-      item['D+'] + item['D'] + item['D-'] + 
-      item['F'] 
+      let numStudents =
+        item["A+"] +
+        item["A"] +
+        item["A-"] +
+        item["B+"] +
+        item["B"] +
+        item["B-"] +
+        item["C+"] +
+        item["C"] +
+        item["C-"] +
+        item["D+"] +
+        item["D"] +
+        item["D-"] +
+        item["F"];
 
-      TotalClassGPA += (total/numStudents);
-     
+      TotalClassGPA += total / numStudents;
     });
 
     TotalClassGPA /= data.length;
     console.log(TotalClassGPA.toFixed(2));
-    avgGrade.innerHTML = "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
-
+    document.getElementById("avgGrade").innerHTML =
+      "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
   });
-  
+
 /* this is assignment 2 js
 const endpoint = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
 
@@ -91,7 +107,6 @@ const suggestions = document.querySelector('.suggestions');
 searchInput.addEventListener('input', displayMatches);
 */
 
-
 /*
 //preferences dropdown bar
 
@@ -114,39 +129,34 @@ $.getJSON(url, function (data) {
 
 //PREFERENCES JAVASCRIPT
 
-const dep_api_url = 'https://api.umd.io/v0/courses/departments?semester=202008' ;
+const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202008";
 
+window.onload = async function getDepartments() {
+  //get department data from api
+  const response = await fetch(dep_api_url);
+  const json = await response.json();
 
-   window.onload = async function getDepartments() {
-     //get department data from api
-     const response = await fetch(dep_api_url);
-     const json = await response.json();
-     
-     console.log(json);
-    
-     //create a list of departments
-                var departments = json
-                var dep_list = []
-            for (var i = 0; i < departments.length; i++) {
-                dep_list.push(departments[i].department);
-            }
-      
-      //add department list to drop down menu
-            var select = document.getElementById("grad-program");
-            for(var i in dep_list){
-              var option = document.createElement('option');
-              option.text = option.value = dep_list[i];
-              select.add(option, 0);
+  console.log(json);
 
-            }
-            
-            
-            console.log(dep_list);
-            //document.getElementById('grad-program').innerHTML = dep_list ;
-   }
-   //getDepartments();
+  //create a list of departments
+  var departments = json;
+  var dep_list = [];
+  for (var i = 0; i < departments.length; i++) {
+    dep_list.push(departments[i].department);
+  }
 
+  //add department list to drop down menu
+  var select = document.getElementById("grad-program");
+  for (var i in dep_list) {
+    var option = document.createElement("option");
+    option.text = option.value = dep_list[i];
+    select.add(option, 0);
+  }
 
+  console.log(dep_list);
+  //document.getElementById('grad-program').innerHTML = dep_list ;
+};
+//getDepartments();
 
 /*
 var dropdown = document.querySelector('dropdown');
@@ -202,7 +212,6 @@ function dropDownSelect() {
 /* When the user clicks on the button,
 toggle between hiding and showing the dropdown content */
 
-
 /*function myFunction() {
     document.getElementById("myDropdown").classList.toggle("show");
   }
@@ -248,5 +257,3 @@ dropdown.classList.toggle('is-active');
     });
   }
 */
-
-
