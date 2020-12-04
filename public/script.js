@@ -158,8 +158,8 @@ window.onload = async function getDepartments() {
 };
 /// PREFERENCES END
 
-// THIS IS THE SEARCH FILTERS JS DROP DOWNS
-const sec_api_url = "https://api.umd.io/v1/courses/departments?semester=202008" // "https://api.umd.io/v1/courses"; // this will need to be several endpoints to allow for multiple
+// THIS IS THE SEARCH FILTERS JS
+const sec_api_url = "https://api.umd.io/v1/courses"; // this will need to be several endpoints to allow for multiple
 
 window.onload = async function getCourses() {
   //get department data from api
@@ -186,11 +186,9 @@ window.onload = async function getCourses() {
   console.log(cor_list);
   //document.getElementById('grad-program').innerHTML = dep_list ;
 };
-// THIS IS THE SEARCH FILTERS JS DROP DOWNS
 
 
 
-// THIS IS THE SEARCH FILTERS JS search bars
 const courses = [];
 fetch(endpoint)
   .then(blob => blob.json())
@@ -246,7 +244,7 @@ $(document).ready(function(){
       e.preventDefault();
     });
   });
-// END SEARCH FILTERS JS search bars
+// END OF JS FOR SEARCH RESULTS PAGE
 
 
 
