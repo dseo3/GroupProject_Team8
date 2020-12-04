@@ -159,24 +159,24 @@ window.onload = async function getDepartments() {
 
 
 // THIS IS THE SEARCH FILTERS JS
-const sec_api_url = "https://api.umd.io/v1/courses/courses/sections"; // this will need to be several endpoints to allow for multiple
+const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202008"; // this will need to be several endpoints to allow for multiple
 
-window.onload = async function getSections() {
+window.onload = async function getDepartments() {
   //get department data from api
-  const response = await fetch(sec_api_url);
+  const response = await fetch(dep_api_url);
   const json = await response.json();
 
   console.log(json);
 
   //create a list of departments
-  var sections = json;
-  var sec_list = [];
-  for (var i = 0; i < sections.length; i++) {
-    sec_list.push(sections[i].section);
+  var departments = json;
+  var dep_list = [];
+  for (var i = 0; i < departments.length; i++) {
+    dep_list.push(departments[i].department);
   }
 
   //add department list to drop down menu
-  var select = document.getElementById("section");
+  var select = document.getElementById("grad-program");
   for (var i in dep_list) {
     var option = document.createElement("option");
     option.text = option.value = dep_list[i];
@@ -186,6 +186,8 @@ window.onload = async function getSections() {
   console.log(dep_list);
   //document.getElementById('grad-program').innerHTML = dep_list ;
 };
+
+
 
 
 
@@ -236,14 +238,6 @@ const searchInput = document.querySelector('.search');
 const suggestions = document.querySelector('.suggestions');
 
 searchInput.addEventListener('input', displayMatches);
-
-$(document).ready(function(){
-    $('a.dropdown-toggle').on("click", function(e){
-      $(this).closest('li').toggleClass('open');
-      e.stopPropagation();
-      e.preventDefault();
-    });
-  });
 // END OF JS FOR SEARCH RESULTS PAGE
 
 
