@@ -191,8 +191,7 @@ window.onload = async function getCourses() {
 
 
 // THIS IS THE SEARCH FILTERS JS search bars
-const course_endpoint = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
-//"https://api.umd.io/v1/courses/departments?semester=202008";
+const course_endpoint = "https://api.umd.io/v1/courses/departments?semester=202008"
 
 const courses = [];
 
@@ -211,7 +210,7 @@ fetch(instructor_endpoint)
 function findMatches(wordsToMatch, courses) {
     return courses.filter(course => {
         const regex = new RegExp(wordsToMatch, 'gi');
-        return course.name.match(regex)
+        return course.department.match(regex)
     });
 }
 
@@ -225,14 +224,12 @@ function displayMatches() {
         
     <li>
         <span class="name">${course.name}</span><br>
-        </li>
-
     </li>`).join('');
     }
     suggestions.innerHTML = HTMLmatches;       
 }
    
-const searchInput = document.querySelector('.search');
+const searchInput = document.querySelector('.input');
 const suggestions = document.querySelector('.suggestions');
 
 searchInput.addEventListener('input', displayMatches);
