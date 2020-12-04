@@ -124,91 +124,88 @@ body {font-family: Arial, Helvetica, sans-serif;}
 <div id="myModal" class="modal">
 
   <!-- Modal content -->
-    <div class="modal-content">
-        <form>
-            <input class="input" type="text" placeholder="Type in the course you're looking for"> <!--the type needs to be search like the asst2 JS-->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    
+    <input class="input" type="text" placeholder="Type in the course you're looking for"> <!--the type needs to be search like the asst2 JS-->
 
-            <input class="input" type="text" placeholder="Type in the section you're looking for"> <!--the type needs to be search like the asst2 JS-->
+    <input class="input" type="text" placeholder="Type in the section you're looking for"> <!--the type needs to be search like the asst2 JS-->
 
-            <input class="input" type="text" placeholder="Type in the instructor you're looking for"> <!--the type needs to be search like the asst2 JS-->
+    <input class="input" type="text" placeholder="Type in the instructor you're looking for"> <!--the type needs to be search like the asst2 JS-->
 
-            <div class="field has-addons">
-                <div class="control is-expanded">
-                    <div class="select is-fullwidth">
-                        <select name="section" id="section">
-                            <!--CONTENT NEEDS TO GO HERE-->
-                        </select>
-                    </div>
-                </div>
-                <div class="control">
-                    <button type="submit" class="button is-dark">Choose</button>
-                </div>
+    <div class="field has-addons">
+        <div class="control is-expanded">
+            <div class="select is-fullwidth">
+                <select name="section" id="section">
+                    <!--CONTENT NEEDS TO GO HERE-->
+                </select>
             </div>
-            <div class="field has-addons">
-                <div class="control is-expanded">
-                    <div class="select is-fullwidth">
-                        <select name="term" id="term">
-                            <!--CONTENT NEEDS TO GO HERE-->
-                        </select>
-                    </div>
-                </div>
-                <div class="control">
-                    <button type="submit" class="button is-dark">Choose</button>
-                </div>
-            </div>
-            <div class="field has-addons">
-                <div class="control is-expanded">
-                    <div class="select is-fullwidth">
-                        <select name="greaterorless" id="greaterorless">
-                            <!--CONTENT NEEDS TO GO HERE-->
-                        </select>
-                    </div>
-                </div>
-                <div class="control">
-                    <button type="submit" class="button is-dark">Choose</button>
-                </div>
-            </div>
-            <div class="field has-addons">
-                <div class="control is-expanded">
-                    <div class="select is-fullwidth">
-                        <select name="credit" id="credit">
-                            <!--CONTENT NEEDS TO GO HERE-->
-                        </select>
-                    </div>
-                </div>
-                <div class="control">
-                    <button type="submit" class="button is-dark">Choose</button>
-                </div>
-            </div>
-            <div class="field has-addons">
-                <div class="control is-expanded">
-                    <div class="select is-fullwidth">
-                        <select name="starttime" id="starttime">
-                            <!--CONTENT NEEDS TO GO HERE-->
-                        </select>
-                    </div>
-                </div>
-                <div class="control">
-                    <button type="submit" class="button is-dark">Choose</button>
-                </div>
-            </div>
-            <div class="field has-addons">
-                <div class="control is-expanded">
-                    <div class="select is-fullwidth">
-                        <select name="delivery" id="delivery">
-                            <!--CONTENT NEEDS TO GO HERE-->
-                        </select>
-                    </div>
-                </div>
-                <div class="control">
-                    <button type="submit" class="button is-dark">Choose</button>
-                </div>
-            </div>
-            <span class="close">
-                <button type="submit" class="button is-dark close">Confirm Filters</button>
-            </span>
-        </form>
+        </div>
+        <div class="control">
+            <button type="submit" class="button is-dark">Choose</button>
+        </div>
     </div>
+    <div class="field has-addons">
+        <div class="control is-expanded">
+            <div class="select is-fullwidth">
+                <select name="term" id="term">
+                    <!--CONTENT NEEDS TO GO HERE-->
+                </select>
+            </div>
+        </div>
+        <div class="control">
+            <button type="submit" class="button is-dark">Choose</button>
+        </div>
+    </div>
+    <div class="field has-addons">
+        <div class="control is-expanded">
+            <div class="select is-fullwidth">
+                <select name="greaterorless" id="greaterorless">
+                    <!--CONTENT NEEDS TO GO HERE-->
+                </select>
+            </div>
+        </div>
+        <div class="control">
+            <button type="submit" class="button is-dark">Choose</button>
+        </div>
+    </div>
+    <div class="field has-addons">
+        <div class="control is-expanded">
+            <div class="select is-fullwidth">
+                <select name="credit" id="credit">
+                    <!--CONTENT NEEDS TO GO HERE-->
+                </select>
+            </div>
+        </div>
+        <div class="control">
+            <button type="submit" class="button is-dark">Choose</button>
+        </div>
+    </div>
+    <div class="field has-addons">
+        <div class="control is-expanded">
+            <div class="select is-fullwidth">
+                <select name="starttime" id="starttime">
+                    <!--CONTENT NEEDS TO GO HERE-->
+                </select>
+            </div>
+        </div>
+        <div class="control">
+            <button type="submit" class="button is-dark">Choose</button>
+        </div>
+    </div>
+    <div class="field has-addons">
+        <div class="control is-expanded">
+            <div class="select is-fullwidth">
+                <select name="delivery" id="delivery">
+                    <!--CONTENT NEEDS TO GO HERE-->
+                </select>
+            </div>
+        </div>
+        <div class="control">
+            <button type="submit" class="button is-dark">Choose</button>
+        </div>
+    </div>
+        
 </div>
 
 <script>
@@ -231,6 +228,12 @@ span.onclick = function() {
   modal.style.display = "none";
 }
 
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+}
 </script>
 <!--- MY SHIT-->
 
