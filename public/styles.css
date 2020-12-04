@@ -107,6 +107,11 @@
     opacity: .90;
 }
 
-.my-float{
+.my-float {
     margin-top:0;
+}
+
+.input {
+    margin-bottom: 15;
+
 }
