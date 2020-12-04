@@ -86,6 +86,263 @@
             
         </div>
 
+        <script>    
+            // THIS IS THE SEARCH FILTERS JS DROP DOWNS
+            const cor_api_url = "https://api.umd.io/v0/courses/list?semester=202008"; // "https://api.umd.io/v1/courses"; // this will need to be several endpoints to allow for multiple
+
+            window.onload = async function getCourses() {
+            //get department data from api
+            const response = await fetch(cor_api_url);
+            const json = await response.json();
+
+            console.log(json);
+
+            //create a list of departments
+            var courses = json;
+            var cor_list = [];
+            for (var i = 0; i < courses.length; i++) {
+                cor_list.push(courses[i].name);
+            }
+
+            //add department list to drop down menu
+            var select = document.getElementById("section");
+            for (var i in cor_list) {
+                var option = document.createElement("option");
+                option.text = option.value = cor_list[i];
+                select.add(option, 0);
+            }
+
+            console.log(cor_list);
+            //document.getElementById('grad-program').innerHTML = dep_list ;
+            };
+            // THIS IS THE SEARCH FILTERS JS DROP DOWNS
+        </script>
+
+
+        <!--MY SHIT-->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+
+        /* The Modal (background) */
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+        </style>
+        </head>
+        <body>
+
+        <!-- Trigger/Open The Modal -->
+        <button id="myBtn">Filters FIXED</button>
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+            <div class="modal-content">
+                <!-- <span class="close">&times;</span> -->
+                <form>
+                    <input class="input" type="text" placeholder="Type in the course you're looking for"> <!--the type needs to be search like the asst2 JS-->
+                    <div id="navContainer">
+                        <ul class="suggestions"></ul>
+                    </div>
+
+                    <input class="input section" type="text" placeholder="Type in the section you're looking for"> <!--the type needs to be search like the asst2 JS-->
+
+                    <input class="input instructor" type="text" placeholder="Type in the instructor you're looking for"> <!--the type needs to be search like the asst2 JS-->
+
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="section" id="section">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button type="submit" class="button is-dark">Choose</button>
+                        </div>
+                    </div>
+
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="term" id="term">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button type="submit" class="button is-dark">Choose</button>
+                        </div>
+                    </div>
+
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="greaterorless" id="greaterorless">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button type="submit" class="button is-dark">Choose</button>
+                        </div>
+                    </div>
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="credit" id="credit">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button type="submit" class="button is-dark">Choose</button>
+                        </div>
+                    </div>
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="starttime" id="starttime">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button type="submit" class="button is-dark">Choose</button>
+                        </div>
+                    </div>
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="delivery" id="delivery">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button type="submit" class="button is-dark">Choose</button>
+                        </div>
+                    </div>
+                    <span class="close">
+                        <button type="submit" class="button is-dark close">Confirm Filters</button>
+                    </span>
+                </form>
+            </div>
+        </div>
+
+        <script>
+        // Get the modal
+        var modal = document.getElementById("myModal");
+
+        // Get the button that opens the modal
+        var btn = document.getElementById("myBtn");
+
+        // Get the <span> element that closes the modal
+        var span = document.getElementsByClassName("close")[0];
+
+        // When the user clicks the button, open the modal 
+        btn.onclick = function() {
+        modal.style.display = "block";
+        }
+
+        // When the user clicks on <span> (x), close the modal
+        span.onclick = function() {
+        modal.style.display = "none";
+        }
+
+        </script>
+
+
+
+
+
+                
+        <div class="container">
+            <div class="row">
+                <h1>Isabeau, Jasmine, Zenobia Assignment 2</h1>
+                <form class= "search-form">
+                    <input type="text" class="search" placeholder="Filter for zipcode, business name, address, business category, or city"></input>
+                    <div id="navContainer">
+                        <ul class="suggestions"></ul>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script>
+    
+            const endpoint = "https://api.umd.io/v0/courses/list?semester=202008";
+
+            const restaurants = [];
+            fetch(endpoint)
+            .then(blob => blob.json())
+            .then(data => restaurants.push(...data));
+
+            function findMatches(wordsToMatch, restaurants) {
+                return restaurants.filter(place => {
+                    const regex = new RegExp(wordsToMatch, 'gi');
+                    return place.name.match(regex)
+                });
+            }
+
+            function displayMatches() {
+                const matchArray = findMatches(this.value, restaurants);
+                let placesHTML = []
+                if (this.value.length == 0) { 
+                    placesHTML = [];
+                } 
+                else {placesHTML = matchArray.map((place) => `
+                    
+                <li>
+                    <span class="name">${place.name}</span><br>
+                </li>`).join('');
+                }
+                suggestions.innerHTML = placesHTML;       
+            }
+                
+            const searchInput = document.querySelector('.search');
+            const suggestions = document.querySelector('.suggestions');
+
+            searchInput.addEventListener('input', displayMatches);
+        </script>
+
+
       </body>
 
 </html>
