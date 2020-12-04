@@ -156,34 +156,34 @@ window.onload = async function getDepartments() {
   console.log(dep_list);
   //document.getElementById('grad-program').innerHTML = dep_list ;
 };
-/// PREFERENCES END
+
 
 // THIS IS THE SEARCH FILTERS JS
-const sec_api_url = "https://api.umd.io/v1/courses"; // this will need to be several endpoints to allow for multiple
+const sec_api_url = "https://api.umd.io/v1/courses/courses/sections"; // this will need to be several endpoints to allow for multiple
 
-window.onload = async function getCourses() {
+window.onload = async function getSections() {
   //get department data from api
-  const response = await fetch(cor_api_url);
+  const response = await fetch(sec_api_url);
   const json = await response.json();
 
   console.log(json);
 
   //create a list of departments
-  var courses = json;
-  var cor_list = [];
-  for (var i = 0; i < courses.length; i++) {
-    cor_list.push(courses[i].course);
+  var sections = json;
+  var sec_list = [];
+  for (var i = 0; i < sections.length; i++) {
+    sec_list.push(sections[i].section);
   }
 
   //add department list to drop down menu
   var select = document.getElementById("section");
-  for (var i in cor_list) {
+  for (var i in dep_list) {
     var option = document.createElement("option");
-    option.text = option.value = cor_list[i];
+    option.text = option.value = dep_list[i];
     select.add(option, 0);
   }
 
-  console.log(cor_list);
+  console.log(dep_list);
   //document.getElementById('grad-program').innerHTML = dep_list ;
 };
 
