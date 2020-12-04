@@ -159,7 +159,7 @@ window.onload = async function getDepartments() {
 
 
 // THIS IS THE SEARCH FILTERS JS
-const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202008"; // this will need to be several endpoints to allow for multiple
+const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202008"; // this will need to be several endpoints to allow for multiple filters
 
 window.onload = async function getDepartments() {
   //get department data from api
@@ -191,59 +191,39 @@ window.onload = async function getDepartments() {
 
 
 
-const courses = [];
+const restaurants = [];
 fetch(endpoint)
   .then(blob => blob.json())
-  .then(data => courses.push(...data));
+  .then(data => restaurants.push(...data));
 
-const section = [];
-fetch(endpoint)
-.then(blob => blob.json())
-.then(data => section.push(...data));
-
-const instructor = [];
-fetch(endpoint)
-.then(blob => blob.json())
-.then(data => section.push(...data));
-
-function findMatches(wordsToMatch, given_const) {
-    return given_const.filter(a_match => {
+function findMatches(wordsToMatch, restaurants) {
+    return restaurants.filter(place => {
         const regex = new RegExp(wordsToMatch, 'gi');
-        return a_match.name.match(regex) || a_match.zip.match(regex)
+        return place.name.match(regex) || place.zip.match(regex)
     });
 }
 
 function displayMatches() {
-    const matchArray = findMatches(this.value, given_const);
-    let HTMLmatches = []
+    const matchArray = findMatches(this.value, restaurants);
+    let placesHTML = []
     if (this.value.length == 0) { 
-        HTMLmatches = [];
+        placesHTML = [];
     } 
-    else {HTMLmatches = matchArray.map((a_match) => `
+    else {placesHTML = matchArray.map((place) => `
         
     <li>
-        <span class="name">${a_match.name}</span><br>
+        <span class="name">${place.name}</span><br>
         <span class="category">${place.category}</span>
-        <address>${a_match.address_line_1}<br>
+        <address>${place.address_line_1}<br>
         ${place.city}<br>
         ${place.zip}<address>
         </li>
 
     </li>`).join('');
     }
-    suggestions.innerHTML = HTMLmatches;       
+    suggestions.innerHTML = placesHTML;       
 }
-   
-const searchInput = document.querySelector('.search');
-const suggestions = document.querySelector('.suggestions');
 
-searchInput.addEventListener('input', displayMatches);
-// END OF JS FOR SEARCH RESULTS PAGE
-
-
-
-
-// FUNCTIONS FOR REDIRECTING TO DIFFERENT PAGES
 function pageRedirectHome() {
   window.location.href = "home.html";
 }
@@ -263,7 +243,11 @@ function pageRedirectPreferences() {
 function pageRedirectIndex() {
     window.location.href = "index.html";
 }
-// END OF THE REDIRECTION SECTION
+    
+const searchInput = document.querySelector('.search');
+const suggestions = document.querySelector('.suggestions');
+
+searchInput.addEventListener('input', displayMatches);
 
 
 //getDepartments();
