@@ -191,45 +191,56 @@ window.onload = async function getCourses() {
 
 
 // THIS IS THE SEARCH FILTERS JS search bars
-const endpoint = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
+const course_endpoint = 'https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json';
+//"https://api.umd.io/v1/courses/departments?semester=202008";
 
-const restaurants = [];
-fetch(endpoint)
+const courses = [];
+
+fetch(course_endpoint)
   .then(blob => blob.json())
-  .then(data => restaurants.push(...data));
+  .then(data => courses.push(...data));
 
-function findMatches(wordsToMatch, restaurants) {
-    return restaurants.filter(place => {
+const data = await fetch('https://api.umd.io/v1/courses');
+
+
+
+ /*
+const instructor_endpoint = "https://api.umd.io/v1/courses"
+const courses = [];
+fetch(instructor_endpoint)
+.then(blob => blob.json())
+.then(data => section.push(...data));
+*/
+
+function findMatches(wordsToMatch, courses) {
+    return courses.filter(course => {
         const regex = new RegExp(wordsToMatch, 'gi');
-        return place.name.match(regex) || place.zip.match(regex)
+        return course.name.match(regex)
     });
 }
 
 function displayMatches() {
-    const matchArray = findMatches(this.value, restaurants);
-    let placesHTML = []
+    const matchArray = findMatches(this.value, courses);
+    let HTMLmatches = []
     if (this.value.length == 0) { 
-        placesHTML = [];
+        HTMLmatches = [];
     } 
-    else {placesHTML = matchArray.map((place) => `
+    else {HTMLmatches = matchArray.map((course) => `
         
     <li>
-        <span class="name">${place.name}</span><br>
-        <span class="category">${place.category}</span>
-        <address>${place.address_line_1}<br>
-        ${place.city}<br>
-        ${place.zip}<address>
+        <span class="name">${course.name}</span><br>
         </li>
 
     </li>`).join('');
     }
-    suggestions.innerHTML = placesHTML;       
+    suggestions.innerHTML = HTMLmatches;       
 }
-    
+   
 const searchInput = document.querySelector('.search');
 const suggestions = document.querySelector('.suggestions');
 
 searchInput.addEventListener('input', displayMatches);
+
 // END SEARCH FILTERS JS search bars
 
 
