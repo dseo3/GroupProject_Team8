@@ -191,61 +191,49 @@ window.onload = async function getCourses() {
 
 
 // THIS IS THE SEARCH FILTERS JS search bars
+const course_endpoint = "https://api.umd.io/v1/courses/departments?semester=202008"
+
 const courses = [];
-fetch(endpoint)
+
+fetch(course_endpoint)
   .then(blob => blob.json())
   .then(data => courses.push(...data));
 
-const section = [];
-fetch(endpoint)
+  /*
+const instructor_endpoint = "https://api.umd.io/v1/courses"
+const courses = [];
+fetch(instructor_endpoint)
 .then(blob => blob.json())
 .then(data => section.push(...data));
+*/
 
-const instructor = [];
-fetch(endpoint)
-.then(blob => blob.json())
-.then(data => section.push(...data));
-
-function findMatches(wordsToMatch, given_const) {
-    return given_const.filter(a_match => {
+function findMatches(wordsToMatch, courses) {
+    return courses.filter(course => {
         const regex = new RegExp(wordsToMatch, 'gi');
-        return a_match.name.match(regex) || a_match.zip.match(regex)
+        return course.department.match(regex)
     });
 }
 
 function displayMatches() {
-    const matchArray = findMatches(this.value, given_const);
+    const matchArray = findMatches(this.value, courses);
     let HTMLmatches = []
     if (this.value.length == 0) { 
         HTMLmatches = [];
     } 
-    else {HTMLmatches = matchArray.map((a_match) => `
+    else {HTMLmatches = matchArray.map((course) => `
         
     <li>
-        <span class="name">${a_match.name}</span><br>
-        <span class="category">${place.category}</span>
-        <address>${a_match.address_line_1}<br>
-        ${place.city}<br>
-        ${place.zip}<address>
-        </li>
-
+        <span class="name">${course.name}</span><br>
     </li>`).join('');
     }
     suggestions.innerHTML = HTMLmatches;       
 }
    
-const searchInput = document.querySelector('.search');
+const searchInput = document.querySelector('.input');
 const suggestions = document.querySelector('.suggestions');
 
 searchInput.addEventListener('input', displayMatches);
 
-$(document).ready(function(){
-    $('a.dropdown-toggle').on("click", function(e){
-      $(this).closest('li').toggleClass('open');
-      e.stopPropagation();
-      e.preventDefault();
-    });
-  });
 // END SEARCH FILTERS JS search bars
 
 
