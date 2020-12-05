@@ -81,13 +81,13 @@
             </div>
         </div>
 
-        <!-- FILTERING BY TEXT MATCHING START-->                
+<!-- FILTERING BY TEXT MATCHING START-->                
         <script>
 
-            const endpoint = "https://api.umd.io/v0/courses/list?semester=202008";
+            const endpoint_course = "https://api.umd.io/v0/courses/list?semester=202008";
 
             const restaurants = [];
-            fetch(endpoint)
+            fetch(endpoint_course)
             .then(blob => blob.json())
             .then(data => restaurants.push(...data));
 
@@ -105,10 +105,14 @@
                     placesHTML = [];
                 } 
                 else {placesHTML = matchArray.map((place) => `
-                    
-                <li>
-                    <span class="name">${place.name}</span><br>
-                </li>`).join('');}
+                    <li>
+                        <div class="tile is-parent" >
+                            <div class="tile is-child box" id="department-name">
+                              <p class="title"> <b>AASP</b> <small>African American Studies</small></p>
+                              </div>
+                          </div>
+                    </li>
+                    `).join('');}
                 suggestions.innerHTML = placesHTML;       
             }
                 
@@ -137,8 +141,39 @@
         <!-- FILTERING BY TEXT MATCHING END-->  
             
 <!-- THIS IS THE DROPDOWN FILTER CODE START-->
-        <script>    
+       <!-- <script>    
             
+            function SECTIONS() {
+            const sec_api_url = "https://api.umd.io/v0/courses/sections?semester=202008";
+
+            window.onload = async function getSections() {
+            //get department data from api
+            const sec_response = await fetch(sec_api_url);
+            const sec_json = await sec_response.json();
+
+            console.log(sec_json);
+
+            //create a list of departments
+            var sections = sec_json;
+            var sec_list = [];
+            for (var i = 0; i < sections.length; i++) {
+                sec_list.push(sections[i].section_id);
+            }
+
+            //add department list to drop down menu
+            var select = document.getElementById("section");
+            for (var i in sec_list) {
+                var option = document.createElement("option");
+                option.text = option.value = sec_list[i];
+                select.add(option, 0);
+            }
+
+            console.log(sec_list);
+            };
+            };
+
+
+            function COURSES() {
             const cor_api_url = "https://api.umd.io/v0/courses/list?semester=202008"; // "https://api.umd.io/v1/courses"; // this will need to be several endpoints to allow for multiple
 
             window.onload = async function getCourses() {
@@ -165,38 +200,13 @@
 
             console.log(cor_list);
             };
-        </script>
-<!-- THIS IS THE DROPDOWN FILTER CODE END-->
+            };
 
-<!-- THIS IS THE DROPDOWN FILTER CODE START TIME-->
-<script>    
-            
-    const sec_api_url = "https://api.umd.io/v0/courses/sections?semester=202008";
+        -->
+    
+//THIS IS THE DROPDOWN FILTER CODE END-->
 
-    window.onload = async function getSections() {
-    //get department data from api
-    const sec_response = await fetch(sec_api_url);
-    const sec_json = await sec_response.json();
-
-    console.log(sec_json);
-
-    //create a list of departments
-    var sections = sec_json;
-    var sec_list = [];
-    for (var i = 0; i < sections.length; i++) {
-        sec_list.push(sections[i].section_id);
-    }
-
-    //add department list to drop down menu
-    var select = document.getElementById("section");
-    for (var i in sec_list) {
-        var option = document.createElement("option");
-        option.text = option.value = sec_list[i];
-        select.add(option, 0);
-    }
-
-    console.log(sec_list);
-    };
+// THIS IS THE DROPDOWN FILTER CODE START TIME-->   
 </script>
 <!-- THIS IS THE DROPDOWN FILTER CODE END-->
 
