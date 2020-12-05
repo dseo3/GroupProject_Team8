@@ -156,7 +156,7 @@
             }
 
             //add department list to drop down menu
-            var select = document.getElementById("section");
+            var select = document.getElementById("course");
             for (var i in cor_list) {
                 var option = document.createElement("option");
                 option.text = option.value = cor_list[i];
@@ -171,31 +171,31 @@
 <!-- THIS IS THE DROPDOWN FILTER CODE START TIME-->
 <script>    
             
-    const cor_api_url = "https://api.umd.io/v0/courses/list?semester=202008";
+    const sec_api_url = "https://api.umd.io/v0/courses/sections?semester=202008";
 
-    window.onload = async function getCourses() {
+    window.onload = async function getSections() {
     //get department data from api
-    const response = await fetch(cor_api_url);
-    const json = await response.json();
+    const sec_response = await fetch(sec_api_url);
+    const sec_json = await sec_response.json();
 
-    console.log(json);
+    console.log(sec_json);
 
     //create a list of departments
-    var courses = json;
-    var cor_list = [];
-    for (var i = 0; i < courses.length; i++) {
-        cor_list.push(courses[i].name);
+    var sections = sec_json;
+    var sec_list = [];
+    for (var i = 0; i < sections.length; i++) {
+        sec_list.push(sections[i].section_id);
     }
 
     //add department list to drop down menu
     var select = document.getElementById("section");
-    for (var i in cor_list) {
+    for (var i in sec_list) {
         var option = document.createElement("option");
-        option.text = option.value = cor_list[i];
+        option.text = option.value = sec_list[i];
         select.add(option, 0);
     }
 
-    console.log(cor_list);
+    console.log(sec_list);
     };
 </script>
 <!-- THIS IS THE DROPDOWN FILTER CODE END-->
@@ -270,6 +270,18 @@
                     <div class="field has-addons">
                         <div class="control is-expanded">
                             <div class="select is-fullwidth">
+                                <select name="course" id="course">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                        <div class="control">
+                            <button type="submit" class="button is-dark">Choose</button>
+                        </div>
+                    </div>
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
                                 <select name="section" id="section">
                                     <!--CONTENT NEEDS TO GO HERE-->
                                 </select>
@@ -279,7 +291,6 @@
                             <button type="submit" class="button is-dark">Choose</button>
                         </div>
                     </div>
-
                     <div class="field has-addons">
                         <div class="control is-expanded">
                             <div class="select is-fullwidth">
