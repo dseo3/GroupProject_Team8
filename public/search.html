@@ -9,9 +9,9 @@
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
         <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
         <link rel="stylesheet" type="text/css" href="styles.css" />
-      </head>
+    </head>
 
-      <body class="search-page">
+    <body class="search-page">
         <div class="global-features">
         <!-- Golobal Header -->
             <section class="hero is-primary">
@@ -43,9 +43,8 @@
             </div>
         </div>
 
+
         <div class= "search">
-
-
             <div class="field has-addons">
                 <div class="control">
                 <input class="input" type="text" placeholder="Seach Course Connector">
@@ -80,14 +79,66 @@
                     </li>
                 </ul>
             </div>
-
-
-            
-            
         </div>
 
+        <!-- FILTERING BY TEXT MATCHING START-->                
+        <script>
+
+            const endpoint = "https://api.umd.io/v0/courses/list?semester=202008";
+
+            const restaurants = [];
+            fetch(endpoint)
+            .then(blob => blob.json())
+            .then(data => restaurants.push(...data));
+
+            function findMatches(wordsToMatch, restaurants) {
+                return restaurants.filter(place => {
+                    const regex = new RegExp(wordsToMatch, 'gi');
+                    return place.name.match(regex)
+                });
+            }
+
+            function displayMatches() {
+                const matchArray = findMatches(this.value, restaurants);
+                let placesHTML = []
+                if (this.value.length == 0) { 
+                    placesHTML = [];
+                } 
+                else {placesHTML = matchArray.map((place) => `
+                    
+                <li>
+                    <span class="name">${place.name}</span><br>
+                </li>`).join('');}
+                suggestions.innerHTML = placesHTML;       
+            }
+                
+            const searchInput = document.querySelector('.search');
+            const suggestions = document.querySelector('.suggestions');
+
+            searchInput.addEventListener('input', displayMatches);
+
+        </script>
+        
+        <div class="container">
+            <div class="row">
+                <form class= "search-form">
+                    <input type="text" class="search" id=
+                "search" placeholder="Filter for zipcode"></input>
+                    <div id="navContainer">
+                        <div>
+                            <ul class="suggestions">
+
+                            </ul>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- FILTERING BY TEXT MATCHING END-->  
+            
+<!-- THIS IS THE DROPDOWN FILTER CODE START-->
         <script>    
-            // THIS IS THE SEARCH FILTERS JS DROP DOWNS
+            
             const cor_api_url = "https://api.umd.io/v0/courses/list?semester=202008"; // "https://api.umd.io/v1/courses"; // this will need to be several endpoints to allow for multiple
 
             window.onload = async function getCourses() {
@@ -113,13 +164,44 @@
             }
 
             console.log(cor_list);
-            //document.getElementById('grad-program').innerHTML = dep_list ;
             };
-            // THIS IS THE SEARCH FILTERS JS DROP DOWNS
         </script>
+<!-- THIS IS THE DROPDOWN FILTER CODE END-->
+
+<!-- THIS IS THE DROPDOWN FILTER CODE START TIME-->
+<script>    
+            
+    const cor_api_url = "https://api.umd.io/v0/courses/list?semester=202008";
+
+    window.onload = async function getCourses() {
+    //get department data from api
+    const response = await fetch(cor_api_url);
+    const json = await response.json();
+
+    console.log(json);
+
+    //create a list of departments
+    var courses = json;
+    var cor_list = [];
+    for (var i = 0; i < courses.length; i++) {
+        cor_list.push(courses[i].name);
+    }
+
+    //add department list to drop down menu
+    var select = document.getElementById("section");
+    for (var i in cor_list) {
+        var option = document.createElement("option");
+        option.text = option.value = cor_list[i];
+        select.add(option, 0);
+    }
+
+    console.log(cor_list);
+    };
+</script>
+<!-- THIS IS THE DROPDOWN FILTER CODE END-->
 
 
-        <!--MY SHIT-->
+<!-- POPUP FILTER PAGE -->
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <style>
         body {font-family: Arial, Helvetica, sans-serif;}
@@ -202,7 +284,7 @@
                         <div class="control is-expanded">
                             <div class="select is-fullwidth">
                                 <select name="term" id="term">
-                                    <!--CONTENT NEEDS TO GO HERE-->
+                                    <p> Fall 2020</p>
                                 </select>
                             </div>
                         </div>
@@ -287,61 +369,7 @@
         }
 
         </script>
-
-
-
-
-
-                
-        <div class="container">
-            <div class="row">
-                <h1>Isabeau, Jasmine, Zenobia Assignment 2</h1>
-                <form class= "search-form">
-                    <input type="text" class="search" placeholder="Filter for zipcode, business name, address, business category, or city"></input>
-                    <div id="navContainer">
-                        <ul class="suggestions"></ul>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <script>
-    
-            const endpoint = "https://api.umd.io/v0/courses/list?semester=202008";
-
-            const restaurants = [];
-            fetch(endpoint)
-            .then(blob => blob.json())
-            .then(data => restaurants.push(...data));
-
-            function findMatches(wordsToMatch, restaurants) {
-                return restaurants.filter(place => {
-                    const regex = new RegExp(wordsToMatch, 'gi');
-                    return place.name.match(regex)
-                });
-            }
-
-            function displayMatches() {
-                const matchArray = findMatches(this.value, restaurants);
-                let placesHTML = []
-                if (this.value.length == 0) { 
-                    placesHTML = [];
-                } 
-                else {placesHTML = matchArray.map((place) => `
-                    
-                <li>
-                    <span class="name">${place.name}</span><br>
-                </li>`).join('');
-                }
-                suggestions.innerHTML = placesHTML;       
-            }
-                
-            const searchInput = document.querySelector('.search');
-            const suggestions = document.querySelector('.suggestions');
-
-            searchInput.addEventListener('input', displayMatches);
-        </script>
-
+<!-- POPUP FILTER PAGE -->
 
       </body>
 
