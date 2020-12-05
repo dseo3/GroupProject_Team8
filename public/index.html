@@ -1,50 +1,74 @@
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Group Project INST377</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
       integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
-      crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-    <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"
+    ></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script src="script.js"></script>
   </head>
-
   <body>
-
-  <!-- Golobal Header -->
-    <section class="hero is-primary">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">
-            Course Connector
-          </h1>
+    <div class="global-features">
+      <!-- Golobal Header -->
+      <section class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">Course Connector</h1>
+          </div>
         </div>
-      </div>
-    </section>
-  
-    
-<!-- Golobal Navigation bar -->
-    <div class="navbar">
-      <nav class="navbar is-light">
+      </section>
+
+      <!-- Golobal Navigation bar -->
+      <div class="navbar">
+        <nav class="navbar is-light">
           <a class="navbar-item" href="home.html">
-            <button> <i class="fas fa-home"></i> </button>
+            <button><i class="fas fa-home fa-4x"></i></button>
           </a>
           <a class="navbar-item" href="search.html">
-            <button> <i class="fas fa-search"></i> </button>
+            <button><i class="fas fa-search fa-4x"></i></button>
           </a>
           <a class="navbar-item" href="bookmarks.html">
-            <button> <i class="far fa-bookmark"></i> </button>
+            <button><i class="far fa-bookmark fa-4x"></i></button>
           </a>
           <a class="navbar-item" href="preferences.html">
-            <button> <i class="fas fa-sliders-h"></i> </button>
+            <button><i class="fas fa-sliders-h fa-4x"></i></button>
           </a>
-      </nav>
+        </nav>
+      </div>
     </div>
 
-    
+    <section class="section">
+      <div class="container">
+        <h1 class="is-size-1 has-text-centered">
+          Select Your Graduate Program
+        </h1>
+      </div>
+    </section>
+
+    <!-- Dropdown bar -->
+    <div class="field has-addons">
+      <div class="control is-expanded">
+        <div class="select is-fullwidth">
+          <select name="grad-program" id="grad-program">
+            <!-- in JS need to add options values -->
+          </select>
+        </div>
+      </div>
+      <div class="control">
+        <button type="submit" class="button is-dark">Choose</button>
+      </div>
+    </div>
   </body>
-  <script src="script.js"></script>
-  </head>
 </html>
