@@ -27,8 +27,11 @@ app.route('/api')
   .post(async (req, res) => {
     console.log('POST request detected');
     const data = await fetch('https://api.umd.io/v1/courses');
+    const data_isa = await fetch("https://api.umd.io/v0/courses/list?semester=202008");
     const json = await data.json();
+    const json_isa = await data_isa.json();
     res.json(json);
+    res.json(json_isa);
   });
 
 app.listen(port, () => {

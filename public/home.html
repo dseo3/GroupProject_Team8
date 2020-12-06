@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
 </head>
 
 <body class="home-page">
@@ -52,8 +52,8 @@
   <div class='course-title-home' > 
     <div class="tile is-parent" >
       <div class="tile is-child box" id="course-code">
-        <p class="title">INST612</p>
-        <p class="subtitle">Advanced Usability Testing</p>
+        <p class="title" id="code">INST612</p>
+        <p class="subtitle" id="title">Advanced Usability Testing</p>
       </div>
     </div>
   </div>
@@ -63,19 +63,19 @@
     <div class="tile is-ancestor">
       <div class="tile is-parent">
         <article class="tile is-child box" id="course-stat">
-          <p class="title">3</p>
+          <p class="title" id="credit">3</p>
           <p class="subtitle">Credits</p>
         </article>
       </div>
       <div class="tile is-parent">
         <article class="tile is-child box" id="course-stat">
-          <p class="title">DSSP</p>
+          <p class="title" id="gened">N/A</p>
           <p class="subtitle">Gen-Ed</p>
         </article>
       </div>
       <div class="tile is-parent">
         <article class="tile is-child box" id="course-stat">
-          <p class="title">Regular</p>
+          <p class="title" id="method">Regular</p>
           <p class="subtitle">Grading Method</p>
         </article>
       </div>
@@ -87,8 +87,8 @@
   <div class='course-description-home' > 
     <div class="tile is-parent" >
       <div class="tile is-child box" id="home-description">
-        <p class="title">Description</p>
-        <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="title" >Description</p>
+        <p class="subtitle" id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </div>
     </div>
   </div>
@@ -97,8 +97,8 @@
    <!-- Average Grade -->
     <div class="tile is-parent" >
       <div class="tile is-child box" id="average-grade">
-        <p id="avgGrade"> </p>
-        </div>
+        <p id="avgGrade"></p>
+      </div>
     </div>
 
     <!-- Button to more detailed couse page -->
@@ -106,20 +106,129 @@
       <button class="learn-more"> Learn More </button>
     </a>
 
-    <!-- Button to save -->
+    <!-- Heart Button to save and see next -->
     
-      <button href="#" class="float">
+      <button href="#" class="float" onclick="NewRecFromFave">
         <i class="far fa-heart fa-2x my-float"></i>
       </button>
      
 
-    <!-- Button to see next -->
+    <!-- X Button to see next -->
     
-      <button href="#" class="float-x">
+      <button href="#" class="float-x" onclick="NewRec">
           <i class="fas fa-times fa-2x my-float"></i> 
       </button>
-    
+  
   </section>
+
+  <!-- JS for Buttons -->
+  <script>
+    const umd_courses= "https://api.umd.io/v1/courses?semester=202008";
+    
+    fetch(umd_courses) 
+            .then((response) => response.json())
+            .then((data) => {
+                var select = document.getElementById("code");
+                console.log(data)
+                for (var i in data) {
+                  select.innerHTML = data[i].course_id;
+                }
+                var select = document.getElementById("title");
+                console.log(data)
+                for (var i in data) {
+                  select.innerHTML = data[i].name;
+                }
+
+                var select = document.getElementById("credit");
+                console.log(data)
+                for (var i in data) {
+                  select.innerHTML = data[i].credits;
+                }
+              // gened 
+                var select = document.getElementById("gened");
+                console.log(data)
+                for (var i in data) {
+                  select.innerHTML = data[i].gen_ed;
+                }
+
+                var select = document.getElementById("method");
+                console.log(data)
+                for (var i in data) {
+                  select.innerHTML = data[i].grading_method;
+                }
+
+                var select = document.getElementById("description");
+                console.log(data)
+                for (var i in data) {
+                  select.innerHTML = data[i].description;
+                }
+
+        });
+    
+      
+        //Fetching PlanetTerp API
+      const proxyurl = "https://cors-anywhere.herokuapp.com/";
+      const urlTerp = "https://api.planetterp.com/v1/grades?course=INST612"; // site that doesn’t send Access-Control-*
+      let TotalClassGPA = 0.0;
+
+      fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
+        .then(console.log())
+        .then((response) => response.json())
+        .then((data) => {
+          data.forEach((item) => {
+            let total =
+              item["A+"] * 4.0 +
+              item["A"] * 4.0 +
+              item["A-"] * 3.7 +
+              item["B+"] * 3.3 +
+              item["B"] * 3.0 +
+              item["B-"] * 2.7 +
+              item["C+"] * 2.3 +
+              item["C"] * 2.0 +
+              item["C-"] * 1.7 +
+              item["D+"] * 1.3 +
+              item["D"] * 1.0 +
+              item["D-"] * 0.7;
+
+            let numStudents =
+              item["A+"] +
+              item["A"] +
+              item["A-"] +
+              item["B+"] +
+              item["B"] +
+              item["B-"] +
+              item["C+"] +
+              item["C"] +
+              item["C-"] +
+              item["D+"] +
+              item["D"] +
+              item["D-"] +
+              item["F"];
+
+            TotalClassGPA += total / numStudents;
+          });
+
+          TotalClassGPA /= data.length;
+          console.log(TotalClassGPA.toFixed(2));
+          document.getElementById("avgGrade").innerHTML = "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
+        });
+    
+    /*
+  
+    async function NewRec() {
+      const response = await fetch(umdio);
+      const json = await response.json();
+      console.log(json[0]);
+
+      
+  
+
+    NewRec();
+
+    */
+
+   
+  </script>
     
 
     
