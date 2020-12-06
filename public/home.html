@@ -102,24 +102,48 @@
     </div>
 
     <!-- Button to more detailed couse page -->
-    <a href="course.html" class="learn" onclick="GotoDetailedtoCourse">
+    <a href="course.html" class="learn">
       <button class="learn-more"> Learn More </button>
     </a>
 
-    <!-- Button to save -->
+    <!-- Heart Button to save and see next -->
     
-      <button href="#" class="float" onclick="GotoNewRec">
+      <button href="#" class="float" onclick="NewRecFromFave">
         <i class="far fa-heart fa-2x my-float"></i>
       </button>
      
 
-    <!-- Button to see next -->
+    <!-- X Button to see next -->
     
-      <button href="#" class="float-x" onclick="GotoNewRec">
+      <button href="#" class="float-x" onclick="NewRec">
           <i class="fas fa-times fa-2x my-float"></i> 
       </button>
-    
+  
   </section>
+
+  <!-- JS for Buttons -->
+  <script>
+
+    const pterp= 'https://api.planetterp.com/v1/courses'
+    const coursetitle= document.querySelector('.title')
+
+    async function NewRec() {
+      const response = await fetch(pterp);
+      const json = await response.json();
+      console.log(json);
+      
+    }
+    
+
+    function NewRecFromFave() {
+
+    }
+
+    NewRec();
+
+  
+   
+  </script>
     
 
     
