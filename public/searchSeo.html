@@ -43,25 +43,7 @@
             </div>
         </div>
 
-
-        <div class= "search">
-            <div class="field has-addons">
-                <div class="control">
-                <input class="input" type="text" placeholder="Seach Course Connector">
-                </div>
-                <div class="control">
-                <a class="button is-info">
-                    Search
-                </a>
-                </div>
-            </div>
-
-            <!-- Button add filters -->
-            <!-- <a href="search_results.html" class="filters">
-                <button class="filters"> Filters</button>
-            </a> -->
-
-            <!-- <div class="department-list">
+        <div class="department-list">
                 <ul>
                     <li>
                         <div class="tile is-parent" >
@@ -78,146 +60,13 @@
                           </div>
                     </li>
                 </ul>
-            </div> -->
+            
         </div>
 
-<!-- FILTERING BY TEXT MATCHING START-->                
-        <!-- <script>
 
-            const endpoint_course = "https://api.umd.io/v0/courses/list?semester=202008";
-
-            const restaurants = [];
-            fetch(endpoint_course)
-            .then(blob => blob.json())
-            .then(data => restaurants.push(...data));
-
-            function findMatches(wordsToMatch, restaurants) {
-                return restaurants.filter(place => {
-                    const regex = new RegExp(wordsToMatch, 'gi');
-                    return place.name.match(regex)
-                });
-            }
-
-            function displayMatches() {
-                const matchArray = findMatches(this.value, restaurants);
-                let placesHTML = []
-                if (this.value.length == 0) { 
-                    placesHTML = [];
-                } 
-                else {placesHTML = matchArray.map((place) => `
-                    <li>
-                        <div class="tile is-parent" >
-                            <div class="tile is-child box" id="department-name">
-                              <p class="title"> <b>AASP</b> <small>African American Studies</small></p>
-                              </div>
-                          </div>
-                    </li>
-                    `).join('');}
-                suggestions.innerHTML = placesHTML;       
-            }
-                
-            const searchInput = document.querySelector('.search');
-            const suggestions = document.querySelector('.suggestions');
-
-            searchInput.addEventListener('input', displayMatches);
-
-        </script> -->
         
-        <!-- <div class="container">
-            <div class="row">
-                <form class= "search-form">
-                    <input type="text" class="search" id=
-                "search" placeholder="Filter for zipcode"></input>
-                    <div id="navContainer">
-                        <div>
-                            <ul class="suggestions">
-
-                            </ul>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div> -->
-        <!-- FILTERING BY TEXT MATCHING END-->  
-            
-<!-- THIS IS THE DROPDOWN FILTER CODE START-->
-       <!-- <script>    
-            
-            function SECTIONS() {
-            const sec_api_url = "https://api.umd.io/v0/courses/sections?semester=202008";
-
-            window.onload = async function getSections() {
-            //get department data from api
-            const sec_response = await fetch(sec_api_url);
-            const sec_json = await sec_response.json();
-
-            console.log(sec_json);
-
-            //create a list of departments
-            var sections = sec_json;
-            var sec_list = [];
-            for (var i = 0; i < sections.length; i++) {
-                sec_list.push(sections[i].section_id);
-            }
-
-            //add department list to drop down menu
-            var select = document.getElementById("section");
-            for (var i in sec_list) {
-                var option = document.createElement("option");
-                option.text = option.value = sec_list[i];
-                select.add(option, 0);
-            }
-
-            console.log(sec_list);
-            };
-            };
-
-
-            function COURSES() {
-            const cor_api_url = "https://api.umd.io/v0/courses/list?semester=202008"; // "https://api.umd.io/v1/courses"; // this will need to be several endpoints to allow for multiple
-
-            window.onload = async function getCourses() {
-            //get department data from api
-            const response = await fetch(cor_api_url);
-            const json = await response.json();
-
-            console.log(json);
-
-            //create a list of departments
-            var courses = json;
-            var cor_list = [];
-            for (var i = 0; i < courses.length; i++) {
-                cor_list.push(courses[i].name);
-            }
-
-            //add department list to drop down menu
-            var select = document.getElementById("course");
-            for (var i in cor_list) {
-                var option = document.createElement("option");
-                option.text = option.value = cor_list[i];
-                select.add(option, 0);
-            }
-
-            console.log(cor_list);
-            };
-            };
-
-        -->
-    
-<!-- THIS IS THE DROPDOWN FILTER CODE END
-
- THIS IS THE DROPDOWN FILTER CODE START TIME    -->
-<!-- </script> -->
-<!-- THIS IS THE DROPDOWN FILTER CODE END-->
-
-
-<!-- POPUP FILTER PAGE -->
-       
-        <!-- </head> -->
-        <!-- <body> -->
-
         <!-- Trigger/Open The Modal -->
-        <button id="myBtn">Filters FIXED</button>
+        <button id="myBtn">Filter</button>
 
         <!-- The Modal -->
         <div id="myModal" class="modal">
@@ -243,9 +92,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
+                      
                     </div>
                     <div class="field has-addons">
                         <div class="control is-expanded">
@@ -255,21 +102,17 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
+                        
                     </div>
                     <div class="field has-addons">
                         <div class="control is-expanded">
                             <div class="select is-fullwidth">
                                 <select name="term" id="term">
-                                    <p> Fall 2020</p>
+                                    
                                 </select>
                             </div>
                         </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
+                        
                     </div>
 
                     <div class="field has-addons">
@@ -280,9 +123,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
+                        
                     </div>
                     <div class="field has-addons">
                         <div class="control is-expanded">
@@ -292,9 +133,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
+                        
                     </div>
                     <div class="field has-addons">
                         <div class="control is-expanded">
@@ -304,9 +143,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
+                        
                     </div>
                     <div class="field has-addons">
                         <div class="control is-expanded">
@@ -316,9 +153,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
+                      
                     </div>
                     <span class="close">
                         <button type="submit" class="button is-dark close">Confirm Filters</button>
@@ -326,8 +161,9 @@
                 </form>
             </div>
         </div>
+    </body>
 
-        <script>
+    <script>
         // Get the modal
         var modal = document.getElementById("myModal");
 
@@ -347,9 +183,27 @@
         modal.style.display = "none";
         }
 
+        const umd_io = "https://api.umd.io/v1/courses/sections?semester=202008";
+
+        fetch(umd_io) 
+            .then((response) => response.json())
+            .then((data) => {
+
+                var select = document.getElementById("section");
+                for (var i in data[0]) {
+                    var option = document.createElement("option");
+                    option.text = option.value = data[0][i].section_id;
+                    select.add(option);
+                }
+
+                var select = document.getElementById("course");
+                for (var i in data[0]) {
+                    var option1 = document.createElement("option");
+                    option1.text = option1.value = data[0][i].course;
+                    select.add(option1);
+                }
+
+        });
+
         </script>
-<!-- POPUP FILTER PAGE -->
-
-      </body>
-
 </html>
