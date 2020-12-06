@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script src="script.js"></script>
+    <!-- <script src="script.js"></script> -->
 </head>
 
 <body class="home-page">
@@ -52,8 +52,8 @@
   <div class='course-title-home' > 
     <div class="tile is-parent" >
       <div class="tile is-child box" id="course-code">
-        <p class="title">INST612</p>
-        <p class="subtitle">Advanced Usability Testing</p>
+        <p class="title" id="code">INST612</p>
+        <p class="subtitle" id="title">Advanced Usability Testing</p>
       </div>
     </div>
   </div>
@@ -63,19 +63,19 @@
     <div class="tile is-ancestor">
       <div class="tile is-parent">
         <article class="tile is-child box" id="course-stat">
-          <p class="title">3</p>
+          <p class="title" id="credit">3</p>
           <p class="subtitle">Credits</p>
         </article>
       </div>
       <div class="tile is-parent">
         <article class="tile is-child box" id="course-stat">
-          <p class="title">DSSP</p>
+          <p class="title" id="gened">N/A</p>
           <p class="subtitle">Gen-Ed</p>
         </article>
       </div>
       <div class="tile is-parent">
         <article class="tile is-child box" id="course-stat">
-          <p class="title">Regular</p>
+          <p class="title" id="method">Regular</p>
           <p class="subtitle">Grading Method</p>
         </article>
       </div>
@@ -87,8 +87,8 @@
   <div class='course-description-home' > 
     <div class="tile is-parent" >
       <div class="tile is-child box" id="home-description">
-        <p class="title">Description</p>
-        <p class="subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+        <p class="title" >Description</p>
+        <p class="subtitle" id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
       </div>
     </div>
   </div>
@@ -123,86 +123,63 @@
 
   <!-- JS for Buttons -->
   <script>
-    const umdio = 'https://api.umd.io/v0/courses/sections?semester=202008';
-    const courseElement= document.querySelector('.home');
+    const umd_courses= "https://api.umd.io/v1/courses?semester=202008";
+    
+    fetch(umd_courses) 
+            .then((response) => response.json())
+            .then((data) => {
+                var select = document.getElementById("code");
+                console.log(data)
+                for (var i in data) {
+                  select.innerHTML = data[i].course_id;
+                }
+                var select = document.getElementById("title");
+                console.log(data)
+                for (var i in data) {
+                  select.innerHTML = data[i].name;
+                }
 
+                var select = document.getElementById("credit");
+                console.log(data)
+                for (var i in data) {
+                  select.innerHTML = data[i].credits;
+                }
+              // gened 
+                var select = document.getElementById("gened");
+                console.log(data)
+                for (var i in data) {
+                  select.innerHTML = data[i].gen_ed;
+                }
+
+                var select = document.getElementById("method");
+                console.log(data)
+                for (var i in data) {
+                  select.innerHTML = data[i].grading_method;
+                }
+
+                var select = document.getElementById("description");
+                console.log(data)
+                for (var i in data) {
+                  select.innerHTML = data[i].description;
+                }
+
+        });
+    
+    
+    
+    /*
+  
     async function NewRec() {
       const response = await fetch(umdio);
       const json = await response.json();
       console.log(json[0]);
 
-
-      // selecting the courses
-      json[0].forEach((course) => {
-        // Course Code and Title Tile
-        // <div class='course-title-home' > 
-        const divElement = document.createElement('div');
-        divElement.classList.add('course-title-home');
-
-        // <div class="tile is-parent" >
-        const tileElement = document.createElement('div');
-        tileElement.classList.add('tile');
-        divElement.appendChild(tileElement);
-
-        // <div class="tile is-child box" id="course-code">
-        const ctileElement = document.createElement('div');
-        ctileElement.classList.add('tile');
-        ctileElement.id = 'course-code';
-        tileElement.appendChild(ctileElement);
-
-        // <p class="title">INST612</p>
-        const courseCode = document.createElement('p');
-        courseCode.src = course;
-        courseCode.classList.add('title');
-        ctileElement.appendChild(courseCode);
-
-        const courseTitle = document.createElement('p');
-        courseCode.src = course;
-        courseTitle.classList.add('subtitle');
-        ctileElement.appendChild(courseTitle);
-
-        courseElement.appendChild(divElement);
-
-        // Course Stat Tiles
       
-        // <div class="course-stats">
-        const statElement = document.createElement('div');
-        statElement.classList.add('course-stats');
-
-        // <div class="tile is-ancestor">
-        const statTileElement = document.createElement('div');
-        statTileElement.classList.add('tile');
-        statElement.appendChild(statTileElement);
-
-        // <div class="tile is-parent">
-        const pstatTileElement = document.createElement('div');
-        pstatTileElement.classList.add('tile');
-        statTileElement.appendChild(pstatTileElement);
-
-        // <article class="tile is-child box" id="course-stat">
-        const courseCredits = document.createElement('article');
-        courseCredits.classList.add('tile');
-        courseCredits.id = 'course-stat';
-        pstatTileElement.appendChild(courseCredits);
-
-        //  <p class="title">3</p>
-        const Credits = document.createElement('p');
-        Credits.classList.add('title');
-        Credits.src = course;
-        courseCredits.appendChild(Credits);
-
-        // <p class="subtitle">Credits</p>
-        const creditTitle = document.createElement('p');
-        creditTitle.src = course;
-        creditTitle.classList.add('subtitle');
-        courseCredits.appendChild(creditTitle);
-
-        courseElement.appendChild(statElement);
-
-      });
-    }
+  
 
     NewRec();
+
+    */
 
    
   </script>
