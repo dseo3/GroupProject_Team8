@@ -10,7 +10,9 @@ let li = response.map((dept)=> `<li>
 <span class="dept_id">${dept.dept_id}</span><br>
 <span class="category">${dept.department}</span>
 </li>`)
+    
 ul.innerHTML = li
+const Element = document.querySelector('.Element');
 
 target.appendChild(ul)
     })
