@@ -43,13 +43,115 @@
             </div>
         </div>
 
-
+        
         <div class = "search">
 
         </div>
-            
-        <script src="app.js"></script>
+        <div class="filters">
 
-      </body>
+           
+        <button id="myBtn">Filter</button>
 
+
+        <!-- The Modal -->
+        <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+            <div class="modal-content">
+                <!-- <span class="close">&times;</span> -->
+                <form>
+                    <input class="input" type="text" placeholder="Type in the course you're looking for"> <!--the type needs to be search like the asst2 JS-->
+                    <div id="navContainer">
+                        <ul class="suggestions"></ul>
+                    </div>
+
+                    <input class="input section" type="text" placeholder="Type in the section you're looking for"> <!--the type needs to be search like the asst2 JS-->
+
+                    <input class="input instructor" type="text" placeholder="Type in the instructor you're looking for"> <!--the type needs to be search like the asst2 JS-->
+
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="course" id="course">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="section" id="section">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="term" id="term">
+                                    
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="greaterorless" id="greaterorless">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="credit" id="credit">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="starttime" id="starttime">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="field has-addons">
+                        <div class="control is-expanded">
+                            <div class="select is-fullwidth">
+                                <select name="delivery" id="delivery">
+                                    <!--CONTENT NEEDS TO GO HERE-->
+                                </select>
+                            </div>
+                        </div>
+                      
+                    </div>
+                    <span class="close">
+                        <button type="submit" class="button is-dark close">Confirm Filters</button>
+                    </span>
+                </form>
+            </div>
+        </div>
+      </div>
+    </body>
+
+    <script src="app.js">
+
+       
+       </script>
+    
 </html>
