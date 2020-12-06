@@ -1,0 +1,17 @@
+ ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    border: none;
+    width: auto;
+  }
+ li {
+    border-bottom: 1px solid #90bade;
+    margin: 0;
+    padding: 10px;
+    border-radius: 3px;
+    background: rgb(238, 232, 170);
+    background: linear-gradient(
+      180deg,
+      rgba(238, 232, 170, 1) 35%,
+      rgba(255, 251, 238, 1) 100%

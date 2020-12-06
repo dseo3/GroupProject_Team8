@@ -5,6 +5,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import fetch from 'node-fetch';
 
+
 dotenv.config();
 
 const app = express();
@@ -21,16 +22,22 @@ app.use((req, res, next) => {
 });
 
 app.route('/api')
-  .get((req, res) => {
+  .get(async(req, res) => {
     console.log('GET request detected');
+    const data = await fetch('https://api.umd.io/v0/courses/departments?semester=202008');
+    const json = await data.json();
+    //console.log('data from fetch',json)
+    res.send(json);
   })
   .post(async (req, res) => {
     console.log('POST request detected');
-    const data = await fetch('https://data.princegeorgescountymd.gov/resource/umjn-t2iz.json');
+    const data = await fetch('https://api.umd.io/v0/courses/departments?semester=202008');
     const json = await data.json();
-    res.json(json);
+    res.send(json);
   });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
 });
+
+
