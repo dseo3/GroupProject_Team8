@@ -44,21 +44,8 @@
         </div>
 
         <div class="department-list">
-                <ul>
-                    <li>
-                        <div class="tile is-parent" >
-                            <div class="tile is-child box" id="department-name">
-                              <p class="title"> <b>AASP</b> <small>African American Studies</small></p>
-                              </div>
-                          </div>
-                    </li>
-                    <li>
-                        <div class="tile is-parent" >
-                            <div class="tile is-child box" id="department-name">
-                              <p class="title"> <b>AAST</b> <small>Asian American Studies</small></p>
-                              </div>
-                          </div>
-                    </li>
+                <ul class="suggest" id="department_list">
+                    
                 </ul>
             
         </div>
@@ -67,6 +54,7 @@
         
         <!-- Trigger/Open The Modal -->
         <button id="myBtn">Filter</button>
+        <div id=’rick’></div>
 
         <!-- The Modal -->
         <div id="myModal" class="modal">
@@ -161,6 +149,7 @@
                 </form>
             </div>
         </div>
+        <button id="myButton">CHECK</button>
     </body>
 
     <script>
@@ -182,9 +171,35 @@
         span.onclick = function() {
         modal.style.display = "none";
         }
+    
+
+       
+        const umd_io2 = "https://api.umd.io/v0/courses/list?semester=202008";
+        fetch(umd_io2) 
+        .then((response) => response.json())
+        .then((data) => {
+            var select = document.getElementById("term");
+            for (var i in data) {
+                var option = document.createElement("option");
+                option.text = option.value = data[i].name;
+                select.add(option);
+            }
+        });
+
+        const umd_io3 = "https://api.umd.io/v1/professors?semester=202008";
+        fetch(umd_io3) 
+        .then((response) => response.json())
+        .then((data) => {
+            var select = document.getElementById("greaterorless");
+            for (var i in data) {
+                var option = document.createElement("option");
+                option.text = option.value = data[i].name;
+                select.add(option);
+            }
+        });
 
         const umd_io = "https://api.umd.io/v1/courses/sections?semester=202008";
-
+    
         fetch(umd_io) 
             .then((response) => response.json())
             .then((data) => {
@@ -204,6 +219,5 @@
                 }
 
         });
-
         </script>
 </html>

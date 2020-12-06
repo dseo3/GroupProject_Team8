@@ -57,11 +57,11 @@
             </div>
 
             <!-- Button add filters -->
-            <!-- <a href="search_results.html" class="filters">
+            <a href="search_results.html" class="filters">
                 <button class="filters"> Filters</button>
-            </a> -->
+            </a>
 
-            <!-- <div class="department-list">
+            <div class="department-list">
                 <ul>
                     <li>
                         <div class="tile is-parent" >
@@ -78,11 +78,11 @@
                           </div>
                     </li>
                 </ul>
-            </div> -->
+            </div>
         </div>
 
 <!-- FILTERING BY TEXT MATCHING START-->                
-        <!-- <script>
+        <script>
 
             const endpoint_course = "https://api.umd.io/v0/courses/list?semester=202008";
 
@@ -121,9 +121,9 @@
 
             searchInput.addEventListener('input', displayMatches);
 
-        </script> -->
+        </script>
         
-        <!-- <div class="container">
+        <div class="container">
             <div class="row">
                 <form class= "search-form">
                     <input type="text" class="search" id=
@@ -137,84 +137,110 @@
                     </div>
                 </form>
             </div>
-        </div> -->
+        </div>
         <!-- FILTERING BY TEXT MATCHING END-->  
             
 <!-- THIS IS THE DROPDOWN FILTER CODE START-->
-       <!-- <script>    
-            
-            function SECTIONS() {
-            const sec_api_url = "https://api.umd.io/v0/courses/sections?semester=202008";
+<script>    
+        const endpoint = ["https://api.umd.io/v0/courses/list?semester=202008", "https://api.umd.io/v0/courses/sections?semester=202008"];
 
-            window.onload = async function getSections() {
-            //get department data from api
-            const sec_response = await fetch(sec_api_url);
-            const sec_json = await sec_response.json();
+        const json = [];
+        for (var l = 0; l < endpoint.length; l++) {
+            const response = await fetch(l);
+            const json_push = json.push(await response.json());
+        }
 
-            console.log(sec_json);
+        function displaySection() {
+        
+        }
+        var newarray = json.map(displaySection)
 
-            //create a list of departments
-            var sections = sec_json;
-            var sec_list = [];
-            for (var i = 0; i < sections.length; i++) {
-                sec_list.push(sections[i].section_id);
-            }
+        function displayCourse() {
 
-            //add department list to drop down menu
-            var select = document.getElementById("section");
-            for (var i in sec_list) {
-                var option = document.createElement("option");
-                option.text = option.value = sec_list[i];
-                select.add(option, 0);
-            }
-
-            console.log(sec_list);
-            };
-            };
+        }
+        var newarray = json.map(displayCourse)
 
 
-            function COURSES() {
-            const cor_api_url = "https://api.umd.io/v0/courses/list?semester=202008"; // "https://api.umd.io/v1/courses"; // this will need to be several endpoints to allow for multiple
 
-            window.onload = async function getCourses() {
-            //get department data from api
-            const response = await fetch(cor_api_url);
-            const json = await response.json();
 
-            console.log(json);
+        window.onload = async function getSections() {
+        
+        //get department data from api
+        const sec_response = await fetch(sec_api_url);
+        const sec_json = await sec_response.json();
 
-            //create a list of departments
-            var courses = json;
-            var cor_list = [];
-            for (var i = 0; i < courses.length; i++) {
-                cor_list.push(courses[i].name);
-            }
+        console.log(sec_json);
 
-            //add department list to drop down menu
-            var select = document.getElementById("course");
-            for (var i in cor_list) {
-                var option = document.createElement("option");
-                option.text = option.value = cor_list[i];
-                select.add(option, 0);
-            }
+        //create a list of departments
+        var sections = sec_json;
+        var sec_list = [];
+        for (var i = 0; i < sections.length; i++) {
+            sec_list.push(sections[i].section_id);
+        }
 
-            console.log(cor_list);
-            };
-            };
+        //add department list to drop down menu
+        var select = document.getElementById("section");
+        for (var i in sec_list) {
+            var option = document.createElement("option");
+            option.text = option.value = sec_list[i];
+            select.add(option, 0);
+        }
 
-        -->
-    
-<!-- THIS IS THE DROPDOWN FILTER CODE END
+        console.log(sec_list);
+        };
 
- THIS IS THE DROPDOWN FILTER CODE START TIME    -->
-<!-- </script> -->
+
+          
+</script>
 <!-- THIS IS THE DROPDOWN FILTER CODE END-->
 
 
 <!-- POPUP FILTER PAGE -->
-       
-        <!-- </head> -->
-        <!-- <body> -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <style>
+        body {font-family: Arial, Helvetica, sans-serif;}
+
+        /* The Modal (background) */
+        .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+        }
+
+        /* Modal Content */
+        .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        }
+
+        /* The Close Button */
+        .close {
+        color: #aaaaaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        }
+
+        .close:hover,
+        .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+        }
+        </style>
+        </head>
+        <body>
 
         <!-- Trigger/Open The Modal -->
         <button id="myBtn">Filters FIXED</button>
