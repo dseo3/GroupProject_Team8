@@ -1,5 +1,4 @@
 
-//window.onload = function testFunction() {
     fetch('/api')
     .then((response) => {return response.json()})
     .then((response) => {
