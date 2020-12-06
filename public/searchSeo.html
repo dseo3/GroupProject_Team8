@@ -50,7 +50,6 @@
             
         </div>
 
-
         
         <!-- Trigger/Open The Modal -->
         <button id="myBtn">Filter</button>
@@ -171,9 +170,8 @@
         span.onclick = function() {
         modal.style.display = "none";
         }
-    
 
-       
+
         const umd_io2 = "https://api.umd.io/v0/courses/list?semester=202008";
         fetch(umd_io2) 
         .then((response) => response.json())
