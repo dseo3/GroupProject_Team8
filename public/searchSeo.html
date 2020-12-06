@@ -203,7 +203,31 @@
                     select.add(option1);
                 }
 
-        });
+        })
+        
+        const umd_io = "https://api.umd.io/v1/courses/sections?semester=202008";
+
+        fetch(umd_io) 
+            .then((response) => response.json())
+            .then((data) => {
+
+                var select = document.getElementById("section");
+                for (var i in data[0]) {
+                    var option = document.createElement("option");
+                    option.text = option.value = data[0][i].section_id;
+                    select.add(option);
+                }
+
+                var select = document.getElementById("course");
+                for (var i in data[0]) {
+                    var option1 = document.createElement("option");
+                    option1.text = option1.value = data[0][i].course;
+                    select.add(option1);
+                }
+
+        })
+        
+        ;
 
         </script>
 </html>
