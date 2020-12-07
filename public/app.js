@@ -16,7 +16,7 @@ let li = response.map((dept)=> `<li>
 ul.innerHTML = li
 
 target.appendChild(ul)
-    })
+    });
     
      // Get the modal
      var modal = document.getElementById("myModal");
