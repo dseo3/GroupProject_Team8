@@ -108,7 +108,7 @@
 
     <!-- Heart Button to save and see next -->
     
-      <button href="#" class="float" onclick="NewRecFromFave">
+      <button id="fav_button" href="#" class="float" onclick="NewRecFromFave">
         <i class="far fa-heart fa-2x my-float"></i>
       </button>
      
@@ -171,6 +171,9 @@
       const urlTerp = "https://api.planetterp.com/v1/grades?course=INST612"; // site that doesn’t send Access-Control-*
       let TotalClassGPA = 0.0;
 
+
+
+      
       fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
         .then(console.log())
         .then((response) => response.json())
