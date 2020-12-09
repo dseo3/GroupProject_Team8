@@ -49,7 +49,7 @@ app.route('/api')
     const json_isa = await data_isa.json();
     res.json(json);
     res.json(json_isa);
-  });*/
+  });
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
