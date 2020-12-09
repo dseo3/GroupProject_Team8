@@ -1,7 +1,9 @@
+
 //Prefrences Dropdown Bar 
 async function main() {
   await getDepartments();
   //selects api
+
   const data = await fetch("https://api.umd.io/v1/courses");
   //parses api data into json value
   const courses = await data.json(); 
@@ -12,12 +14,16 @@ async function main() {
   const program = document.querySelector("#program");
 
   form.addEventListener("submit", (event) => {
+    
     event.preventDefault();
+    
     console.log("HELLO?");
+
     //formdata = department names 
     const formdata = $(event.target).serializeArray();
     console.log(formdata);
     //creating a new constant 
+
     const availCourses = courses
     //
     .filter(course => {
@@ -66,6 +72,7 @@ function NewRecFromFave(){
   })
 }
 
+
 NewRecFromFave(); 
 
 function NewRecFromX(){
@@ -85,8 +92,9 @@ function NewRecFromX(){
 
 NewRecFromX(); 
 
+
 function favClass(className) {
-    
+
 }
 
 function findMatches(wordsToMatch, courses) {
