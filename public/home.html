@@ -126,42 +126,42 @@
     const umd_courses= "https://api.umd.io/v1/courses?semester=202008";
     
     fetch(umd_courses) 
-            .then((response) => response.json())
-            .then((data) => {
-                var select = document.getElementById("code");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].course_id;
-                }
-                var select = document.getElementById("title");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].name;
-                }
+      .then((response) => response.json())
+      .then((data) => {
+          var select = document.getElementById("code");
+          console.log(data)
+          for (var i in data) {
+            select.innerHTML = data[i].course_id;
+          }
+          var select = document.getElementById("title");
+          console.log(data)
+          for (var i in data) {
+            select.innerHTML = data[i].name;
+          }
 
-                var select = document.getElementById("credit");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].credits;
-                }
-              // gened 
-                var select = document.getElementById("gened");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].gen_ed;
-                }
+          var select = document.getElementById("credit");
+          console.log(data)
+          for (var i in data) {
+            select.innerHTML = data[i].credits;
+          }
+        // gened 
+          var select = document.getElementById("gened");
+          console.log(data)
+          for (var i in data) {
+            select.innerHTML = data[i].gen_ed;
+          }
 
-                var select = document.getElementById("method");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].grading_method;
-                }
+          var select = document.getElementById("method");
+          console.log(data)
+          for (var i in data) {
+            select.innerHTML = data[i].grading_method;
+          }
 
-                var select = document.getElementById("description");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].description;
-                }
+          var select = document.getElementById("description");
+          console.log(data)
+          for (var i in data) {
+            select.innerHTML = data[i].description;
+          }
 
         });
     
