@@ -145,4 +145,73 @@ fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example
 
 
 
+    // Get the modal
+    var modal = document.getElementById("myModal");
+
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // When the user clicks the button, open the modal
+    btn.onclick = function () {
+      modal.style.display = "block";
+    };
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function () {
+      modal.style.display = "none";
+    };
+
+
+
+    /// THESE THREE NEED TO BE FIXED STILL PER ALEXS CHANGES - ISABEAU
+    const umd_io2 = "https://api.umd.io/v0/courses/list?semester=202008";
+    fetch(umd_io2)
+      .then((response) => response.json())
+      .then((data) => {
+        var select = document.getElementById("term");
+        for (var i in data) {
+          var option = document.createElement("option");
+          option.text = option.value = data[i].name;
+          select.add(option);
+        }
+      });
+
+    const umd_io3 = "https://api.umd.io/v1/professors?semester=202008";
+    fetch(umd_io3)
+      .then((response) => response.json())
+      .then((data) => {
+        var select = document.getElementById("greaterorless");
+        for (var i in data) {
+          var option = document.createElement("option");
+          option.text = option.value = data[i].name;
+          select.add(option);
+        }
+      });
+
+    const umd_io = "https://api.umd.io/v1/courses/sections?semester=202008";
+
+    fetch(umd_io)
+      .then((response) => response.json())
+      .then((data) => {
+        var select = document.getElementById("section");
+        for (var i in data[0]) {
+          var option = document.createElement("option");
+          option.text = option.value = data[0][i].section_id;
+          select.add(option);
+        }
+
+        var select = document.getElementById("course");
+        for (var i in data[0]) {
+          var option1 = document.createElement("option");
+          option1.text = option1.value = data[0][i].course;
+          select.add(option1);
+        }
+      });
+  </script>
+
+
+
 window.onload = main;
