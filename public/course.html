@@ -9,28 +9,24 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
     <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <!-- <script src="script.js"></script> -->
-</head>
-
-<body class="home-page">
-
-  <div class="global-features">
-  <!-- Golobal Header -->
-    <section class="hero is-primary">
-      <div class="hero-body">
-        <div class="container">
-          <h1 class="title">
-            Course Connector
-          </h1>
+  </head>
+  <body>
+    <div class="global-features">
+      <!-- Golobal Header -->
+      <section class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">Course Connector</h1>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Golobal Navigation bar -->
-    <div class="navbar">
-      <nav class="navbar is-light">
-          <a class="navbar-item" href="home.html">
-            <button> <i class="fas fa-home fa-4x"></i> </button>
+      <!-- Golobal Navigation bar -->
+      <div class="navbar">
+        <nav class="navbar is-light">
+          <a class="navbar-item" href="index.html">
+            <button><i class="fas fa-home fa-4x"></i></button>
           </a>
           <a class="navbar-item" href="search.html">
             <button> <i class="fas fa-search fa-4x"></i> </button>
@@ -38,10 +34,8 @@
           <a class="navbar-item" href="bookmarks.html">
             <button> <i class="far fa-bookmark fa-4x"></i> </button>
           </a>
-          <a class="navbar-item" href="preferences.html">
-            <button> <i class="fas fa-sliders-h fa-4x"></i> </button>
-          </a>
-      </nav>
+        </nav>
+      </div>
     </div>
   </div>
  
@@ -108,134 +102,20 @@
         <p id="sections">Sections</p>
         </div>
     </div>
-
-    <!-- Button to more detailed couse page -->
-    <a href="home.html" class="learn">
-      <button class="learn-more"> Go Back </button>
-    </a>
-
+    
+    <!-- Button to save -->
 
   </section>
 
-  <!-- JS for Buttons -->
-  <script>
-    const umd_courses= "https://api.umd.io/v1/courses?semester=202008";
-    
-    fetch(umd_courses) 
-            .then((response) => response.json())
-            .then((data) => {
-                var select = document.getElementById("code");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].course_id;
-                }
-                var select = document.getElementById("section");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].name;
-                }
 
-                var select = document.getElementById("credit");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].credits;
-                }
-              // gened 
-                var select = document.getElementById("gened");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].gen_ed;
-                }
+    <!-- Button to see next -->
 
-                var select = document.getElementById("method");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].grading_method;
-                }
+    <button href="#" class="float-x">
+      <i class="fas fa-times fa-2x my-float"></i>
+    </button>
 
-                var select = document.getElementById("description");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].description;
-                }
+    </section>
 
-                var select = document.getElementById("sections");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].sections;
-                }
-
-        });
-    
-    
-    
-    /*
-  
-    async function NewRec() {
-      const response = await fetch(umdio);
-      const json = await response.json();
-      console.log(json[0]);
-
-      
-  
-
-    NewRec();
-
-    */
-
-   
-  </script>  
-
-  <script>
-        //Fetching PlanetTerp API
-      const proxyurl = "https://cors-anywhere.herokuapp.com/";
-      const urlTerp = "https://api.planetterp.com/v1/grades?course=INST612"; // site that doesn’t send Access-Control-*
-      let TotalClassGPA = 0.0;
-
-      fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
-        .then(console.log())
-        .then((response) => response.json())
-        .then((data) => {
-          data.forEach((item) => {
-            let total =
-              item["A+"] * 4.0 +
-              item["A"] * 4.0 +
-              item["A-"] * 3.7 +
-              item["B+"] * 3.3 +
-              item["B"] * 3.0 +
-              item["B-"] * 2.7 +
-              item["C+"] * 2.3 +
-              item["C"] * 2.0 +
-              item["C-"] * 1.7 +
-              item["D+"] * 1.3 +
-              item["D"] * 1.0 +
-              item["D-"] * 0.7;
-
-            let numStudents =
-              item["A+"] +
-              item["A"] +
-              item["A-"] +
-              item["B+"] +
-              item["B"] +
-              item["B-"] +
-              item["C+"] +
-              item["C"] +
-              item["C-"] +
-              item["D+"] +
-              item["D"] +
-              item["D-"] +
-              item["F"];
-
-            TotalClassGPA += total / numStudents;
-          });
-
-          TotalClassGPA /= data.length;
-          console.log(TotalClassGPA.toFixed(2));
-          document.getElementById("avgGrade").innerHTML = "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
-        });
-
-   
-  </script>
-
+  <script src="script.js"></script>
   </body>
 </html>
