@@ -1,5 +1,7 @@
+
 async function main() {
-  await getDepartments();
+
+    await getDepartments();
   const data = await fetch("https://api.umd.io/v1/courses");
   const courses = await data.json();
   const searchInput = document.querySelector(".search");
@@ -8,9 +10,13 @@ async function main() {
   const form = document.querySelector(".course_select");
 
   form.addEventListener("submit", (event) => {
+    
     event.preventDefault();
+    
     console.log("HELLO?");
+    
     const formdata = $(event.target).serializeArray();
+    
     const availCourses = courses
     .filter(course => {
         console.log(formdata[0].value)
@@ -25,7 +31,12 @@ async function main() {
   //   });
 }
 
-function favClass(className) {}
+
+
+
+function favClass(className) {
+
+}
 
 function findMatches(wordsToMatch, courses) {
   return courses.filter((course) => {
@@ -52,7 +63,9 @@ function displayMatches() {
   return HTMLmatches;
 }
 
-// Lil Yomi's Code
+
+
+// Yomi's Code: for Preferences Departments Drop down at top of index/home page
 
 const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202008";
 
@@ -81,7 +94,6 @@ async function getDepartments() {
   console.log(dep_list);
   //document.getElementById('grad-program').innerHTML = dep_list ;
 }
-
 
 
 window.onload = main;
