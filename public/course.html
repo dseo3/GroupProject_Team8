@@ -17,7 +17,6 @@
       src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"
     ></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
-    <script src="script.js"></script>
   </head>
   <body>
     <div class="global-features">
@@ -113,80 +112,6 @@
 
     </section>
 
-   
-     <!-- JS for Buttons -->
-  <script>
-    const umd_courses= "https://api.umd.io/v1/courses?semester=202008";
-    
-    fetch(umd_courses) 
-            .then((response) => response.json())
-            .then((data) => {
-                var select = document.getElementById("code");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].course_id;
-                }
-                var select = document.getElementById("section");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].name;
-                }
-
-                var select = document.getElementById("credit");
-                console.log(data)
-                for (var i in data) {
-                  select.innerHTML = data[i].credits;
-                }
-    
-        //Fetching PlanetTerp API
-      const proxyurl = "https://cors-anywhere.herokuapp.com/";
-      const urlTerp = "https://api.planetterp.com/v1/grades?course=INST612"; // site that doesn’t send Access-Control-*
-      let TotalClassGPA = 0.0;
-
-      fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
-        .then(console.log())
-        .then((response) => response.json())
-        .then((data) => {
-          data.forEach((item) => {
-            let total =
-              item["A+"] * 4.0 +
-              item["A"] * 4.0 +
-              item["A-"] * 3.7 +
-              item["B+"] * 3.3 +
-              item["B"] * 3.0 +
-              item["B-"] * 2.7 +
-              item["C+"] * 2.3 +
-              item["C"] * 2.0 +
-              item["C-"] * 1.7 +
-              item["D+"] * 1.3 +
-              item["D"] * 1.0 +
-              item["D-"] * 0.7;
-
-            let numStudents =
-              item["A+"] +
-              item["A"] +
-              item["A-"] +
-              item["B+"] +
-              item["B"] +
-              item["B-"] +
-              item["C+"] +
-              item["C"] +
-              item["C-"] +
-              item["D+"] +
-              item["D"] +
-              item["D-"] +
-              item["F"];
-
-            TotalClassGPA += total / numStudents;
-          });
-
-          TotalClassGPA /= data.length;
-          console.log(TotalClassGPA.toFixed(2));
-          document.getElementById("avgGrade").innerHTML = "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
-        });
-
-   
-  </script>
-
+  <script src="script.js"></script>
   </body>
 </html>
