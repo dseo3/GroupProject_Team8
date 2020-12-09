@@ -1,381 +1,160 @@
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Group Project INST377</title>
-        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
-          integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
-          crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-        <script defer src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"></script>
-        <link rel="stylesheet" type="text/css" href="styles.css" />
-    </head>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Group Project INST377</title>
+    <script
+      src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+      integrity="sha256-4+XzXVhsDmqanXGHaHvgh1gMQKX40OUvDEBTu8JcmNs="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css"
+    />
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"
+    ></script>
+    <link rel="stylesheet" type="text/css" href="styles.css" />
+  </head>
 
-    <body class="search-page">
-        <div class="global-features">
-        <!-- Golobal Header -->
-            <section class="hero is-primary">
-            <div class="hero-body">
-                <div class="container">
-                <h1 class="title">
-                    Course Connector
-                </h1>
-                </div>
-            </div>
-            </section>
-        
-            <!-- Golobal Navigation bar -->
-            <div class="navbar">
-            <nav class="navbar is-light">
-                <a class="navbar-item" href="home.html">
-                    <button> <i class="fas fa-home fa-4x"></i> </button>
-                </a>
-                <a class="navbar-item" href="search.html">
-                    <button> <i class="fas fa-search fa-4x"></i> </button>
-                </a>
-                <a class="navbar-item" href="bookmarks.html">
-                    <button> <i class="far fa-bookmark fa-4x"></i> </button>
-                </a>
-                <a class="navbar-item" href="preferences.html">
-                    <button> <i class="fas fa-sliders-h fa-4x"></i> </button>
-                </a>
-            </nav>
-            </div>
+  <body class="search-page">
+    <div class="global-features">
+      <!-- Golobal Header -->
+      <section class="hero is-primary">
+        <div class="hero-body">
+          <div class="container">
+            <h1 class="title">Course Connector</h1>
+          </div>
         </div>
+      </section>
 
+      <!-- Golobal Navigation bar -->
+      <div class="navbar">
+        <nav class="navbar is-light">
+          <a class="navbar-item" href="index.html">
+            <button><i class="fas fa-home fa-4x"></i></button>
+          </a>
+          <a class="navbar-item" href="search.html">
+            <button><i class="fas fa-search fa-4x"></i></button>
+          </a>
+          <a class="navbar-item" href="bookmarks.html">
+            <button><i class="far fa-bookmark fa-4x"></i></button>
+          </a>
+        </nav>
+      </div>
+    </div>
 
-        <div class= "search">
-            <div class="field has-addons">
-                <div class="control">
-                <input class="input" type="text" placeholder="Seach Course Connector">
-                </div>
-                <div class="control">
-                <a class="button is-info">
-                    Search
-                </a>
-                </div>
+    <div class="department-list">
+      <ul class="suggest" id="department_list"></ul>
+    </div>
+
+    <!-- Trigger/Open The Modal -->
+    <button id="myBtn">Filter</button>
+    <div id="’rick’"></div>
+
+    <!-- The Modal -->
+    <div id="myModal" class="modal">
+      <!-- Modal content -->
+      <div class="modal-content">
+        <!-- <span class="close">&times;</span> -->
+        <form>
+          <input
+            class="input"
+            type="text"
+            placeholder="Type in the course you're looking for"
+          />
+          <!--the type needs to be search like the asst2 JS-->
+          <div id="navContainer">
+            <ul class="suggestions"></ul>
+          </div>
+
+          <input
+            class="input section"
+            type="text"
+            placeholder="Type in the section you're looking for"
+          />
+          <!--the type needs to be search like the asst2 JS-->
+
+          <input
+            class="input instructor"
+            type="text"
+            placeholder="Type in the instructor you're looking for"
+          />
+          <!--the type needs to be search like the asst2 JS-->
+
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <div class="select is-fullwidth">
+                <select name="course" id="course">
+                  <!--CONTENT NEEDS TO GO HERE-->
+                </select>
+              </div>
             </div>
-
-            <!-- Button add filters -->
-            <a href="search_results.html" class="filters">
-                <button class="filters"> Filters</button>
-            </a>
-
-            <div class="department-list">
-                <ul>
-                    <li>
-                        <div class="tile is-parent" >
-                            <div class="tile is-child box" id="department-name">
-                              <p class="title"> <b>AASP</b> <small>African American Studies</small></p>
-                              </div>
-                          </div>
-                    </li>
-                    <li>
-                        <div class="tile is-parent" >
-                            <div class="tile is-child box" id="department-name">
-                              <p class="title"> <b>AAST</b> <small>Asian American Studies</small></p>
-                              </div>
-                          </div>
-                    </li>
-                </ul>
+          </div>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <div class="select is-fullwidth">
+                <select name="section" id="section">
+                  <!--CONTENT NEEDS TO GO HERE-->
+                </select>
+              </div>
             </div>
-        </div>
-
-<!-- FILTERING BY TEXT MATCHING START-->                
-        <script>
-
-            const endpoint_course = "https://api.umd.io/v0/courses/list?semester=202008";
-
-            const restaurants = [];
-            fetch(endpoint_course)
-            .then(blob => blob.json())
-            .then(data => restaurants.push(...data));
-
-            function findMatches(wordsToMatch, restaurants) {
-                return restaurants.filter(place => {
-                    const regex = new RegExp(wordsToMatch, 'gi');
-                    return place.name.match(regex)
-                });
-            }
-
-            function displayMatches() {
-                const matchArray = findMatches(this.value, restaurants);
-                let placesHTML = []
-                if (this.value.length == 0) { 
-                    placesHTML = [];
-                } 
-                else {placesHTML = matchArray.map((place) => `
-                    <li>
-                        <div class="tile is-parent" >
-                            <div class="tile is-child box" id="department-name">
-                              <p class="title"> <b>AASP</b> <small>African American Studies</small></p>
-                              </div>
-                          </div>
-                    </li>
-                    `).join('');}
-                suggestions.innerHTML = placesHTML;       
-            }
-                
-            const searchInput = document.querySelector('.search');
-            const suggestions = document.querySelector('.suggestions');
-
-            searchInput.addEventListener('input', displayMatches);
-
-        </script>
-        
-        <div class="container">
-            <div class="row">
-                <form class= "search-form">
-                    <input type="text" class="search" id=
-                "search" placeholder="Filter for zipcode"></input>
-                    <div id="navContainer">
-                        <div>
-                            <ul class="suggestions">
-
-                            </ul>
-                        </div>
-                    </div>
-                </form>
+          </div>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <div class="select is-fullwidth">
+                <select name="term" id="term"></select>
+              </div>
             </div>
-        </div>
-        <!-- FILTERING BY TEXT MATCHING END-->  
-            
-<!-- THIS IS THE DROPDOWN FILTER CODE START-->
-<script>    
-        const endpoint = ["https://api.umd.io/v0/courses/list?semester=202008", "https://api.umd.io/v0/courses/sections?semester=202008"];
+          </div>
 
-        const json = [];
-        for (var l = 0; l < endpoint.length; l++) {
-            const response = await fetch(l);
-            const json_push = json.push(await response.json());
-        }
-
-        function displaySection() {
-        
-        }
-        var newarray = json.map(displaySection)
-
-        function displayCourse() {
-
-        }
-        var newarray = json.map(displayCourse)
-
-
-
-
-        window.onload = async function getSections() {
-        
-        //get department data from api
-        const sec_response = await fetch(sec_api_url);
-        const sec_json = await sec_response.json();
-
-        console.log(sec_json);
-
-        //create a list of departments
-        var sections = sec_json;
-        var sec_list = [];
-        for (var i = 0; i < sections.length; i++) {
-            sec_list.push(sections[i].section_id);
-        }
-
-        //add department list to drop down menu
-        var select = document.getElementById("section");
-        for (var i in sec_list) {
-            var option = document.createElement("option");
-            option.text = option.value = sec_list[i];
-            select.add(option, 0);
-        }
-
-        console.log(sec_list);
-        };
-
-
-          
-</script>
-<!-- THIS IS THE DROPDOWN FILTER CODE END-->
-
-
-<!-- POPUP FILTER PAGE -->
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <style>
-        body {font-family: Arial, Helvetica, sans-serif;}
-
-        /* The Modal (background) */
-        .modal {
-        display: none; /* Hidden by default */
-        position: fixed; /* Stay in place */
-        z-index: 1; /* Sit on top */
-        padding-top: 100px; /* Location of the box */
-        left: 0;
-        top: 0;
-        width: 100%; /* Full width */
-        height: 100%; /* Full height */
-        overflow: auto; /* Enable scroll if needed */
-        background-color: rgb(0,0,0); /* Fallback color */
-        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-        }
-
-        /* Modal Content */
-        .modal-content {
-        background-color: #fefefe;
-        margin: auto;
-        padding: 20px;
-        border: 1px solid #888;
-        width: 80%;
-        }
-
-        /* The Close Button */
-        .close {
-        color: #aaaaaa;
-        float: right;
-        font-size: 28px;
-        font-weight: bold;
-        }
-
-        .close:hover,
-        .close:focus {
-        color: #000;
-        text-decoration: none;
-        cursor: pointer;
-        }
-        </style>
-        </head>
-        <body>
-
-        <!-- Trigger/Open The Modal -->
-        <button id="myBtn">Filters FIXED</button>
-
-        <!-- The Modal -->
-        <div id="myModal" class="modal">
-
-        <!-- Modal content -->
-            <div class="modal-content">
-                <!-- <span class="close">&times;</span> -->
-                <form>
-                    <input class="input" type="text" placeholder="Type in the course you're looking for"> <!--the type needs to be search like the asst2 JS-->
-                    <div id="navContainer">
-                        <ul class="suggestions"></ul>
-                    </div>
-
-                    <input class="input section" type="text" placeholder="Type in the section you're looking for"> <!--the type needs to be search like the asst2 JS-->
-
-                    <input class="input instructor" type="text" placeholder="Type in the instructor you're looking for"> <!--the type needs to be search like the asst2 JS-->
-
-                    <div class="field has-addons">
-                        <div class="control is-expanded">
-                            <div class="select is-fullwidth">
-                                <select name="course" id="course">
-                                    <!--CONTENT NEEDS TO GO HERE-->
-                                </select>
-                            </div>
-                        </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
-                    </div>
-                    <div class="field has-addons">
-                        <div class="control is-expanded">
-                            <div class="select is-fullwidth">
-                                <select name="section" id="section">
-                                    <!--CONTENT NEEDS TO GO HERE-->
-                                </select>
-                            </div>
-                        </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
-                    </div>
-                    <div class="field has-addons">
-                        <div class="control is-expanded">
-                            <div class="select is-fullwidth">
-                                <select name="term" id="term">
-                                    <p> Fall 2020</p>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
-                    </div>
-
-                    <div class="field has-addons">
-                        <div class="control is-expanded">
-                            <div class="select is-fullwidth">
-                                <select name="greaterorless" id="greaterorless">
-                                    <!--CONTENT NEEDS TO GO HERE-->
-                                </select>
-                            </div>
-                        </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
-                    </div>
-                    <div class="field has-addons">
-                        <div class="control is-expanded">
-                            <div class="select is-fullwidth">
-                                <select name="credit" id="credit">
-                                    <!--CONTENT NEEDS TO GO HERE-->
-                                </select>
-                            </div>
-                        </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
-                    </div>
-                    <div class="field has-addons">
-                        <div class="control is-expanded">
-                            <div class="select is-fullwidth">
-                                <select name="starttime" id="starttime">
-                                    <!--CONTENT NEEDS TO GO HERE-->
-                                </select>
-                            </div>
-                        </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
-                    </div>
-                    <div class="field has-addons">
-                        <div class="control is-expanded">
-                            <div class="select is-fullwidth">
-                                <select name="delivery" id="delivery">
-                                    <!--CONTENT NEEDS TO GO HERE-->
-                                </select>
-                            </div>
-                        </div>
-                        <div class="control">
-                            <button type="submit" class="button is-dark">Choose</button>
-                        </div>
-                    </div>
-                    <span class="close">
-                        <button type="submit" class="button is-dark close">Confirm Filters</button>
-                    </span>
-                </form>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <div class="select is-fullwidth">
+                <select name="greaterorless" id="greaterorless">
+                  <!--CONTENT NEEDS TO GO HERE-->
+                </select>
+              </div>
             </div>
-        </div>
+          </div>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <div class="select is-fullwidth">
+                <select name="credit" id="credit">
+                  <!--CONTENT NEEDS TO GO HERE-->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <div class="select is-fullwidth">
+                <select name="starttime" id="starttime">
+                  <!--CONTENT NEEDS TO GO HERE-->
+                </select>
+              </div>
+            </div>
+          </div>
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <div class="select is-fullwidth">
+                <select name="delivery" id="delivery">
+                  <!--CONTENT NEEDS TO GO HERE-->
+                </select>
+              </div>
+            </div>
+          </div>
+          <span class="close">
+            <button type="submit" class="button is-dark close">
+              Confirm Filters
+            </button>
+          </span>
+        </form>
+      </div>
+    </div>
+  </body>
 
-        <script>
-        // Get the modal
-        var modal = document.getElementById("myModal");
-
-        // Get the button that opens the modal
-        var btn = document.getElementById("myBtn");
-
-        // Get the <span> element that closes the modal
-        var span = document.getElementsByClassName("close")[0];
-
-        // When the user clicks the button, open the modal 
-        btn.onclick = function() {
-        modal.style.display = "block";
-        }
-
-        // When the user clicks on <span> (x), close the modal
-        span.onclick = function() {
-        modal.style.display = "none";
-        }
-
-        </script>
-<!-- POPUP FILTER PAGE -->
-
-      </body>
-
+  <script src="test.js"></script>
 </html>
