@@ -19,4 +19,21 @@
 * We used figma in order to create a wireframe of how we wanted each page to look on both desktop and mobile views
 * Our team decided to use Bulma in order to improve the structure and layout of our application
 
+## Technical Rationale:
+
+## Problem Addressed 
+
+## Challenges:
+* The UMD.io API caused some issues when it came to retrieving data. This caused us to divert from the original plan and narrow the scope of our design.
+* Could not include all the desired features due to API limitations.
+* Each teammate had a different approach to coding our applications. Having diffrent approaches/styles of solving the problem may have contributed to having a more complex code than necessary.
+
+## Future Direction:
+* Improve application layout/structure
+ 
+
+
+
+
+
 
