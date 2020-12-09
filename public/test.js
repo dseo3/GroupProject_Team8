@@ -166,7 +166,7 @@ fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example
 
 
 
-    /// THESE THREE NEED TO BE FIXED STILL PER ALEXS CHANGES - ISABEAU
+    // THESE THREE NEED TO BE FIXED STILL PER ALEXS CHANGES - ISABEAU
     const umd_io2 = "https://api.umd.io/v0/courses/list?semester=202008";
     fetch(umd_io2)
       .then((response) => response.json())
@@ -210,8 +210,5 @@ fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example
           select.add(option1);
         }
       });
-  </script>
-
-
 
 window.onload = main;
