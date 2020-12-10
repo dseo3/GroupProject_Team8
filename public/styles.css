@@ -157,7 +157,14 @@ text-decoration: none;
 cursor: pointer;
 }
 
+#saved-course {
+    flex-direction: row;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+}
 
-
-
+h1 {
+    color: white;
+}
     
