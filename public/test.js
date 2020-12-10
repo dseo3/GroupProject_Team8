@@ -1,10 +1,14 @@
 
 //Prefrences Dropdown Bar 
 async function main() {
+
+  //Yomi's function that gets the departments for the dropdown 
   await getDepartments();
   //selects api
 
-  const data = await fetch("https://api.umd.io/v1/courses");
+  // => fetch(umd_courses)
+  // const data = await fetch("https://api.umd.io/v1/courses");
+  const data = await fetch("https://api.umd.io/v1/courses?semester=202008");
   //parses api data into json value
   const courses = await data.json(); 
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
@@ -32,8 +36,10 @@ async function main() {
     console.log(formdata);
     //creating a new constant 
 
+    //list of courses that matches that department 
     const availCourses = courses
-    //
+    
+    // math.random look at lab 2 
     .filter(course => {
         console.log("formdata :" + formdata[0].value)
         console.log("here : " + course.department)
@@ -148,7 +154,6 @@ function NewRecFromFave(){
           document.body.innerHTML = document.body.innerHTML.replace('B-','A-')
   })
 }
-
 
 NewRecFromFave(); 
 
