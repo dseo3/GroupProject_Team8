@@ -139,40 +139,40 @@ function avgGPA(course_id) {
 
 
 
-//Show New Course Recommendation and Save To Bookmarks
-function NewRecFromFave(){
-  const favbutton = document.querySelector("#fav_button");
-  favbutton.addEventListener("click", (event) => {
-    event.preventDefault();
-    console.log("Tis my fave");
-    // let coursecode1 = document.getElementById("code");
+// //Show New Course Recommendation and Save To Bookmarks
+// function NewRecFromFave(){
+//   const favbutton = document.querySelector("#fav_button");
+//   favbutton.addEventListener("click", (event) => {
+//     event.preventDefault();
+//     console.log("Tis my fave");
+//     // let coursecode1 = document.getElementById("code");
     
-    //Added for the purpose of demo because can't pull from the API
-    return document.body.innerHTML = document.body.innerHTML.replace('INST612', 'INST702'),
-          document.body.innerHTML = document.body.innerHTML.replace('Nature, structure, development and application of information policy. Interactions of social objectives, stakeholders, technology and other forces that shape policy decisions.', 'Usability testing methods -- how to design and implement them both for desktop and mobile sites. Students will learn the complex process of facilitating usability testing and how to synthesize test data into a report.'),
-          document.body.innerHTML = document.body.innerHTML.replace('Regular, Audit','Regular, Audit, Sat-Fail'), 
-          document.body.innerHTML = document.body.innerHTML.replace('B-','A-')
-  })
-}
+//     //Added for the purpose of demo because can't pull from the API
+//     return document.body.innerHTML = document.body.innerHTML.replace('INST612', 'INST702'),
+//           document.body.innerHTML = document.body.innerHTML.replace('Nature, structure, development and application of information policy. Interactions of social objectives, stakeholders, technology and other forces that shape policy decisions.', 'Usability testing methods -- how to design and implement them both for desktop and mobile sites. Students will learn the complex process of facilitating usability testing and how to synthesize test data into a report.'),
+//           document.body.innerHTML = document.body.innerHTML.replace('Regular, Audit','Regular, Audit, Sat-Fail'), 
+//           document.body.innerHTML = document.body.innerHTML.replace('B-','A-')
+//   })
+// }
 
-NewRecFromFave(); 
+// NewRecFromFave(); 
 
-function NewRecFromX(){
-  const favbutton = document.querySelector(".float-x");
-  favbutton.addEventListener("click", (event) => {
-    event.preventDefault();
-    console.log("Don't Like Dis");
-    // let coursecode1 = document.getElementById("code");
+// function NewRecFromX(){
+//   const favbutton = document.querySelector(".float-x");
+//   favbutton.addEventListener("click", (event) => {
+//     event.preventDefault();
+//     console.log("Don't Like Dis");
+//     // let coursecode1 = document.getElementById("code");
     
-    //Added for the purpose of demo because can't pull from the API
-    return document.body.innerHTML = document.body.innerHTML.replace('INST702', 'AMST856'),          
-    document.body.innerHTML = document.body.innerHTML.replace('Usability testing methods -- how to design and implement them both for desktop and mobile sites. Students will learn the complex process of facilitating usability testing and how to synthesize test data into a report.', 'A research seminar focusing on the practice and presentation of cultural and historical scholarship in museums and historical sites. Students will complete an original research project on the challenges and opportunities of public exhibition and interpretation of cultural and historical research.'),
-    document.body.innerHTML = document.body.innerHTML.replace('Regular, Audit'),           
-    document.body.innerHTML = document.body.innerHTML.replace('B-','A-')
-  })
-}
+//     //Added for the purpose of demo because can't pull from the API
+//     return document.body.innerHTML = document.body.innerHTML.replace('INST702', 'AMST856'),          
+//     document.body.innerHTML = document.body.innerHTML.replace('Usability testing methods -- how to design and implement them both for desktop and mobile sites. Students will learn the complex process of facilitating usability testing and how to synthesize test data into a report.', 'A research seminar focusing on the practice and presentation of cultural and historical scholarship in museums and historical sites. Students will complete an original research project on the challenges and opportunities of public exhibition and interpretation of cultural and historical research.'),
+//     document.body.innerHTML = document.body.innerHTML.replace('Regular, Audit'),           
+//     document.body.innerHTML = document.body.innerHTML.replace('B-','A-')
+//   })
+// }
 
-NewRecFromX(); 
+// NewRecFromX(); 
 
 
 function favClass(className) {
