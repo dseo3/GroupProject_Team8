@@ -12,6 +12,14 @@ async function main() {
   const favbutton = document.querySelector("#fav_button");
   const form = document.querySelector(".course_select");
   const program = document.querySelector("#program");
+  const courseID = document.querySelector("#courseID");
+  const courseTitle = document.querySelector("#courseTitle");
+  const credit = document.querySelector("#credit");
+  const gened = document.querySelector("#gened");
+  const method = document.querySelector("#method");
+  const description = document.querySelector("#description");
+ 
+
 
   form.addEventListener("submit", (event) => {
     
@@ -27,13 +35,82 @@ async function main() {
     const availCourses = courses
     //
     .filter(course => {
+        console.log("formdata :" + formdata[0].value)
+        console.log("here : " + course.department)
         console.log(formdata[0].value)
         console.log(course.department)
+        console.log("here----!")
         console.log(course)
         return course.department === formdata[0].value})
 
     console.table(availCourses)
+    console.log("yooooo");
+    console.log(availCourses);
+    
+    //Dongyeon - Test
+    console.log("anyonggggg");
+    const random = Math.floor(Math.random() * availCourses.length); 
+    courseID.innerHTML = availCourses[random].course_id;
+    courseTitle.innerHTML = availCourses[random].name;
+    credit.innerHTML = availCourses[random].credits;
+    gened.innerHTML = availCourses[random].gen_ed;
+    method.innerHTML = availCourses[random].grading_method;
+    description.innerHTML = availCourses[random].description;
+    console.log(random);
+    avgGPA(availCourses[random].course_id);
+
+    
    
+  });
+}
+
+function avgGPA(course_id) {
+  //Fetching PlanetTerp API
+  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+  const urlTerp = "https://api.planetterp.com/v1/grades?course=" + course_id ; // site that doesn’t send Access-Control-*
+  let TotalClassGPA = 0.0;
+
+  fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
+
+  .then((response) => response.json())
+  .then((data) => {
+    data.forEach((item) => { // availCourses.forEach don't remember what availCourses is supposed to be, but alex added it, so I need to go back and figure it out again. - Isabeau
+      let total =
+        item["A+"] * 4.0 +
+        item["A"] * 4.0 +
+        item["A-"] * 3.7 +
+        item["B+"] * 3.3 +
+        item["B"] * 3.0 +
+        item["B-"] * 2.7 +
+        item["C+"] * 2.3 +
+        item["C"] * 2.0 +
+        item["C-"] * 1.7 +
+        item["D+"] * 1.3 +
+        item["D"] * 1.0 +
+        item["D-"] * 0.7;
+
+      let numStudents =
+        item["A+"] +
+        item["A"] +
+        item["A-"] +
+        item["B+"] +
+        item["B"] +
+        item["B-"] +
+        item["C+"] +
+        item["C"] +
+        item["C-"] +
+        item["D+"] +
+        item["D"] +
+        item["D-"] +
+        item["F"];
+
+      TotalClassGPA += total / numStudents;
+    });
+
+    TotalClassGPA /= data.length;
+    console.log(TotalClassGPA.toFixed(2));
+    document.getElementById("avgGrade").innerHTML =
+      "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
   });
 }
 
@@ -147,12 +224,14 @@ async function getDepartments() {
   for (var i in dep_list) {
     var option = document.createElement("option");
     option.text = option.value = dep_list[i];
-    select.add(option, 0);
+    select.add(option);
   }
 
   console.log(dep_list);
   //document.getElementById('grad-program').innerHTML = dep_list ;
 }
+
+
 
 
 window.onload = main;
