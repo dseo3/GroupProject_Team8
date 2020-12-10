@@ -1,4 +1,3 @@
-
 //Prefrences Dropdown Bar 
 async function main() {
 
@@ -41,11 +40,9 @@ async function main() {
     
     // math.random look at lab 2 
     .filter(course => {
-        console.log("formdata :" + formdata[0].value)
-        console.log("here : " + course.department)
+
         console.log(formdata[0].value)
         console.log(course.department)
-        console.log("here----!")
         console.log(course)
         return course.department === formdata[0].value})
 
@@ -54,7 +51,6 @@ async function main() {
     console.log(availCourses);
     
     //Dongyeon - Test
-    console.log("anyonggggg");
     const random = Math.floor(Math.random() * availCourses.length); 
     courseID.innerHTML = availCourses[random].course_id;
     courseTitle.innerHTML = availCourses[random].name;
@@ -62,14 +58,18 @@ async function main() {
     gened.innerHTML = availCourses[random].gen_ed;
     method.innerHTML = availCourses[random].grading_method;
     description.innerHTML = availCourses[random].description;
-    console.log(random);
+    
     avgGPA(availCourses[random].course_id);
-
+    NewRecFromFave(availCourses);
+    NewRecFromX(availCourses);
     
    
   });
 }
 
+function displayPage() {
+  
+}
 function avgGPA(course_id) {
   //Fetching PlanetTerp API
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -120,44 +120,29 @@ function avgGPA(course_id) {
   });
 }
 
-    /* -> Still need to pull data from the API 
-    //Added for the purpose of demo
-    program.addEventListener("click", (event) => {
-      event.preventDefault();
-      console.log("InfoSci or Die");
-      // let coursecode1 = document.getElementById("code");
-      
-      return document.body.innerHTML = document.body.innerHTML.replace('INST612', 'INST702'),
-            document.body.innerHTML = document.body.innerHTML.replace('Nature, structure, development and application of information policy. Interactions of social objectives, stakeholders, technology and other forces that shape policy decisions.', 'Usability testing methods -- how to design and implement them both for desktop and mobile sites. Students will learn the complex process of facilitating usability testing and how to synthesize test data into a report.'),
-            document.body.innerHTML = document.body.innerHTML.replace('Regular, Audit','Regular, Audit, Sat-Fail'), 
-            document.body.innerHTML = document.body.innerHTML.replace('B-','A-);
-
-  //   button.addEventListener("click", (event) => {
-  //     favClass(event.target.value)
-   */
-  // });
-
-
 
 //Show New Course Recommendation and Save To Bookmarks
-function NewRecFromFave(){
+function NewRecFromFave(availCourses){
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
     event.preventDefault();
     console.log("Tis my fave");
     // let coursecode1 = document.getElementById("code");
     
-    //Added for the purpose of demo because can't pull from the API
-    return document.body.innerHTML = document.body.innerHTML.replace('INST612', 'INST702'),
-          document.body.innerHTML = document.body.innerHTML.replace('Nature, structure, development and application of information policy. Interactions of social objectives, stakeholders, technology and other forces that shape policy decisions.', 'Usability testing methods -- how to design and implement them both for desktop and mobile sites. Students will learn the complex process of facilitating usability testing and how to synthesize test data into a report.'),
-          document.body.innerHTML = document.body.innerHTML.replace('Regular, Audit','Regular, Audit, Sat-Fail'), 
-          document.body.innerHTML = document.body.innerHTML.replace('B-','A-')
+    //This generates a random req when you click the fav button
+    console.log("this is new req");
+    random = Math.floor(Math.random() * availCourses.length); 
+    courseID.innerHTML = availCourses[random].course_id;
+    courseTitle.innerHTML = availCourses[random].name;
+    credit.innerHTML = availCourses[random].credits;
+    gened.innerHTML = availCourses[random].gen_ed;
+    method.innerHTML = availCourses[random].grading_method;
+    description.innerHTML = availCourses[random].description;
+    avgGPA(availCourses[random].course_id);
   })
 }
 
-NewRecFromFave(); 
-
-function NewRecFromX(){
+function NewRecFromX(availCourses){
   const favbutton = document.querySelector(".float-x");
   favbutton.addEventListener("click", (event) => {
     event.preventDefault();
@@ -165,19 +150,17 @@ function NewRecFromX(){
     // let coursecode1 = document.getElementById("code");
     
     //Added for the purpose of demo because can't pull from the API
-    return document.body.innerHTML = document.body.innerHTML.replace('INST702', 'AMST856'),          
-    document.body.innerHTML = document.body.innerHTML.replace('Usability testing methods -- how to design and implement them both for desktop and mobile sites. Students will learn the complex process of facilitating usability testing and how to synthesize test data into a report.', 'A research seminar focusing on the practice and presentation of cultural and historical scholarship in museums and historical sites. Students will complete an original research project on the challenges and opportunities of public exhibition and interpretation of cultural and historical research.'),
-    document.body.innerHTML = document.body.innerHTML.replace('Regular, Audit'),           
-    document.body.innerHTML = document.body.innerHTML.replace('B-','A-')
+    random = Math.floor(Math.random() * availCourses.length); 
+    courseID.innerHTML = availCourses[random].course_id;
+    courseTitle.innerHTML = availCourses[random].name;
+    credit.innerHTML = availCourses[random].credits;
+    gened.innerHTML = availCourses[random].gen_ed;
+    method.innerHTML = availCourses[random].grading_method;
+    description.innerHTML = availCourses[random].description;
+    avgGPA(availCourses[random].course_id);
   })
 }
 
-NewRecFromX(); 
-
-
-function favClass(className) {
-
-}
 
 function findMatches(wordsToMatch, courses) {
   return courses.filter((course) => {
