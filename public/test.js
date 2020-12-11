@@ -40,6 +40,7 @@ async function main() {
   
   //parses api data into json value
   const courses = await availCourses.json(); 
+  console.log("Does this work", courses)
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
   const suggestions = document.querySelector(".suggestions"); //not being used right now
   const favbutton = document.querySelector("#fav_button");
@@ -51,7 +52,9 @@ async function main() {
   const gened = document.querySelector("#gened");
   const method = document.querySelector("#method");
   const description = document.querySelector("#description");
- 
+
+
+   
 
 // Choose Button this confirms users program preference 
   form.addEventListener("submit", (event) => {
@@ -64,11 +67,26 @@ async function main() {
     const formdata = $(event.target).serializeArray();
     console.log("djiasjdf")
     console.log(formdata);
-    //creating a new constant 
 
-    //list of courses that matches that department
-    /* 
+     //When user chooses a program, the page gets updated with corresponding data
+     const random = Math.floor(Math.random() * courses.length); 
+     courseID.innerHTML = courses[random].course_id;
+     courseTitle.innerHTML = courses[random].name;
+     credit.innerHTML = courses[random].credits;
+     gened.innerHTML = courses[random].gen_ed;
+     method.innerHTML = courses[random].grading_method;
+     description.innerHTML = courses[random].description;
+     avgGPA(courses[random].course_id);
+    
+     NewRecFromFave(courses);
+     NewRecFromX(courses);
+  
+
+
+    //list of courses that matches that department 
+    /*
     const availCourses = courses.filter(course => {
+
         console.log(formdata[0].value)
         console.log(course.department)
         console.log(course)
@@ -79,18 +97,6 @@ async function main() {
     console.log(availCourses);
     */
     
-    //When user chooses a program, the page gets updated with corresponding data
-    const random = Math.floor(Math.random() * availCourses.length); 
-    courseID.innerHTML = availCourses[random].course_id;
-    courseTitle.innerHTML = availCourses[random].name;
-    credit.innerHTML = availCourses[random].credits;
-    gened.innerHTML = availCourses[random].gen_ed;
-    method.innerHTML = availCourses[random].grading_method;
-    description.innerHTML = availCourses[random].description;
-    avgGPA(availCourses[random].course_id);
-   
-    NewRecFromFave(availCourses);
-    NewRecFromX(availCourses);
   });
 
   
@@ -210,21 +216,32 @@ function avgGPA(course_id) {
 }
 
 //Show New Course Recommendation and Save To Bookmarks
-function NewRecFromFave(availCourses){
+function NewRecFromFave(courses){
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
     event.preventDefault();
     console.log("Tis my fave");
     const data = $(event.target).serializeArray();
 
-    const random = Math.floor(Math.random() * availCourses.length); 
-    courseID.innerHTML = availCourses[random].course_id;
-    courseTitle.innerHTML = availCourses[random].name;
-    credit.innerHTML = availCourses[random].credits;
-    gened.innerHTML = availCourses[random].gen_ed;
-    method.innerHTML = availCourses[random].grading_method;
-    description.innerHTML = availCourses[random].description;
-    avgGPA(availCourses[random].course_id);
+    // send this random course to server.js
+    // create new put endpoint 
+    // empty array
+    //send request
+
+    /* Alternative 
+    > Create empty array at top test
+    > Send random to that array 
+    > Load in bookmarks
+    > Might have reviste remove function and delete from aray 
+    */
+    const random = Math.floor(Math.random() * courses.length); 
+    courseID.innerHTML = courses[random].course_id;
+    courseTitle.innerHTML = courses[random].name;
+    credit.innerHTML = courses[random].credits;
+    gened.innerHTML = courses[random].gen_ed;
+    method.innerHTML = courses[random].grading_method;
+    description.innerHTML = courses[random].description;
+    avgGPA(courses[random].course_id);
 
 
 
