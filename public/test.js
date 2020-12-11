@@ -1,8 +1,9 @@
 //Prefrences Dropdown Bar 
 async function main() {
 
-  //Yomi's function that gets the departments for the dropdown 
+  //Calling the Departments for the dropdown
   await getDepartments();
+
 
 
   const page = 147;
@@ -67,9 +68,71 @@ async function main() {
   
 }
 
+// Yomi's Code: for Preferences Departments Drop down at top of index/home page
+const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202008";
+
+async function getDepartments() {
+  //get department data from api
+  const response = await fetch(dep_api_url);
+  const json = await response.json();
+
+  console.log(json);
+
+  //create a list of lists of departments
+  var departments = json;
+  //create a list of departments names
+  var dep_list = [];
+
+  //populates list of depatartment names
+  for (var i = 0; i < departments.length; i++) {
+    dep_list.push(departments[i].department);
+  }
+
+  //add department list to drop down menu
+  var select = document.getElementById("grad-program");
+  for (var i in dep_list) {
+    var option = document.createElement("option");
+    option.text = option.value = dep_list[i];
+    select.add(option);
+  }
+
+  console.log("Dept_name_list", dep_list);
+
+  var dep_code = []
+  //populates list of depatartment ids
+  for (var i = 0; i < departments.length; i++) {
+    dep_code.push(departments[i].dept_id);
+  
+  /*
+    // Isabeaus's Pagination attempts
+    for (var i = 0; i < dep_code.length;) {  
+      if (dep_code[i] === formdata[0].value) 
+      {    return dep_code[i];  }}
+  
+  // Kennedy's Pagination psuedo for paginiation  
+  var choosen_dep = [];
+  for i in dep_code:
+    if choosen_dep is in dep_code:
+      const course_by_dept = "https://api.umd.io/v1/courses?dept_id="+choosen_dep;
+
+  */
+
+
+
+  }
+  console.log("department ids", dep_code)
+
+  
+
+
+  
+  //document.getElementById('grad-program').innerHTML = dep_list ;
+}
+
 function displayPage() {
   
 }
+
 function avgGPA(course_id) {
   //Fetching PlanetTerp API
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -187,34 +250,6 @@ function displayMatches() {
 
 
 
-// Yomi's Code: for Preferences Departments Drop down at top of index/home page
-const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202008";
-
-async function getDepartments() {
-  //get department data from api
-  const response = await fetch(dep_api_url);
-  const json = await response.json();
-
-  console.log(json);
-
-  //create a list of departments
-  var departments = json;
-  var dep_list = [];
-  for (var i = 0; i < departments.length; i++) {
-    dep_list.push(departments[i].department);
-  }
-
-  //add department list to drop down menu
-  var select = document.getElementById("grad-program");
-  for (var i in dep_list) {
-    var option = document.createElement("option");
-    option.text = option.value = dep_list[i];
-    select.add(option);
-  }
-
-  console.log(dep_list);
-  //document.getElementById('grad-program').innerHTML = dep_list ;
-}
 
 
 window.onload = main;
