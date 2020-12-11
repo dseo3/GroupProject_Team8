@@ -3,10 +3,9 @@ async function main() {
 
   //Yomi's function that gets the departments for the dropdown 
   await getDepartments();
-  //selects api
 
-  // => fetch(umd_courses)
-  // const data = await fetch("https://api.umd.io/v1/courses");
+
+  const page = 147;
   const data = await fetch("https://api.umd.io/v1/courses?semester=202008");
   //parses api data into json value
   const courses = await data.json(); 
@@ -32,6 +31,7 @@ async function main() {
 
     //formdata = department names 
     const formdata = $(event.target).serializeArray();
+    console.log("djiasjdf")
     console.log(formdata);
     //creating a new constant 
 
@@ -50,7 +50,7 @@ async function main() {
     console.log("yooooo");
     console.log(availCourses);
     
-    //Dongyeon - Test
+    //When user chooses a program, the page gets updated with corresponding data
     const random = Math.floor(Math.random() * availCourses.length); 
     courseID.innerHTML = availCourses[random].course_id;
     courseTitle.innerHTML = availCourses[random].name;
@@ -58,13 +58,13 @@ async function main() {
     gened.innerHTML = availCourses[random].gen_ed;
     method.innerHTML = availCourses[random].grading_method;
     description.innerHTML = availCourses[random].description;
-    
     avgGPA(availCourses[random].course_id);
+   
     NewRecFromFave(availCourses);
     NewRecFromX(availCourses);
-    
-   
   });
+
+  
 }
 
 function displayPage() {
@@ -127,11 +127,9 @@ function NewRecFromFave(availCourses){
   favbutton.addEventListener("click", (event) => {
     event.preventDefault();
     console.log("Tis my fave");
-    // let coursecode1 = document.getElementById("code");
-    
-    //This generates a random req when you click the fav button
-    console.log("this is new req");
-    random = Math.floor(Math.random() * availCourses.length); 
+    const data = $(event.target).serializeArray();
+
+    const random = Math.floor(Math.random() * availCourses.length); 
     courseID.innerHTML = availCourses[random].course_id;
     courseTitle.innerHTML = availCourses[random].name;
     credit.innerHTML = availCourses[random].credits;
@@ -139,6 +137,7 @@ function NewRecFromFave(availCourses){
     method.innerHTML = availCourses[random].grading_method;
     description.innerHTML = availCourses[random].description;
     avgGPA(availCourses[random].course_id);
+   
   })
 }
 
@@ -148,9 +147,7 @@ function NewRecFromX(availCourses){
     event.preventDefault();
     console.log("Don't Like Dis");
     // let coursecode1 = document.getElementById("code");
-    
-    //Added for the purpose of demo because can't pull from the API
-    random = Math.floor(Math.random() * availCourses.length); 
+    const random = Math.floor(Math.random() * availCourses.length); 
     courseID.innerHTML = availCourses[random].course_id;
     courseTitle.innerHTML = availCourses[random].name;
     credit.innerHTML = availCourses[random].credits;
@@ -158,6 +155,7 @@ function NewRecFromX(availCourses){
     method.innerHTML = availCourses[random].grading_method;
     description.innerHTML = availCourses[random].description;
     avgGPA(availCourses[random].course_id);
+   
   })
 }
 
