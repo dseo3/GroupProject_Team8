@@ -42,7 +42,8 @@ async function main() {
 
    //const data = await fetch("https://api.umd.io/v1/courses");
   
-   ///////////const data = await fetch(`https://api.umd.io/v1/courses?dept_id=${dept_id_for_data}`) 
+  const data = await fetch(`https://api.umd.io/v1/courses?dept_id=${dept_id_for_data}`) 
+
   // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
     
   console.log(data, "THIS IS WHERE THE MATCH HAPPENS")
@@ -84,7 +85,7 @@ async function main() {
         console.log(formdata[0].value)
         console.log(course.department)
         console.log(course)
-        return course.department === formdata[0].value})
+        return course.dept_id === formdata[0].value.substring(0,4)})
 
     console.table(availCourses)
     console.log("yooooo");
@@ -247,7 +248,8 @@ async function getDepartments() {
   var departments = json;
   var dep_list = [];
   for (var i = 0; i < departments.length; i++) {
-    dep_list.push([departments[i].dept_id + " - " + departments[i].department]); // I ALSO CHANGED THIS HERE! - ISABEAU
+    dep_list.push(departments[i].dept_id); //+ " - " + departments[i].department]); // I ALSO CHANGED THIS HERE! - ISABEAU
+    // MAKE SURE TO ADD BACK IN LIST
   }
 
   //add department list to drop down menu
