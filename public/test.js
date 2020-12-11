@@ -6,7 +6,9 @@ async function main() {
 
   // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
   const dept_id_here = document.forms[0].elements[0];
+  
   const dept_id_for_data = dept_id_here.value[0]+dept_id_here.value[1]+dept_id_here.value[2]+dept_id_here.value[3];
+  console.log("new const", dept_id_for_data)
 
   // const data = await fetch("https://api.umd.io/v1/courses");
   const data = await fetch(
@@ -75,7 +77,7 @@ async function main() {
 }
 
 // Yomi's Code: for Preferences Departments Drop down at top of index/home page
-const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202008";
+const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101";
 
 async function getDepartments() {
   //get department data from api
@@ -127,8 +129,6 @@ async function getDepartments() {
 
   }
   console.log("department ids", dep_code)
-
-  
 
 
   
@@ -188,7 +188,6 @@ function avgGPA(course_id) {
       "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
   });
 }
-
 
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(availCourses){
@@ -252,38 +251,6 @@ function displayMatches() {
   });
 
   return HTMLmatches;
-}
-
-
-
-// Yomi's Code: for Preferences Departments Drop down at top of index/home page
-const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101"; // I ALSO CHANGED THE SEMESTER HERE - ISABEAU
-
-async function getDepartments() {
-  //get department data from api
-  const response = await fetch(dep_api_url);
-  const json = await response.json();
-
-  console.log(json);
-
-
-  //create a list of departments
-  var departments = json;
-  var dep_list = [];
-  for (var i = 0; i < departments.length; i++) {
-    dep_list.push([departments[i].dept_id + " - " + departments[i].department]); // I ALSO CHANGED THIS HERE! - ISABEAU
-  }
-
-  //add department list to drop down menu
-  var select = document.getElementById("grad-program");
-  for (var i in dep_list) {
-    var option = document.createElement("option");
-    option.text = option.value = dep_list[i];
-    select.add(option);
-  }
-
-  console.log(dep_list);
-  //document.getElementById('grad-program').innerHTML = dep_list ;
 }
 
 
