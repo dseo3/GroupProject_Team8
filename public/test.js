@@ -1,7 +1,6 @@
-//Prefrences Dropdown Bar 
+//Prefrences Dropdown Bar
 async function main() {
-
-  //Yomi's function that gets the departments for the dropdown 
+  //Yomi's function that gets the departments for the dropdown
   await getDepartments();
 
   // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
@@ -9,8 +8,6 @@ async function main() {
   //No longer Spaghetti code yay!
   const dept_id_for_data = dept_id_here.value.substring(0,4);
   console.log("Selected Department Code:", dept_id_for_data);
-  // Just stringing together the API url here before we fetch the data 
-  const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
 
   /*The console.log below shows that it actually fetching the API data 
     if you click the link in the console after inspecting the page
@@ -19,7 +16,7 @@ async function main() {
     Hoowwwever something weird is happening here when we try and fetch that data
   
   */
-  console.log("API url is", pref_api)
+  console.log("API url is", pref_api);
 
   /* 
   I've tried putting the first paginated API back in 
@@ -31,16 +28,15 @@ async function main() {
   working again and then replace it with pref_api
   */
 
-   //const data = await fetch("https://api.umd.io/v1/courses");
-  
-  const data = await fetch(pref_api); 
+  //const data = await fetch("https://api.umd.io/v1/courses");
+  const data = await fetch(`https://api.umd.io/v1/courses?dept_id=${dept_id_for_data}`);
   // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
-    
-  console.log(data, "THIS IS WHERE THE MATCH HAPPENS")
-  
+
+  console.log(data, "THIS IS WHERE THE MATCH HAPPENS");
+
   //parses api data into json value
-  const courses = await data.json(); 
-  const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
+  const courses = await data.json();
+  const searchInput = document.querySelector(".search"); //TBD not being used right now -> will be used for serach page
   const suggestions = document.querySelector(".suggestions"); //not being used right now
   const favbutton = document.querySelector("#fav_button");
   const form = document.querySelector(".course_select");
@@ -51,38 +47,33 @@ async function main() {
   const gened = document.querySelector("#gened");
   const method = document.querySelector("#method");
   const description = document.querySelector("#description");
- 
-
 
   form.addEventListener("submit", (event) => {
-    
     event.preventDefault();
-    
+
     console.log("HELLO?");
 
-    //formdata = department names 
+    //formdata = department names
     const formdata = $(event.target).serializeArray();
-    console.log("djiasjdf")
+    console.log("djiasjdf");
     console.log(formdata);
-    //creating a new constant 
+    //creating a new constant
 
-    //list of courses that matches that department 
-    const availCourses = courses
+    //list of courses that matches that department
+    const availCourses = courses.filter((course) => {
+      console.log("form value", formdata[0].value);
+      console.log(course.department);
+      return course.department === formdata[0].value.substring(7,);
+    });
+    //console.log("here is filter",course)
+    console.log("the filter.",formdata[0].value.substring(7,));
     
-    // math.random look at lab 2 
-    .filter(course => {
-
-        console.log(formdata[0].value)
-        console.log(course.department)
-        console.log(course)
-        return course.department === formdata[0].value})
-
-    console.table(availCourses)
+    console.table(availCourses);
     console.log("yooooo");
     console.log(availCourses);
-    
+
     //When user chooses a program, the page gets updated with corresponding data
-    const random = Math.floor(Math.random() * availCourses.length); 
+    const random = Math.floor(Math.random() * availCourses.length);
     courseID.innerHTML = availCourses[random].course_id;
     courseTitle.innerHTML = availCourses[random].name;
     credit.innerHTML = availCourses[random].credits;
@@ -90,76 +81,72 @@ async function main() {
     method.innerHTML = availCourses[random].grading_method;
     description.innerHTML = availCourses[random].description;
     avgGPA(availCourses[random].course_id);
-   
+
     NewRecFromFave(availCourses);
     NewRecFromX(availCourses);
   });
-
-  
 }
 
-function displayPage() {
-  
-}
+function displayPage() {}
 function avgGPA(course_id) {
   //Fetching PlanetTerp API
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
-  const urlTerp = "https://api.planetterp.com/v1/grades?course=" + course_id ; // site that doesn’t send Access-Control-*
+  const urlTerp = "https://api.planetterp.com/v1/grades?course=" + course_id; // site that doesn’t send Access-Control-*
   let TotalClassGPA = 0.0;
 
   fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
+    .then((response) => response.json())
+    .then((data) => {
+      // i know you've done this with data but alex explicitly said it needs to be avail courses
+      data.forEach((item) => {
+        let total =
+          item["A+"] * 4.0 +
+          item["A"] * 4.0 +
+          item["A-"] * 3.7 +
+          item["B+"] * 3.3 +
+          item["B"] * 3.0 +
+          item["B-"] * 2.7 +
+          item["C+"] * 2.3 +
+          item["C"] * 2.0 +
+          item["C-"] * 1.7 +
+          item["D+"] * 1.3 +
+          item["D"] * 1.0 +
+          item["D-"] * 0.7;
 
-  .then((response) => response.json())
-  .then((data) => { // i know you've done this with data but alex explicitly said it needs to be avail courses
-    data.forEach((item) => { 
-      let total =
-        item["A+"] * 4.0 +
-        item["A"] * 4.0 +
-        item["A-"] * 3.7 +
-        item["B+"] * 3.3 +
-        item["B"] * 3.0 +
-        item["B-"] * 2.7 +
-        item["C+"] * 2.3 +
-        item["C"] * 2.0 +
-        item["C-"] * 1.7 +
-        item["D+"] * 1.3 +
-        item["D"] * 1.0 +
-        item["D-"] * 0.7;
+        let numStudents =
+          item["A+"] +
+          item["A"] +
+          item["A-"] +
+          item["B+"] +
+          item["B"] +
+          item["B-"] +
+          item["C+"] +
+          item["C"] +
+          item["C-"] +
+          item["D+"] +
+          item["D"] +
+          item["D-"] +
+          item["F"];
 
-      let numStudents =
-        item["A+"] +
-        item["A"] +
-        item["A-"] +
-        item["B+"] +
-        item["B"] +
-        item["B-"] +
-        item["C+"] +
-        item["C"] +
-        item["C-"] +
-        item["D+"] +
-        item["D"] +
-        item["D-"] +
-        item["F"];
+        TotalClassGPA += total / numStudents;
+      });
 
-      TotalClassGPA += total / numStudents;
+      TotalClassGPA /= data.length;
+      console.log(TotalClassGPA.toFixed(2));
+      document.getElementById("avgGrade").innerHTML =
+        "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
     });
-
-    TotalClassGPA /= data.length;
-    console.log(TotalClassGPA.toFixed(2));
-    document.getElementById("avgGrade").innerHTML =
-      "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
-  });
 }
 
 //Show New Course Recommendation and Save To Bookmarks
-function NewRecFromFave(availCourses){
+function NewRecFromFave(availCourses) {
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
     event.preventDefault();
     console.log("Tis my fave");
     const data = $(event.target).serializeArray();
 
-    const random = Math.floor(Math.random() * availCourses.length); 
+    const random = Math.floor(Math.random() * availCourses.length);
     courseID.innerHTML = availCourses[random].course_id;
     courseTitle.innerHTML = availCourses[random].name;
     credit.innerHTML = availCourses[random].credits;
@@ -167,20 +154,16 @@ function NewRecFromFave(availCourses){
     method.innerHTML = availCourses[random].grading_method;
     description.innerHTML = availCourses[random].description;
     avgGPA(availCourses[random].course_id);
-
-
-
-   
   });
-};
+}
 
-function NewRecFromX(availCourses){
+function NewRecFromX(availCourses) {
   const favbutton = document.querySelector(".float-x");
   favbutton.addEventListener("click", (event) => {
     event.preventDefault();
     console.log("Don't Like Dis");
     // let coursecode1 = document.getElementById("code");
-    const random = Math.floor(Math.random() * availCourses.length); 
+    const random = Math.floor(Math.random() * availCourses.length);
     courseID.innerHTML = availCourses[random].course_id;
     courseTitle.innerHTML = availCourses[random].name;
     credit.innerHTML = availCourses[random].credits;
@@ -188,8 +171,7 @@ function NewRecFromX(availCourses){
     method.innerHTML = availCourses[random].grading_method;
     description.innerHTML = availCourses[random].description;
     avgGPA(availCourses[random].course_id);
-   
-  })
+  });
 }
 
 function findMatches(wordsToMatch, courses) {
@@ -227,7 +209,6 @@ async function getDepartments() {
 
   console.log(json);
 
-
   //create a list of departments
   var departments = json;
   var dep_list = [];
@@ -257,5 +238,3 @@ function removeSavedCourse() {
 removeSavedCourse;
 
 window.onload = main;
-
-
