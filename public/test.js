@@ -23,14 +23,14 @@ async function main() {
   const description = document.querySelector("#description");
  
 
-
+// Choose Button this confirms users program preference 
   form.addEventListener("submit", (event) => {
     
     event.preventDefault();
     
     console.log("HELLO?");
 
-    //formdata = department names 
+    //formdata = department names that the user selected
     const formdata = $(event.target).serializeArray();
     console.log(formdata);
     //creating a new constant 
@@ -38,7 +38,7 @@ async function main() {
     //list of courses that matches that department 
     const availCourses = courses
     
-    // math.random look at lab 2 
+    // 
     .filter(course => {
         console.log("formdata :" + formdata[0].value)
         console.log("here : " + course.department)
@@ -63,10 +63,12 @@ async function main() {
     description.innerHTML = availCourses[random].description;
     console.log(random);
     avgGPA(availCourses[random].course_id);
-
-    
    
+
+
   });
+
+
 }
 
 function avgGPA(course_id) {
@@ -118,6 +120,36 @@ function avgGPA(course_id) {
       "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
   });
 }
+
+/*
+//gets all departments
+const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202008";
+
+async function getDepartments() {
+  //get department data from api
+  const response = await fetch(dep_api_url);
+  const json = await response.json();
+
+  console.log(json);
+
+  //create a list of departments id and store in dept_id list
+  var departments = json;
+  var deptid_list = [];
+  for (var i = 0; i < departments.length; i++) {
+    deptid_list.push(departments[i].dept_id);
+
+
+  const course_by_dept = "https://api.umd.io/v1/courses?dept_id="+${dept_id}
+
+//gets all course in a paginated format 
+const courses = "https://api.umd.io/v1/courses?semester=202008";
+// https://api.umd.io/v1/courses?dept_id=INST
+// ^ Ex of API course 
+
+*/
+
+
+
 
     /* -> Still need to pull data from the API 
     //Added for the purpose of demo
