@@ -4,11 +4,17 @@ async function main() {
   //Calling the Departments for the dropdown
   await getDepartments();
 
+  // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
+  const dept_id_here = document.forms[0].elements[0];
+  const dept_id_for_data = dept_id_here.value[0]+dept_id_here.value[1]+dept_id_here.value[2]+dept_id_here.value[3];
 
-
-  const page = 147;
-  const data = await fetch("https://api.umd.io/v1/courses?semester=202008");
+  // const data = await fetch("https://api.umd.io/v1/courses");
+  const data = await fetch(
+    "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
+  ); // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
   //parses api data into json value
+    console.log(data, "THIS IS WHERE THE MATCH HAPPENS")
+
   const courses = await data.json(); 
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
   const suggestions = document.querySelector(".suggestions"); //not being used right now
@@ -250,6 +256,35 @@ function displayMatches() {
 
 
 
+// Yomi's Code: for Preferences Departments Drop down at top of index/home page
+const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101"; // I ALSO CHANGED THE SEMESTER HERE - ISABEAU
+
+async function getDepartments() {
+  //get department data from api
+  const response = await fetch(dep_api_url);
+  const json = await response.json();
+
+  console.log(json);
+
+
+  //create a list of departments
+  var departments = json;
+  var dep_list = [];
+  for (var i = 0; i < departments.length; i++) {
+    dep_list.push([departments[i].dept_id + " - " + departments[i].department]); // I ALSO CHANGED THIS HERE! - ISABEAU
+  }
+
+  //add department list to drop down menu
+  var select = document.getElementById("grad-program");
+  for (var i in dep_list) {
+    var option = document.createElement("option");
+    option.text = option.value = dep_list[i];
+    select.add(option);
+  }
+
+  console.log(dep_list);
+  //document.getElementById('grad-program').innerHTML = dep_list ;
+}
 
 
 window.onload = main;
