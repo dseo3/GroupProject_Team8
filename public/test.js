@@ -1,16 +1,25 @@
+
 //Prefrences Dropdown Bar 
 async function main() {
 
   //Yomi's function that gets the departments for the dropdown 
   await getDepartments();
 
-  // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
-  const dept_id_here = document.forms[0].elements[0];
-  //No longer Spaghetti code yay!
-  const dept_id_for_data = dept_id_here.value.substring(0,4);
-  console.log("Selected Department Code:", dept_id_for_data);
-  // Just stringing together the API url here before we fetch the data 
-  const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
+  // THIS IS THE CODE ALEX WANTS US TO USE FOR SOMETHING BUT IM NOT 100% SURE ABOUT THAT
+  // form.addEventListener('submit', (event) => {
+  //   const formData = $(event.target).serializeArray();
+  //   const deptIdForDataFind = formData.find(f => f.name === 'dept_id');
+  //   const data = await fetch(`https://api.umd.io/v1/courses?dept_id=${deptIdForDataFind.value}`)
+  // }) - ISABEAU
+
+    // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
+    const dept_id_here = document.forms[0].elements[0];
+    //No longer Spaghetti code yay!
+    const dept_id_for_data = dept_id_here.value.substring(0,4);
+    console.log("Selected Department Code:", dept_id_for_data);
+  
+  // THIS IS ANOTHER THING I NEED TO IMPLEMENT - ISABEAU
+  ///  const deptCode = longDeptString.substring(0, longDeptString.indexOf(' '));
 
   /*The console.log below shows that it actually fetching the API data 
     if you click the link in the console after inspecting the page
@@ -19,7 +28,7 @@ async function main() {
     Hoowwwever something weird is happening here when we try and fetch that data
   
   */
-  console.log("API url is", pref_api)
+  console.log("API url is", dept_id_for_data)
 
   /* 
   I've tried putting the first paginated API back in 
@@ -33,7 +42,7 @@ async function main() {
 
    //const data = await fetch("https://api.umd.io/v1/courses");
   
-  const data = await fetch(pref_api); 
+   ///////////const data = await fetch(`https://api.umd.io/v1/courses?dept_id=${dept_id_for_data}`) 
   // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
     
   console.log(data, "THIS IS WHERE THE MATCH HAPPENS")
@@ -95,7 +104,13 @@ async function main() {
     NewRecFromX(availCourses);
   });
 
-  
+    $(document).ready(function(){
+        $("button").click(function(){
+            $(".content").appendTo("#target");
+            $(this).hide(); // Hide move button
+        });
+    });
+
 }
 
 function displayPage() {
@@ -242,7 +257,7 @@ async function getDepartments() {
     option.text = option.value = dep_list[i];
     select.add(option);
   }
-
+  
   console.log(dep_list);
   //document.getElementById('grad-program').innerHTML = dep_list ;
 }

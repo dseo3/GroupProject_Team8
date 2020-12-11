@@ -74,3 +74,29 @@
         </section>
       <!-- <script src="courseload.js"></script> -->
       <!-- <script src="script.js"></script> -->
+
+
+      <html>
+        <head>
+        <script>
+        function show(shown, hidden) {
+          document.getElementById(shown).style.display='block';
+          document.getElementById(hidden).style.display='none';
+          return false;
+        }
+        </script>
+        </head>
+        <body>
+        
+          <div id="index">
+            Content of page 1
+            <a href="#" onclick="return show('bookmarks','index');">Go to Index</a>
+          </div>
+        
+          <div id="bookmarks" style="display:none">
+            Content of page 2
+            <a href="#" onclick="return show('index','bookmarks');">Go Home</a>
+          </div>
+        
+        </body>
+      </html>
