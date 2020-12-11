@@ -33,13 +33,14 @@ async function main() {
 
    //const data = await fetch("https://api.umd.io/v1/courses");
   
-  const data = await fetch(pref_api); 
+  const availCourses = await fetch(pref_api); 
   // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
     
-  console.log(data, "THIS IS WHERE THE MATCH HAPPENS")
+  console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
   
   //parses api data into json value
-  const courses = await data.json(); 
+  const courses = await availCourses.json(); 
+  console.log("Does this work", courses)
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
   const suggestions = document.querySelector(".suggestions"); //not being used right now
   const favbutton = document.querySelector("#fav_button");
@@ -51,7 +52,9 @@ async function main() {
   const gened = document.querySelector("#gened");
   const method = document.querySelector("#method");
   const description = document.querySelector("#description");
- 
+
+
+   
 
 
   form.addEventListener("submit", (event) => {
@@ -64,13 +67,25 @@ async function main() {
     const formdata = $(event.target).serializeArray();
     console.log("djiasjdf")
     console.log(formdata);
-    //creating a new constant 
+
+     //When user chooses a program, the page gets updated with corresponding data
+     const random = Math.floor(Math.random() * courses.length); 
+     courseID.innerHTML = courses[random].course_id;
+     courseTitle.innerHTML = courses[random].name;
+     credit.innerHTML = courses[random].credits;
+     gened.innerHTML = courses[random].gen_ed;
+     method.innerHTML = courses[random].grading_method;
+     description.innerHTML = courses[random].description;
+     avgGPA(courses[random].course_id);
+    
+     NewRecFromFave(courses);
+     NewRecFromX(courses);
+  
+
 
     //list of courses that matches that department 
-    const availCourses = courses
-    
-    // math.random look at lab 2 
-    .filter(course => {
+    /*
+    const availCourses = courses.filter(course => {
 
         console.log(formdata[0].value)
         console.log(course.department)
@@ -80,19 +95,8 @@ async function main() {
     console.table(availCourses)
     console.log("yooooo");
     console.log(availCourses);
+    */
     
-    //When user chooses a program, the page gets updated with corresponding data
-    const random = Math.floor(Math.random() * availCourses.length); 
-    courseID.innerHTML = availCourses[random].course_id;
-    courseTitle.innerHTML = availCourses[random].name;
-    credit.innerHTML = availCourses[random].credits;
-    gened.innerHTML = availCourses[random].gen_ed;
-    method.innerHTML = availCourses[random].grading_method;
-    description.innerHTML = availCourses[random].description;
-    avgGPA(availCourses[random].course_id);
-   
-    NewRecFromFave(availCourses);
-    NewRecFromX(availCourses);
   });
 
   
