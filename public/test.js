@@ -167,9 +167,12 @@ function NewRecFromFave(availCourses){
     method.innerHTML = availCourses[random].grading_method;
     description.innerHTML = availCourses[random].description;
     avgGPA(availCourses[random].course_id);
+
+
+
    
-  })
-}
+  });
+};
 
 function NewRecFromX(availCourses){
   const favbutton = document.querySelector(".float-x");
@@ -246,10 +249,13 @@ async function getDepartments() {
 
 //Removing saved course when you click the bookmark button
 function removeSavedCourse() {
-  console.log("removing this course")
+  console.log("removing course warning");
   const savedcourse = document.getElementById("saved_couse");
   savedcourse.remove();
 }
+
 removeSavedCourse;
 
 window.onload = main;
+
+
