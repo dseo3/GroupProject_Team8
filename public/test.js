@@ -5,8 +5,8 @@ async function main() {
   await getDepartments();
 
 
-  const page = 147;
-  const data = await fetch("https://api.umd.io/v1/courses?semester=202008");
+  //const page = 147;
+  const data = await fetch("https://api.umd.io/v1/courses?page=97?semester=202008");
   //parses api data into json value
   const courses = await data.json(); 
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
