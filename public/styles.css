@@ -77,8 +77,14 @@
     font-size: 24px;
     background-color: rgb(247, 232, 19);
     padding: 1%;
-}
+    border-radius: 11px;
+    margin: auto;
 
+}
+.learn-more-button{
+    position: relative;
+    left: 23px;
+}
 .float{
 	position:fixed;
 	width:60px;
@@ -158,10 +164,20 @@ cursor: pointer;
 }
 
 #saved-course {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+}
+
+#course-info {
     flex-direction: row;
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+}
+
+.bookmark-button{
+    justify-content: end;
 }
 
 h1 {
