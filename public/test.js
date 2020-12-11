@@ -79,8 +79,8 @@ function avgGPA(course_id) {
   fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
 
   .then((response) => response.json())
-  .then((data) => {
-    data.forEach((item) => { // availCourses.forEach don't remember what availCourses is supposed to be, but alex added it, so I need to go back and figure it out again. - Isabeau
+  .then((data) => { // i know you've done this with data but alex explicitly said it needs to be avail courses
+    data.forEach((item) => { 
       let total =
         item["A+"] * 4.0 +
         item["A"] * 4.0 +
@@ -188,7 +188,6 @@ function displayMatches() {
 
 
 // Yomi's Code: for Preferences Departments Drop down at top of index/home page
-
 const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202008";
 
 async function getDepartments() {
@@ -216,8 +215,6 @@ async function getDepartments() {
   console.log(dep_list);
   //document.getElementById('grad-program').innerHTML = dep_list ;
 }
-
-
 
 
 window.onload = main;
