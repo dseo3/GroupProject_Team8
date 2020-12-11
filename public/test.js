@@ -33,13 +33,13 @@ async function main() {
 
    //const data = await fetch("https://api.umd.io/v1/courses");
   
-  const data = await fetch(pref_api); 
+  const availCourses = await fetch(pref_api); 
   // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
     
-  console.log(data, "THIS IS WHERE THE MATCH HAPPENS")
+  console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
   
   //parses api data into json value
-  const courses = await data.json(); 
+  const courses = await availCourses.json(); 
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
   const suggestions = document.querySelector(".suggestions"); //not being used right now
   const favbutton = document.querySelector("#fav_button");
@@ -66,12 +66,9 @@ async function main() {
     console.log(formdata);
     //creating a new constant 
 
-    //list of courses that matches that department 
-    const availCourses = courses
-    
-    // 
-    .filter(course => {
-
+    //list of courses that matches that department
+    /* 
+    const availCourses = courses.filter(course => {
         console.log(formdata[0].value)
         console.log(course.department)
         console.log(course)
@@ -80,6 +77,7 @@ async function main() {
     console.table(availCourses)
     console.log("yooooo");
     console.log(availCourses);
+    */
     
     //When user chooses a program, the page gets updated with corresponding data
     const random = Math.floor(Math.random() * availCourses.length); 
