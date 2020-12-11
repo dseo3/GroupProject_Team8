@@ -71,7 +71,6 @@
       </div>
     </form>
 
-
     <!-- Course Content -->
     <section class="course-rec">
       <!-- Course Code and Title -->
@@ -134,7 +133,7 @@
     <div class="rec-buttons">
         <!-- Button to more detailed couse page -->
         <a href="course.html" class="learn">
-          <button class="learn-more">Learn More</button>
+          <button type="button" class="learn-more">Learn More</button>
         </a>
     
         <!-- Heart Button to save and see next -->
@@ -150,6 +149,17 @@
               <i class="fas fa-times fa-2x my-float"></i> 
           </button>
     </div>
+
+    <!-- Attempt to add saved content to bookmarks page using jquery -->
+     
+    <script>
+       $(document).ready(function(){
+        $("button").click(function(){
+          $(".course-rec").appendTo(".saves");
+          console.log("send me over to bookmarks")
+        })
+      });
+    </script>
   
     <!-- <script src="courseload.js"></script> -->
     <!-- <script src="script.js"></script> -->

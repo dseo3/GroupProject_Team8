@@ -4,11 +4,43 @@ async function main() {
   //Yomi's function that gets the departments for the dropdown 
   await getDepartments();
 
+  // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
+  const dept_id_here = document.forms[0].elements[0];
+  //No longer Spaghetti code yay!
+  const dept_id_for_data = dept_id_here.value.substring(0,4);
+  console.log("Selected Department Code:", dept_id_for_data);
+  // Just stringing together the API url here before we fetch the data 
+  const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
 
-  //const page = 147;
-  const data = await fetch("https://api.umd.io/v1/courses?page=97?semester=202008");
+  /*The console.log below shows that it actually fetching the API data 
+    if you click the link in the console after inspecting the page
+    it should take you too the application tab and you can see all the courses
+    for the selected department, so Good Job ISABEAU!
+    Hoowwwever something weird is happening here when we try and fetch that data
+  
+  */
+  console.log("API url is", pref_api)
+
+  /* 
+  I've tried putting the first paginated API back in 
+  and I'm getting the same weird response when I fetch the data
+  so I do not the the pref_api variable is wrong it is something else 
+  that is refusing to to pull the data from the link
+
+  I think we need to get just the const data, from below 
+  working again and then replace it with pref_api
+  */
+
+   //const data = await fetch("https://api.umd.io/v1/courses");
+  
+  const data = await fetch(pref_api); 
+  // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
+    
+  console.log(data, "THIS IS WHERE THE MATCH HAPPENS")
+  
   //parses api data into json value
   const courses = await data.json(); 
+  console.log(courses)
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
   const suggestions = document.querySelector(".suggestions"); //not being used right now
   const favbutton = document.querySelector("#fav_button");
@@ -120,7 +152,6 @@ function avgGPA(course_id) {
   });
 }
 
-
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(availCourses){
   const favbutton = document.querySelector("#fav_button");
@@ -137,9 +168,12 @@ function NewRecFromFave(availCourses){
     method.innerHTML = availCourses[random].grading_method;
     description.innerHTML = availCourses[random].description;
     avgGPA(availCourses[random].course_id);
+
+
+
    
-  })
-}
+  });
+};
 
 function NewRecFromX(availCourses){
   const favbutton = document.querySelector(".float-x");
@@ -158,7 +192,6 @@ function NewRecFromX(availCourses){
    
   })
 }
-
 
 function findMatches(wordsToMatch, courses) {
   return courses.filter((course) => {
@@ -185,10 +218,8 @@ function displayMatches() {
   return HTMLmatches;
 }
 
-
-
 // Yomi's Code: for Preferences Departments Drop down at top of index/home page
-const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202008";
+const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101"; // I ALSO CHANGED THE SEMESTER HERE - ISABEAU
 
 async function getDepartments() {
   //get department data from api
@@ -197,11 +228,12 @@ async function getDepartments() {
 
   console.log(json);
 
+
   //create a list of departments
   var departments = json;
   var dep_list = [];
   for (var i = 0; i < departments.length; i++) {
-    dep_list.push(departments[i].department);
+    dep_list.push([departments[i].dept_id + " - " + departments[i].department]); // I ALSO CHANGED THIS HERE! - ISABEAU
   }
 
   //add department list to drop down menu
@@ -216,5 +248,15 @@ async function getDepartments() {
   //document.getElementById('grad-program').innerHTML = dep_list ;
 }
 
+//Removing saved course when you click the bookmark button
+function removeSavedCourse() {
+  console.log("removing course warning");
+  const savedcourse = document.getElementById("saved_couse");
+  savedcourse.remove();
+}
+
+removeSavedCourse;
 
 window.onload = main;
+
+
