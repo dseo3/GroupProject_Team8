@@ -156,21 +156,32 @@ function avgGPA(course_id) {
 }
 
 //Show New Course Recommendation and Save To Bookmarks
-function NewRecFromFave(availCourses){
+function NewRecFromFave(courses){
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
     event.preventDefault();
     console.log("Tis my fave");
     const data = $(event.target).serializeArray();
 
-    const random = Math.floor(Math.random() * availCourses.length); 
-    courseID.innerHTML = availCourses[random].course_id;
-    courseTitle.innerHTML = availCourses[random].name;
-    credit.innerHTML = availCourses[random].credits;
-    gened.innerHTML = availCourses[random].gen_ed;
-    method.innerHTML = availCourses[random].grading_method;
-    description.innerHTML = availCourses[random].description;
-    avgGPA(availCourses[random].course_id);
+    // send this random course to server.js
+    // create new put endpoint 
+    // empty array
+    //send request
+
+    /* Alternative 
+    > Create empty array at top test
+    > Send random to that array 
+    > Load in bookmarks
+    > Might have reviste remove function and delete from aray 
+    */
+    const random = Math.floor(Math.random() * courses.length); 
+    courseID.innerHTML = courses[random].course_id;
+    courseTitle.innerHTML = courses[random].name;
+    credit.innerHTML = courses[random].credits;
+    gened.innerHTML = courses[random].gen_ed;
+    method.innerHTML = courses[random].grading_method;
+    description.innerHTML = courses[random].description;
+    avgGPA(courses[random].course_id);
 
 
 
