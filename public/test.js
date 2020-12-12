@@ -33,9 +33,14 @@ async function main() {
 
    //const data = await fetch("https://api.umd.io/v1/courses");
   
-  const data = await fetch(pref_api); 
+  const availCourses = await fetch(pref_api); 
   // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
- 
+    
+  console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
+  
+  //parses api data into json value
+  const courses = await availCourses.json(); 
+  console.log("Does this work", courses)
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
   const suggestions = document.querySelector(".suggestions"); //not being used right now
   const favbutton = document.querySelector("#fav_button");
@@ -47,7 +52,9 @@ async function main() {
   const gened = document.querySelector("#gened");
   const method = document.querySelector("#method");
   const description = document.querySelector("#description");
- 
+
+
+   
 
 
   form.addEventListener("submit", (event) => {
@@ -61,11 +68,24 @@ async function main() {
     console.log("djiasjdf")
     console.log(formdata);
 
-    //list of courses that matches that department 
-    const availCourses = courses
+     //When user chooses a program, the page gets updated with corresponding data
+     const random = Math.floor(Math.random() * courses.length); 
+     courseID.innerHTML = courses[random].course_id;
+     courseTitle.innerHTML = courses[random].name;
+     credit.innerHTML = courses[random].credits;
+     gened.innerHTML = courses[random].gen_ed;
+     method.innerHTML = courses[random].grading_method;
+     description.innerHTML = courses[random].description;
+     avgGPA(courses[random].course_id);
     
-    // math.random look at lab 2 
-    .filter(course => {
+     NewRecFromFave(courses);
+     NewRecFromX(courses);
+  
+
+
+    //list of courses that matches that department 
+    /*
+    const availCourses = courses.filter(course => {
 
         console.log(formdata[0].value)
         console.log(course.department)
@@ -75,6 +95,7 @@ async function main() {
     console.table(availCourses)
     console.log("yooooo");
     console.log(availCourses);
+    */
     
   });
 
@@ -134,6 +155,8 @@ function avgGPA(course_id) {
   });
 }
 
+//Show New Course Recommendation and Save To Bookmarks
+function NewRecFromFave(courses){
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
     event.preventDefault();
@@ -249,5 +272,3 @@ function removeSavedCourse() {
 removeSavedCourse;
 
 window.onload = main;
-
-
