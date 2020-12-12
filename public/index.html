@@ -17,150 +17,258 @@
       src="https://use.fontawesome.com/releases/v5.14.0/js/all.js"
     ></script>
     <link rel="stylesheet" type="text/css" href="styles.css" />
+    <script>
+      function show(shown, hidden) {
+        document.getElementById(shown).style.display='block';
+        document.getElementById(hidden).style.display='none';
+        return false;
+      }
+      </script>
   </head>
+
+
   <body>
     <div class="global-features">
       <!-- Golobal Header -->
-      <section class="hero is-primary">
-        <div class="hero-body">
-          <div class="container">
-            <h1 class="title">Course Connector</h1>
+          <section class="hero is-primary">
+          <div class="hero-body">
+              <div class="container">
+              <h1 class="title">
+                  Course Connector
+              </h1>
+              </div>
           </div>
-        </div>
-      </section>
-
-      <!-- Golobal Navigation bar -->
-      <div class="navbar">
-        <nav class="navbar is-light">
-          <a class="navbar-item" href="index.html">
-            <button><i class="fas fa-home fa-4x"></i></button>
-          </a>
-          <a class="navbar-item" href="search.html">
-            <button><i class="fas fa-search fa-4x"></i></button>
-          </a>
-          <a class="navbar-item" href="bookmarks.html">
-            <button><i class="far fa-bookmark fa-4x"></i></button>
-          </a>
-        </nav>
-      </div>
-    </div>
-
-     <!-- Dropdown Header -->
-    <section class="section">
-      <div class="container">
-        <h1 class="is-size-1 has-text-centered">
-          Select Your Graduate Program
-        </h1>
-      </div>
-    </section>
-
-    <!-- Dropdown bar/ New Prefrences -->
-    <form class="course_select">
-      <div class="field has-addons">
-        <div class="control is-expanded">
-          <div class="select is-fullwidth">
-            <select name="grad-program" id="grad-program">
-              <!-- in JS need to add options values -->
-              <option value="test">Select Your Program</option>
-            </select>
-          </div>
-        </div>
-        <div class="control">
-          <button type="submit" class="button is-dark" id="program" onclick="main()">Choose</button>
-        </div>
-      </div>
-    </form>
-
-    <!-- Course Content -->
-    <section class="course-rec">
-      <!-- Course Code and Title -->
-      <div class='course-title-home' > 
-        <div class="tile is-parent" >
-          <div class="tile is-child box" id="course-code">
-            <p class="title" id="courseID">INST612</p>
-            <p class="subtitle" id="courseTitle">Advanced Usability Testing</p>
-          </div>
-        </div>
-      </div>
-    
-     <!-- Course Stat Tiles -->
-      <div class="course-stats">
-        <div class="tile is-ancestor">
-          <div class="tile is-parent">
-            <article class="tile is-child box" id="course-stat">
-              <p class="title" id="credit">3</p>
-              <p class="subtitle">Credits</p>
-            </article>
-          </div>
-          <div class="tile is-parent">
-            <article class="tile is-child box" id="course-stat">
-              <p class="title" id="gened">N/A</p>
-              <p class="subtitle">Gen-Ed</p>
-            </article>
-          </div>
-          <div class="tile is-parent">
-            <article class="tile is-child box" id="course-stat">
-              <p class="title" id="method">Regular, Audit</p>
-              <p class="subtitle">Grading Method</p>
-            </article>
-          </div>
-        </div>
-      </div>
+          </section>
       
-    
-      <!-- Course Description -->
-      <div class='course-description-home' > 
-        <div class="tile is-parent" >
-          <div class="tile is-child box" id="home-description">
-            <p class="title" >Description</p>
-            <p class="subtitle" id="description">
-              Nature, structure, development and application of information policy. Interactions of social objectives, stakeholders, technology and other forces that shape policy decisions.
-            </p>
-            </div>
-        </div>
-      </div>
-    
-    
-       <!-- Average Grade -->
-        <div class="tile is-parent" >
-          <div class="tile is-child box" id="average-grade">
-            <p id="avgGrade"><b>Average Grade: </b>B-</p>
+          <!-- Golobal Navigation bar -->
+          <div id="navbar">
+          <nav class="navbar is-light">
+              <a class="navbar-item">
+                <!-- href="index.html" -->
+                <a href="#" onclick="return show('index_page','bookmarks_page');"><i class="fas fa-home fa-4x"></i></a>
+                <!-- <button> <i class="fas fa-home fa-4x"></i> </button> -->
+              </a>
+              <!-- <a class="navbar-item" href="search.html">
+                  <button> <i class="fas fa-search fa-4x"></i> </button>
+              </a> -->
+              <a class="navbar-item"> 
+                <!-- href="bookmarks.html" -->
+                <a href="#" onclick="return show('bookmarks_page','index_page');"><i class="far fa-bookmark fa-4x"></i></a>  
+                <!-- <button> <i class="far fa-bookmark fa-4x"></i> </button> -->
+              </a>
+          </nav>
           </div>
+    </div>
+    <div id="index_page">
+          <!-- Dropdown Header -->
+        <section class="section">
+          <div class="container">
+            <h1 class="is-size-1 has-text-centered">
+              Select Your Graduate Program
+            </h1>
+          </div>
+        </section>
+
+        <!-- Dropdown bar/ New Prefrences -->
+        <form class="course_select">
+          <div class="field has-addons">
+            <div class="control is-expanded">
+              <div class="select is-fullwidth">
+                <select name="grad-program" id="grad-program">
+                  <!-- in JS need to add options values -->
+                  <option value="test">Select Your Program</option>
+                </select>
+              </div>
+            </div>
+            <div class="control">
+              <button type="submit" class="button is-dark" id="program" onclick="main()">Choose</button>
+            </div>
+          </div>
+        </form>
+
+        <!-- Course Content -->
+        <section class="course-rec">
+          <!-- Course Code and Title -->
+          <div class='course-title-home' > 
+            <div class="tile is-parent" >
+              <div class="tile is-child box" id="course-code">
+                <p class="title" id="courseID">INST612</p>
+                <p class="subtitle" id="courseTitle">Advanced Usability Testing</p>
+              </div>
+            </div>
+          </div>
+        
+        <!-- Course Stat Tiles -->
+          <div class="course-stats">
+            <div class="tile is-ancestor">
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="credit">3</p>
+                  <p class="subtitle">Credits</p>
+                </article>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="gened">N/A</p>
+                  <p class="subtitle">Gen-Ed</p>
+                </article>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="method">Regular, Audit</p>
+                  <p class="subtitle">Grading Method</p>
+                </article>
+              </div>
+            </div>
+          </div>
+          
+        
+          <!-- Course Description -->
+          <div class='course-description-home' > 
+            <div class="tile is-parent" >
+              <div class="tile is-child box" id="home-description">
+                <p class="title" >Description</p>
+                <p class="subtitle" id="description">
+                  Nature, structure, development and application of information policy. Interactions of social objectives, stakeholders, technology and other forces that shape policy decisions.
+                </p>
+                </div>
+            </div>
+          </div>
+        
+        
+          <!-- Average Grade -->
+            <div class="tile is-parent" >
+              <div class="tile is-child box" id="average-grade">
+                <p id="avgGrade"><b>Average Grade: </b>B-</p>
+              </div>
+            </div>
+        </section>
+        
+        <!-- Heart & X Buttons -->
+        <div class="rec-buttons">
+            <!-- Button to more detailed couse page -->
+            <a href="course.html" class="learn">
+              <button type="button" class="learn-more">Learn More</button>
+            </a>
+        
+            <!-- Heart Button to save and see next -->
+            
+              <button type="click" id="fav_button" href="#" class="float" onclick="NewRecFromFave()" >
+                <i class="far fa-heart fa-2x my-float"></i>
+              </button>
+            
+        
+            <!-- X Button to see next -->
+            
+              <button href="#" class="float-x" onclick="NewRecFromX()" >
+                  <i class="fas fa-times fa-2x my-float"></i> 
+              </button>
         </div>
-    </section>
-    
-    <!-- Heart & X Buttons -->
-    <div class="rec-buttons">
-        <!-- Button to more detailed couse page -->
-        <a href="course.html" class="learn">
-          <button type="button" class="learn-more">Learn More</button>
-        </a>
-    
-        <!-- Heart Button to save and see next -->
+
+        <!-- Attempt to add saved content to bookmarks page using jquery -->
         
-          <button type="click" id="fav_button" href="#" class="float" onclick="NewRecFromFave()" >
-            <i class="far fa-heart fa-2x my-float"></i>
-          </button>
-         
-    
-        <!-- X Button to see next -->
-        
-          <button href="#" class="float-x" onclick="NewRecFromX()" >
-              <i class="fas fa-times fa-2x my-float"></i> 
-          </button>
+        <script>
+          $(document).ready(function(){
+            $("button").click(function(){
+              $(".course-rec").appendTo(".saves");
+              console.log("send me over to bookmarks")
+            })
+          });
+        </script>
     </div>
 
-    <!-- Attempt to add saved content to bookmarks page using jquery -->
-     
-    <script>
-       $(document).ready(function(){
-        $("button").click(function(){
-          $(".course-rec").appendTo(".saves");
-          console.log("send me over to bookmarks")
-        })
-      });
-    </script>
-  
+    <div id="bookmarks_page" style="display:none">
+              
+          <section class="section">
+            <div class="container">
+              <h1 class="is-size-1 has-text-centered">
+                Saved Courses
+              </h1>
+            </div>
+          </section>
+
+            <div class="saved-list">
+              <ul class="saves">
+                  <li id="saved_couse">
+                  <div class="tile is-parent" >
+                      <div class="tile is-child box" id="saved-course">
+                        <div id="course-info">
+                          <p class="title" id="bookmark_item"> <b>INST377</b> <small>Dynamic Web Applications</small></p>
+                          <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
+                        </div>
+                          <div class="course-stats">
+                          <div class="tile is-ancestor">
+                            <div class="tile is-parent">
+                              <article class="tile is-child box" id="course-stat">
+                                <p class="title" id="credit">3</p>
+                                <p class="subtitle">Credits</p>
+                              </article>
+                            </div>
+                            <div class="tile is-parent">
+                              <article class="tile is-child box" id="course-stat">
+                                <p class="title" id="gened">N/A</p>
+                                <p class="subtitle">Gen-Ed</p>
+                              </article>
+                            </div>
+                            <div class="tile is-parent">
+                              <article class="tile is-child box" id="course-stat">
+                                <p class="title" id="method">Regular, Audit</p>
+                                <p class="subtitle">Grading Method</p>
+                              </article>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="learn-more-button">  
+                          <a href="course.html" class="learn">
+                            <button class="learn-more">Learn More</button>
+                          </a> 
+                        </div>            
+                      </div>
+                    </div>
+                </li>
+
+                <li id="saved_couse">
+                  <div class="tile is-parent" >
+                      <div class="tile is-child box" id="saved-course">
+                        <div id="course-info">
+                          <p class="title" id="bookmark_item"> <b>INST327</b> <small>Database Design & Modeling</small></p>
+                          <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
+                        </div>
+                          <div class="course-stats">
+                          <div class="tile is-ancestor">
+                            <div class="tile is-parent">
+                              <article class="tile is-child box" id="course-stat">
+                                <p class="title" id="credit">3</p>
+                                <p class="subtitle">Credits</p>
+                              </article>
+                            </div>
+                            <div class="tile is-parent">
+                              <article class="tile is-child box" id="course-stat">
+                                <p class="title" id="gened">N/A</p>
+                                <p class="subtitle">Gen-Ed</p>
+                              </article>
+                            </div>
+                            <div class="tile is-parent">
+                              <article class="tile is-child box" id="course-stat">
+                                <p class="title" id="method">Regular, Audit</p>
+                                <p class="subtitle">Grading Method</p>
+                              </article>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="learn-more-button">  
+                          <a href="course.html" class="learn">
+                            <button class="learn-more">Learn More</button>
+                          </a> 
+                        </div>               
+                      </div>
+                    </div>
+                </li>
+
+              </ul>
+            </div>
+          
+    </div>
     <!-- <script src="courseload.js"></script> -->
     <!-- <script src="script.js"></script> -->
     <script src="test.js"></script>
