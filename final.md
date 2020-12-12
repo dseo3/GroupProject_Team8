@@ -30,6 +30,7 @@
 
 ## Future Direction:
 * Improve application layout/structure
+* Use a better API source
  
 
 
