@@ -1,3 +1,4 @@
+
 //Prefrences Dropdown Bar 
 async function main() {
 
@@ -156,7 +157,6 @@ function avgGPA(course_id) {
 }
 
 //Show New Course Recommendation and Save To Bookmarks
-function NewRecFromFave(courses){
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
     event.preventDefault();
