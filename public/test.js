@@ -1,6 +1,6 @@
-let courses = []; // entire courses Dongyeon 
-let bookmark = []; // save favorite courses in bookmark Dongyeon
-var currCourse = new Object(); //current course Dongyeon 
+let courses = []; // entire courses 
+let bookmark = []; // save favorite courses in bookmark 
+var currCourse = new Object(); //current course 
 
 //Prefrences Dropdown Bar 
 async function main() {
@@ -154,7 +154,6 @@ function avgGPA(course_id) {
 }
 
 //Show New Course Recommendation and Save To Bookmarks
-//Dongyeon
 function NewRecFromFave(){
   bookmark.push(currCourse);
   console.log(bookmark)
