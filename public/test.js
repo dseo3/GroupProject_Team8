@@ -1,13 +1,8 @@
-let courses = []; // entire courses 
-let bookmark = []; // save favorite courses in bookmark 
-var currCourse = new Object(); //current course 
-
 //Prefrences Dropdown Bar 
 async function main() {
 
   //Yomi's function that gets the departments for the dropdown 
   await getDepartments();
-  
 
   // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
   const dept_id_here = document.forms[0].elements[0];
@@ -43,10 +38,9 @@ async function main() {
     
   console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
   
- 
-  
   //parses api data into json value
-  courses = await availCourses.json(); 
+  const courses = await availCourses.json(); 
+  console.log("Does this work", courses)
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
   const suggestions = document.querySelector(".suggestions"); //not being used right now
   const favbutton = document.querySelector("#fav_button");
@@ -67,13 +61,15 @@ async function main() {
     
     event.preventDefault();
     
+    console.log("HELLO?");
+
     //formdata = department names 
     const formdata = $(event.target).serializeArray();
+    console.log("djiasjdf")
     console.log(formdata);
 
      //When user chooses a program, the page gets updated with corresponding data
      const random = Math.floor(Math.random() * courses.length); 
-     currCourse = courses[random];
      courseID.innerHTML = courses[random].course_id;
      courseTitle.innerHTML = courses[random].name;
      credit.innerHTML = courses[random].credits;
@@ -82,6 +78,7 @@ async function main() {
      description.innerHTML = courses[random].description;
      avgGPA(courses[random].course_id);
     
+     NewRecFromFave(courses);
      NewRecFromX(courses);
   
 
@@ -100,9 +97,14 @@ async function main() {
     console.log(availCourses);
     */
     
-  });  
+  });
+
+  
 }
 
+function displayPage() {
+  
+}
 function avgGPA(course_id) {
   //Fetching PlanetTerp API
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -154,27 +156,25 @@ function avgGPA(course_id) {
 }
 
 //Show New Course Recommendation and Save To Bookmarks
-function NewRecFromFave(){
-  bookmark.push(currCourse);
-  console.log(bookmark)
- 
+function NewRecFromFave(courses){
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
     event.preventDefault();
+    console.log("Tis my fave");
     const data = $(event.target).serializeArray();
-  //   // send this random course to server.js
-  //   // create new put endpoint 
-  //   // empty array
-  //   //send request
 
-  //   /* Alternative 
-  //   > Create empty array at top test
-  //   > Send random to that array 
-  //   > Load in bookmarks
-  //   > Might have reviste remove function and delete from aray 
-  //   */
+    // send this random course to server.js
+    // create new put endpoint 
+    // empty array
+    //send request
+
+    /* Alternative 
+    > Create empty array at top test
+    > Send random to that array 
+    > Load in bookmarks
+    > Might have reviste remove function and delete from aray 
+    */
     const random = Math.floor(Math.random() * courses.length); 
-    currCourse = courses[random];
     courseID.innerHTML = courses[random].course_id;
     courseTitle.innerHTML = courses[random].name;
     credit.innerHTML = courses[random].credits;
@@ -182,9 +182,11 @@ function NewRecFromFave(){
     method.innerHTML = courses[random].grading_method;
     description.innerHTML = courses[random].description;
     avgGPA(courses[random].course_id);
-  });
 
- 
+
+
+   
+  });
 };
 
 function NewRecFromX(availCourses){
@@ -194,7 +196,6 @@ function NewRecFromX(availCourses){
     console.log("Don't Like Dis");
     // let coursecode1 = document.getElementById("code");
     const random = Math.floor(Math.random() * availCourses.length); 
-    currCourse = courses[random];
     courseID.innerHTML = availCourses[random].course_id;
     courseTitle.innerHTML = availCourses[random].name;
     credit.innerHTML = availCourses[random].credits;
@@ -261,13 +262,14 @@ async function getDepartments() {
   //document.getElementById('grad-program').innerHTML = dep_list ;
 }
 
-
 //Removing saved course when you click the bookmark button
 function removeSavedCourse() {
   console.log("removing course warning");
   const savedcourse = document.getElementById("saved_couse");
   savedcourse.remove();
 }
+
+removeSavedCourse;
 
 window.onload = main;
 
