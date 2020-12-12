@@ -238,7 +238,7 @@ function NewRecFromFave(courses){
 
     //Each time you click fave button send that course to 
     //the mybookmarks array
-    mybookmarks.push(randomfave);
+    mybookmarks.push(randomfave[values]);
     console.log("bookmarks:", mybookmarks);
 
     // bookmark_item.innerHTML = courses[randomfave].course_id;
