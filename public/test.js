@@ -1,4 +1,13 @@
-//Prefrences Dropdown Bar 
+// Creates and empty array for users fav course
+mybookmarks = []; 
+/* for each item in mybookmarks 
+      add a card to the bookmarks page
+      populate with API data
+
+*/
+
+
+//Main function does all the important stuff on load
 async function main() {
 
   //Calling the Departments for the dropdown
@@ -12,35 +21,15 @@ async function main() {
   // Just stringing together the API url here before we fetch the data 
   const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
 
-  /*The console.log below shows that it actually fetching the API data 
-    if you click the link in the console after inspecting the page
-    it should take you too the application tab and you can see all the courses
-    for the selected department, so Good Job ISABEAU!
-    Hoowwwever something weird is happening here when we try and fetch that data
-  
-  */
   console.log("API url is", pref_api)
 
-  /* 
-  I've tried putting the first paginated API back in 
-  and I'm getting the same weird response when I fetch the data
-  so I do not the the pref_api variable is wrong it is something else 
-  that is refusing to to pull the data from the link
-
-  I think we need to get just the const data, from below 
-  working again and then replace it with pref_api
-  */
-
-   //const data = await fetch("https://api.umd.io/v1/courses");
-  
   const availCourses = await fetch(pref_api); 
-  // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
     
   console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
   
   //parses api data into json value
   const courses = await availCourses.json(); 
-  console.log("Does this work", courses)
+  console.log("Courses in selected department", courses)
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
   const suggestions = document.querySelector(".suggestions"); //not being used right now
   const favbutton = document.querySelector("#fav_button");
@@ -209,7 +198,7 @@ function avgGPA(course_id) {
     });
 
     TotalClassGPA /= data.length;
-    console.log(TotalClassGPA.toFixed(2));
+    console.log("Class Average Grade:", TotalClassGPA.toFixed(2));
     document.getElementById("avgGrade").innerHTML =
       "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
   });
@@ -223,31 +212,87 @@ function NewRecFromFave(courses){
     console.log("Tis my fave");
     const data = $(event.target).serializeArray();
 
-    // send this random course to server.js
+
+    const randomfave = Math.floor(Math.random() * courses.length);
+    console.log("saved course:", randomfave)
+
+    courseID.innerHTML = courses[randomfave].course_id;
+    courseTitle.innerHTML = courses[randomfave].name;
+    credit.innerHTML = courses[randomfave].credits;
+    gened.innerHTML = courses[randomfave].gen_ed;
+    method.innerHTML = courses[randomfave].grading_method;
+    description.innerHTML = courses[randomfave].description;
+    avgGPA(courses[randomfave].course_id);
+
+    // send random course to server.js
     // create new put endpoint 
     // empty array
     //send request
 
-    /* Alternative 
-    > Create empty array at top test
-    > Send random to that array 
+    /* Alternative Gabe's suggestion
+    > Create empty array at top test.js
+    > Send randomfave to that array 
     > Load in bookmarks
     > Might have reviste remove function and delete from aray 
     */
-    const random = Math.floor(Math.random() * courses.length); 
-    courseID.innerHTML = courses[random].course_id;
-    courseTitle.innerHTML = courses[random].name;
-    credit.innerHTML = courses[random].credits;
-    gened.innerHTML = courses[random].gen_ed;
-    method.innerHTML = courses[random].grading_method;
-    description.innerHTML = courses[random].description;
-    avgGPA(courses[random].course_id);
 
+    //Each time you click fave button send that course to 
+    //the mybookmarks array
+    mybookmarks.push(randomfave);
+    console.log("bookmarks:", mybookmarks);
 
+    // bookmark_item.innerHTML = courses[randomfave].course_id;
+    // bookmark_title.innerHTML = courses[randomfave].name;
+    
 
-   
   });
 };
+
+//Testing if the next 7 line this will pop in bookmarks
+/*
+mybookmarks.forEach(favecourse => {
+  const target = document.querySelector(".saves") 
+  let li = availCourses.map((s-course) => `<li id="saved_couse">
+  <div class="tile is-parent" >
+      <div class="tile is-child box" id="saved-course">
+        <div id="course-info">
+          <p class="title" id="bookmark_item"> <b>${s-course.course_id}</b> <small id="bookmark-title">${s-course.name}</small></p>
+          <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
+        </div>
+          <div class="course-stats">
+          <div class="tile is-ancestor">
+            <div class="tile is-parent">
+              <article class="tile is-child box" id="course-stat">
+                <p class="title" id="credit">${s-course.credits}</p>
+                <p class="subtitle">Credits</p>
+              </article>
+            </div>
+            <div class="tile is-parent">
+              <article class="tile is-child box" id="course-stat">
+                <p class="title" id="gened">${s-course.gen_ed}</p>
+                <p class="subtitle">Gen-Ed</p>
+              </article>
+            </div>
+            <div class="tile is-parent">
+              <article class="tile is-child box" id="course-stat">
+                <p class="title" id="method">${s-course.grading_method}</p>
+                <p class="subtitle">Grading Method</p>
+              </article>
+            </div>
+          </div>
+        </div>
+        <div class="learn-more-button">  
+          <a href="course.html" class="learn">
+            <button class="learn-more">Learn More</button>
+          </a> 
+        </div>              
+      </div>
+    </div>
+</li>`);
+
+}); 
+*/
+
 
 function NewRecFromX(availCourses){
   const favbutton = document.querySelector(".float-x");
