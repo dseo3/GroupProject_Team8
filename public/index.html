@@ -105,6 +105,8 @@
                       <p class="subtitle">Credits</p>
                     </article>
                   </div>
+                  
+                 
                   <div class="tile is-parent">
                     <article class="tile is-child box" id="course-stat">
                       <p class="title" id="gened">N/A</p>
@@ -146,10 +148,6 @@
         <!-- Heart & X Buttons -->
         <div class="rec-buttons">
             <!-- Heart Button to save and see next -->
-            <a href="#" onclick="copybook()">
-              <button> CLICK ME! </button> 
-              </a>
-              
               <button type="click" id="fav_button" href="#" class="float" onclick="NewRecFromFave()" >
                 <i class="far fa-heart fa-2x my-float"></i>
               </button>
@@ -183,13 +181,13 @@
               </h1>
             </div>
           </section>
-
+          <button class="bookmark_button" onclick="removeSavedCourse()"> CLICK TO REMOVE </button>
             <div class="saved-list">
               <ul class="saves" id="saves">
                   <li id="saved_couse">
                   <div class="tile is-parent" >
                       <div class="tile is-child box" id="saved-course">
-                        <div id="course-info">
+                        <div id="course-info">      
                           <p class="title" id="bookmark_item"> <b>INST377</b> <small>Dynamic Web Applications</small></p>
                           <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
                         </div>
@@ -218,7 +216,6 @@
                       </div>
                     </div>
                 </li>
-
               </ul>
             </div>
             <!-- <button> <i class="fas fa-home fa-4x"></i> </button> -->

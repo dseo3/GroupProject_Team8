@@ -157,8 +157,15 @@ function avgGPA(course_id) {
 
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(courses){
+  
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
+
+    // ISABEAU APPEND TO BOOKMARKS
+    // $("#courseTitle").clone().appendTo($("#saves"));
+    $("#for_bookmarks").clone().appendTo($("#saves"));
+    $("#course-stat").clone().appendTo($("#saves"));
+    
     event.preventDefault();
     console.log("Tis my fave");
     const data = $(event.target).serializeArray();
@@ -265,7 +272,8 @@ async function getDepartments() {
 //Removing saved course when you click the bookmark button
 function removeSavedCourse() {
   console.log("removing course warning");
-  const savedcourse = document.getElementById("saved_couse");
+  // BOOKMARKS REMOVE BUTTON -ISABEAU
+  const savedcourse = document.getElementsById("#for_bookmarks");
   savedcourse.remove();
 }
 
@@ -277,11 +285,15 @@ function show(shown, hidden) {
 }
 
 // favbutton.addEventListener("click", (event) => {
-  function copybook() {
+  // function copybook() {
 
+    // THIS IS THE ORIGINAL BUTTON FOR TESTING IT WILL NEED TO GO INTO 
+    // <a href="#" onclick="copybook()">
+    // <button> CLICK ME! </button> 
+    // </a>
 
-    $("#for_bookmarks").clone().appendTo($("#saves"));
-    
+    // $("#for_bookmarks").clone().appendTo($("#saves"));
+
     // $(".learn").clone().appendTo($("#saves"));
     // const bookmark_button = document.createElement("button");
 
@@ -309,7 +321,7 @@ function show(shown, hidden) {
   //   bookmarks_card.innerHTML = bookmark_item; 
   //   console.log(bookmark_item)   
   //   const bookmarks_card = document.querySelector('.saves');
-  }
+  // }
 
 
 removeSavedCourse;
