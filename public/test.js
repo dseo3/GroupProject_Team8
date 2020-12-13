@@ -2,77 +2,15 @@ let courses = []; //ADDED DONGYEON
 let bookmark = []; // ADDDED DONGYEON
 let currCourse = new Object(); //ADDED DONGYEON
 
-function loadcard() {
-  const course_popup = document.querySelector(".course-rec");
-  course_popup.innerHTML += 
-  `<!-- Course Code and Title -->
-<div id="for_bookmarks">
-  <div class='course-title-home' > 
-    <div class="tile is-parent" >
-      <div class="tile is-child box" id="course-code">
-        <p class="title" id="courseID"></p>
-        <p class="subtitle" id="courseTitle"></p>
-      </div>
-    </div>
-  </div>
-
-<!-- THIS IS THE TILE I ADDED - ISABEAU  
-<div class="tile is-child box" id="saved-course"> -->
-<!-- Course Stat Tiles -->
-    <div class="course-stats">
-      <div class="tile is-ancestor">
-        <div class="tile is-parent">
-          <article class="tile is-child box" id="course-stat">
-            <p class="title" id="credit"></p>
-            <p class="subtitle">Credits</p>
-          </article>
-        </div>
-        
-      
-        <div class="tile is-parent">
-          <article class="tile is-child box" id="course-stat">
-            <p class="title" id="gened"></p>
-            <p class="subtitle">Gen-Ed</p>
-          </article>
-        </div>
-        <div class="tile is-parent">
-          <article class="tile is-child box" id="course-stat">
-            <p class="title" id="method"></p>
-            <p class="subtitle">Grading Method</p>
-          </article>
-        </div>
-      </div>
-    </div>
-  </div>  
-
-
-<!-- Course Description -->
-<div class='course-description-home' > 
-  <div class="tile is-parent" >
-    <div class="tile is-child box" id="home-description">
-      <p class="title" >Description</p>
-      <p class="subtitle" id="description">
-      </p>
-      </div>
-  </div>
-</div>
-
-
-<!-- Average Grade -->
-  <div class="tile is-parent" >
-    <div class="tile is-child box" id="average-grade">
-      <p id="avgGrade"><b>Average Grade: </b></p>
-    </div>
-  </div>`
-  }
- 
 
 //Prefrences Dropdown Bar 
 async function main() {
-
+  if (document.querySelector('#tester_option').text === "") {
   //Yomi's function that gets the departments for the dropdown 
   await getDepartments();
-
+  console.log(document.querySelector('#tester_option').text);
+  }  
+  // }
 
     // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
     const dept_id_here = document.forms[0].elements[0];
@@ -94,7 +32,6 @@ async function main() {
     const courses = await availCourses.json(); 
     console.log("Courses within selected department", courses)
     
-    
     const favbutton = document.querySelector("#fav_button");
     const form = document.querySelector(".course_select");
     const program = document.querySelector("#program");
@@ -115,7 +52,69 @@ async function main() {
       event.preventDefault();
       
       console.log("HELLO?");
+      const avgGPAitem = avgGPA(courses[random].course_id)
+      console.log(avgGPAitem)
+        const course_popup = document.querySelector(".course-rec");
+        course_popup.innerHTML = 
+        `<!-- Course Code and Title -->
+      <div id="for_bookmarks">
+        <div class='course-title-home' > 
+          <div class="tile is-parent" >
+            <div class="tile is-child box" id="course-code">
+              <p class="title" id="courseID">${courses[random].course_id}</p>
+              <p class="subtitle" id="courseTitle">${courses[random].name}</p>
+            </div>
+          </div>
+        </div>
+      
+      <!-- THIS IS THE TILE I ADDED - ISABEAU  
+      <div class="tile is-child box" id="saved-course"> -->
+      <!-- Course Stat Tiles -->
+          <div class="course-stats">
+            <div class="tile is-ancestor">
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="credit">${courses[random].credits}</p>
+                  <p class="subtitle">Credits</p>
+                </article>
+              </div>
+              
+            
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="gened">${courses[random].gen_ed}</p>
+                  <p class="subtitle">Gen-Ed</p>
+                </article>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="method">${courses[random].grading_method}</p>
+                  <p class="subtitle">Grading Method</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>  
 
+      <!-- Course Description -->
+      <div class='course-description-home' > 
+        <div class="tile is-parent" >
+          <div class="tile is-child box" id="home-description">
+            <p class="title" >Description</p>
+            <p class="subtitle" id="description">${courses[random].description}</p>
+            </div>
+        </div>
+      </div>
+
+      <!-- Average Grade -->
+        <div class="tile is-parent" >
+          <div class="tile is-child box" id="average-grade">
+            <p id="avgGrade"><b>Average Grade: </b>
+            ${avgGPAitem}
+            </p>
+          </div>
+        </div>`
+        
       //formdata = department names 
       const formdata = $(event.target).serializeArray();
       // Grad programs have a name of "grad-program" in this array
@@ -123,15 +122,17 @@ async function main() {
 
       //When user chooses a program, the page gets updated with corresponding data
       //const random = Math.floor(Math.random() * courses.length); 
-      console.log("random course: ", random);
-      currCourse = courses[random]; //ADDED DONGYEON 
-      courseID.innerHTML = courses[random].course_id;
-      courseTitle.innerHTML = courses[random].name;
-      credit.innerHTML = courses[random].credits;
-      gened.innerHTML = courses[random].gen_ed;
-      method.innerHTML = courses[random].grading_method;
-      description.innerHTML = courses[random].description;
-      avgGPA(courses[random].course_id);
+      
+      // ISABEAU PUT THIS IN THE HTML ABOVE
+      // console.log("random course: ", random);
+      // currCourse = courses[random]; //ADDED DONGYEON 
+      // courseID.innerHTML = courses[random].course_id;
+      // courseTitle.innerHTML = courses[random].name;
+      // credit.innerHTML = courses[random].credits;
+      // gened.innerHTML = courses[random].gen_ed;
+      // method.innerHTML = courses[random].grading_method;
+      // description.innerHTML = courses[random].description;
+      // avgGPA(courses[random].course_id);
       
       
       
@@ -191,10 +192,12 @@ function avgGPA(course_id) {
 
     TotalClassGPA /= data.length;
     console.log(TotalClassGPA.toFixed(2));
-    document.getElementById("avgGrade").innerHTML =
-      "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
+    return TotalClassGPA.toFixed(2)
+    // document.getElementById("avgGrade").innerHTML =
+    //   "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
   });
 }
+
 
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(courses, random){
@@ -339,6 +342,8 @@ async function getDepartments() {
     select.add(option);
   }
 
+  const change_tester = document.querySelector('#tester_option');
+  change_tester.innerText = "Select Your Program"
   console.log(dep_list);
   //document.getElementById('grad-program').innerHTML = dep_list ;
 }
