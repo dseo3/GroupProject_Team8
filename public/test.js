@@ -12,26 +12,8 @@ async function main() {
   // Just stringing together the API url here before we fetch the data 
   const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
 
-  /*The console.log below shows that it actually fetching the API data 
-    if you click the link in the console after inspecting the page
-    it should take you too the application tab and you can see all the courses
-    for the selected department, so Good Job ISABEAU!
-    Hoowwwever something weird is happening here when we try and fetch that data
-  
-  */
   console.log("API url is", pref_api)
 
-  /* 
-  I've tried putting the first paginated API back in 
-  and I'm getting the same weird response when I fetch the data
-  so I do not the the pref_api variable is wrong it is something else 
-  that is refusing to to pull the data from the link
-
-  I think we need to get just the const data, from below 
-  working again and then replace it with pref_api
-  */
-
-   //const data = await fetch("https://api.umd.io/v1/courses");
   
   const availCourses = await fetch(pref_api); 
   // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
