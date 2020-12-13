@@ -270,9 +270,12 @@ function removeSavedCourse() {
 }
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 window.onload = main;
 
 =======
+=======
+>>>>>>> Stashed changes
 // REPLACE THIS WITH QUERY SELECTOR
 function show(shown, hidden) {
   document.getElementById(shown).style.display='block';
