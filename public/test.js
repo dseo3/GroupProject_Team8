@@ -290,7 +290,7 @@ async function getDepartments() {
 function removeSavedCourse() {
   console.log("removing course warning");
   // BOOKMARKS REMOVE BUTTON -ISABEAU
-  const savedcourse = document.getElementsById("saved_course");
+  const savedcourse = document.getElementById("saved_course");
   savedcourse.remove();
 }
 
