@@ -1,3 +1,7 @@
+let courses = []; //ADDED DONGYEON
+let bookmark = []; // ADDDED DONGYEON
+let currCourse = new Object(); //ADDED DONGYEON
+
 //Prefrences Dropdown Bar 
 async function main() {
 
@@ -21,7 +25,7 @@ async function main() {
   console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
   
   //parses api data into json value
-  const courses = await availCourses.json(); 
+  courses = await availCourses.json(); 
   console.log("Does this work", courses)
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
   const suggestions = document.querySelector(".suggestions"); //not being used right now
@@ -52,6 +56,7 @@ async function main() {
 
      //When user chooses a program, the page gets updated with corresponding data
      const random = Math.floor(Math.random() * courses.length); 
+     currCourse = courses[random]; //ADDED DONGYEON 
      courseID.innerHTML = courses[random].course_id;
      courseTitle.innerHTML = courses[random].name;
      credit.innerHTML = courses[random].credits;
@@ -60,8 +65,7 @@ async function main() {
      description.innerHTML = courses[random].description;
      avgGPA(courses[random].course_id);
     
-     NewRecFromFave(courses);
-     NewRecFromX(courses);
+     
   
 
 
@@ -78,6 +82,9 @@ async function main() {
     */
     
   });
+
+  NewRecFromFave(courses);
+  NewRecFromX(courses);
 
   
 }
@@ -137,14 +144,16 @@ function avgGPA(course_id) {
 
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(courses){
-  
+  bookmark.push(currCourse); //ADDED DONGYEON
+  console.log(bookmark) //ADDED DONGYEON 
+
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
 
-    // ISABEAU APPEND TO BOOKMARKS
+    // // ISABEAU APPEND TO BOOKMARKS
     // $("#courseTitle").clone().appendTo($("#saves"));
-    $("#for_bookmarks").clone().appendTo($("#saves"));
-    $("#course-stat").clone().appendTo($("#saves"));
+    // $("#for_bookmarks").clone().appendTo($("#saves"));
+    // $("#course-stat").clone().appendTo($("#saves"));
     
     event.preventDefault();
     console.log("Tis my fave");
@@ -162,6 +171,7 @@ function NewRecFromFave(courses){
     > Might have reviste remove function and delete from aray 
     */
     const random = Math.floor(Math.random() * courses.length); 
+    currCourse = courses[random]; //ADDED DONGYEON
     courseID.innerHTML = courses[random].course_id;
     courseTitle.innerHTML = courses[random].name;
     credit.innerHTML = courses[random].credits;
@@ -170,7 +180,10 @@ function NewRecFromFave(courses){
     description.innerHTML = courses[random].description;
     avgGPA(courses[random].course_id);
 
-
+ //ISABEAU APPEND TO BOOKMARKS
+    // $("#courseTitle").clone().appendTo($("#saves"));
+    // $("#for_bookmarks").clone().appendTo($("#saves"));
+    // $("#course-stat").clone().appendTo($("#saves"));
 
    
   });
@@ -263,6 +276,14 @@ function show(shown, hidden) {
   document.getElementById(hidden).style.display='none';
   return false;
 }
+
+function loadBookMarks(){
+  console.log("bookmarks page ----")
+    for(i = 0; i <bookmark.length; i++){
+      document.write(JSON.stringify(bookmark[i]));
+    };
+}
+
 
 // favbutton.addEventListener("click", (event) => {
   // function copybook() {
