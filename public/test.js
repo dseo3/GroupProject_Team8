@@ -276,6 +276,11 @@ function show(shown, hidden) {
   return false;
 }
 
+// favbutton.addEventListener("click", (event) => {
+  function copybook() {
+    $("#for_bookmarks").clone().appendTo($("#bookmarks_page"));
+  }
+
 removeSavedCourse;
 
 window.onload = main;

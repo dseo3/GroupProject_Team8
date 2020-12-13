@@ -93,30 +93,34 @@
             </div>
           </div>
         
-        <!-- Course Stat Tiles -->
-          <div class="course-stats">
-            <div class="tile is-ancestor">
-              <div class="tile is-parent">
-                <article class="tile is-child box" id="course-stat">
-                  <p class="title" id="credit">3</p>
-                  <p class="subtitle">Credits</p>
-                </article>
+        <div id="for_bookmarks">  
+          <!-- THIS IS THE TILE I ADDED - ISABEAU  -->
+          <div class="tile is-child box" id="saved-course">
+          <!-- Course Stat Tiles -->
+              <div class="course-stats">
+                <div class="tile is-ancestor">
+                  <div class="tile is-parent">
+                    <article class="tile is-child box" id="course-stat">
+                      <p class="title" id="credit">3</p>
+                      <p class="subtitle">Credits</p>
+                    </article>
+                  </div>
+                  <div class="tile is-parent">
+                    <article class="tile is-child box" id="course-stat">
+                      <p class="title" id="gened">N/A</p>
+                      <p class="subtitle">Gen-Ed</p>
+                    </article>
+                  </div>
+                  <div class="tile is-parent">
+                    <article class="tile is-child box" id="course-stat">
+                      <p class="title" id="method">Regular, Audit</p>
+                      <p class="subtitle">Grading Method</p>
+                    </article>
+                  </div>
+                </div>
               </div>
-              <div class="tile is-parent">
-                <article class="tile is-child box" id="course-stat">
-                  <p class="title" id="gened">N/A</p>
-                  <p class="subtitle">Gen-Ed</p>
-                </article>
-              </div>
-              <div class="tile is-parent">
-                <article class="tile is-child box" id="course-stat">
-                  <p class="title" id="method">Regular, Audit</p>
-                  <p class="subtitle">Grading Method</p>
-                </article>
-              </div>
-            </div>
-          </div>
-          
+            </div>  
+        </div>
         
           <!-- Course Description -->
           <div class='course-description-home' > 
@@ -146,6 +150,10 @@
               <button type="button" class="learn-more">Learn More</button>
             </a>
         
+            <a href="#" onclick="copybook()">
+              <button> CLICK ME! </button> 
+              </a>
+
             <!-- Heart Button to save and see next -->
             
               <button type="click" id="fav_button" href="#" class="float" onclick="NewRecFromFave()" >
@@ -262,7 +270,8 @@
 
               </ul>
             </div>
-          
+            <!-- <button> <i class="fas fa-home fa-4x"></i> </button> -->
+         
     </div>
     <!-- <script src="courseload.js"></script> -->
     <!-- <script src="script.js"></script> -->
