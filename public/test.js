@@ -23,7 +23,6 @@ async function main() {
     console.log("API url is", pref_api)
 
     
-
     const availCourses = await fetch(pref_api); 
     // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
       
@@ -106,55 +105,6 @@ async function main() {
             </div>
         </div>
       </div>
-
-  console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
-  
-  //parses api data into json value
-  const courses = await availCourses.json(); 
-  console.log("Courses within selected department", courses);
-
-  const favbutton = document.querySelector("#fav_button");
-  const form = document.querySelector(".course_select");
-  const program = document.querySelector("#program");
-  const courseID = document.querySelector("#courseID");
-  const courseTitle = document.querySelector("#courseTitle");
-  const credit = document.querySelector("#credit");
-  const gened = document.querySelector("#gened");
-  const method = document.querySelector("#method");
-  const description = document.querySelector("#description");
-  const random = Math.floor(Math.random() * courses.length); 
-
-
-   
-
-
-  form.addEventListener("submit", (event) => {
-    
-    event.preventDefault();
-    
-    console.log("HELLO?");
-
-    //formdata = department names 
-    const formdata = $(event.target).serializeArray();
-    // Grad programs have a name of "grad-program" in this array
-    console.log("department selected: ", formdata);
-
-     //When user chooses a program, the page gets updated with corresponding data
-     //const random = Math.floor(Math.random() * courses.length); 
-     console.log("random course: ", random);
-     currCourse = courses[random]; //ADDED DONGYEON 
-     courseID.innerHTML = courses[random].course_id;
-     courseTitle.innerHTML = courses[random].name;
-     credit.innerHTML = courses[random].credits;
-     gened.innerHTML = courses[random].gen_ed;
-     method.innerHTML = courses[random].grading_method;
-     description.innerHTML = courses[random].description;
-     avgGPA(courses[random].course_id);
-    
-    
-    
-  });
-
 
       <!-- Average Grade -->
         <div class="tile is-parent" >
@@ -247,6 +197,7 @@ function avgGPA(course_id) {
     //   "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
   });
 }
+
 
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(courses, random){
@@ -369,6 +320,7 @@ function displayMatches() {
 
   return HTMLmatches;
 }
+
 // Yomi's Code: for Preferences Departments Drop down at top of index/home page
 const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101"; // I ALSO CHANGED THE SEMESTER HERE - ISABEAU
 
@@ -386,6 +338,7 @@ async function getDepartments() {
   for (var i = 0; i < departments.length; i++) {
     dep_list.push([departments[i].dept_id + " - " + departments[i].department]); // I ALSO CHANGED THIS HERE! - ISABEAU
   }
+
   //add department list to drop down menu
   var select = document.getElementById("grad-program");
   for (var i in dep_list) {
@@ -399,6 +352,7 @@ async function getDepartments() {
   console.log(dep_list);
   //document.getElementById('grad-program').innerHTML = dep_list ;
 }
+
 //Removing saved course when you click the bookmark button
 function removeSavedCourse() {
   console.log("removing course warning");
@@ -406,6 +360,8 @@ function removeSavedCourse() {
   const savedcourse = document.getElementById("saved_course");
   savedcourse.remove();
 }
+
+
 // REPLACE THIS WITH QUERY SELECTOR
 function show(shown, hidden) {
   document.getElementById(shown).style.display='block';
