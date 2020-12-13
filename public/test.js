@@ -1,5 +1,4 @@
 let courses = []; //ADDED DONGYEON
-let bookmark = []; // ADDDED DONGYEON
 let currCourse = new Object(); //ADDED DONGYEON
 
 
@@ -9,9 +8,7 @@ async function main() {
   //Yomi's function that gets the departments for the dropdown 
   await getDepartments();
   console.log(document.querySelector('#tester_option').text);
-  }  
-  // }
-
+  } 
     // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
     const dept_id_here = document.forms[0].elements[0];
     //No longer Spaghetti code yay!
@@ -19,17 +16,14 @@ async function main() {
     console.log("Selected Department Code:", dept_id_for_data);
     // Just stringing together the API url here before we fetch the data 
     const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
-
     console.log("API url is", pref_api)
-
-    
     const availCourses = await fetch(pref_api); 
     // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
       
     console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
     
     //parses api data into json value
-    const courses = await availCourses.json(); 
+    courses = await availCourses.json(); 
     console.log("Courses within selected department", courses)
     
     const favbutton = document.querySelector("#fav_button");
@@ -41,112 +35,83 @@ async function main() {
     const gened = document.querySelector("#gened");
     const method = document.querySelector("#method");
     const description = document.querySelector("#description");
-    const random = Math.floor(Math.random() * courses.length); 
-
-
-    
-
 
     form.addEventListener("submit", (event) => {
-      
       event.preventDefault();
-      
-      console.log("HELLO?");
-      const avgGPAitem = avgGPA(courses[random].course_id)
-      console.log(avgGPAitem)
-        const course_popup = document.querySelector(".course-rec");
-        course_popup.innerHTML = 
-        `<!-- Course Code and Title -->
-      <div id="for_bookmarks">
-        <div class='course-title-home' > 
-          <div class="tile is-parent" >
-            <div class="tile is-child box" id="course-code">
-              <p class="title" id="courseID">${courses[random].course_id}</p>
-              <p class="subtitle" id="courseTitle">${courses[random].name}</p>
-            </div>
-          </div>
-        </div>
-      
-      <!-- THIS IS THE TILE I ADDED - ISABEAU  
-      <div class="tile is-child box" id="saved-course"> -->
-      <!-- Course Stat Tiles -->
-          <div class="course-stats">
-            <div class="tile is-ancestor">
-              <div class="tile is-parent">
-                <article class="tile is-child box" id="course-stat">
-                  <p class="title" id="credit">${courses[random].credits}</p>
-                  <p class="subtitle">Credits</p>
-                </article>
-              </div>
-              
-            
-              <div class="tile is-parent">
-                <article class="tile is-child box" id="course-stat">
-                  <p class="title" id="gened">${courses[random].gen_ed}</p>
-                  <p class="subtitle">Gen-Ed</p>
-                </article>
-              </div>
-              <div class="tile is-parent">
-                <article class="tile is-child box" id="course-stat">
-                  <p class="title" id="method">${courses[random].grading_method}</p>
-                  <p class="subtitle">Grading Method</p>
-                </article>
-              </div>
-            </div>
-          </div>
-        </div>  
-
-      <!-- Course Description -->
-      <div class='course-description-home' > 
-        <div class="tile is-parent" >
-          <div class="tile is-child box" id="home-description">
-            <p class="title" >Description</p>
-            <p class="subtitle" id="description">${courses[random].description}</p>
-            </div>
-        </div>
-      </div>
-
-      <!-- Average Grade -->
-        <div class="tile is-parent" >
-          <div class="tile is-child box" id="average-grade">
-            <p id="avgGrade"><b>Average Grade: </b>
-            ${avgGPAitem}
-            </p>
-          </div>
-        </div>`
-        
+      refreshPage();
       //formdata = department names 
       const formdata = $(event.target).serializeArray();
       // Grad programs have a name of "grad-program" in this array
-      console.log("department selected: ", formdata);
-
-      //When user chooses a program, the page gets updated with corresponding data
-      //const random = Math.floor(Math.random() * courses.length); 
-      
-      // ISABEAU PUT THIS IN THE HTML ABOVE
-      // console.log("random course: ", random);
-      // currCourse = courses[random]; //ADDED DONGYEON 
-      // courseID.innerHTML = courses[random].course_id;
-      // courseTitle.innerHTML = courses[random].name;
-      // credit.innerHTML = courses[random].credits;
-      // gened.innerHTML = courses[random].gen_ed;
-      // method.innerHTML = courses[random].grading_method;
-      // description.innerHTML = courses[random].description;
-      // avgGPA(courses[random].course_id);
-      
-      
-      
+      console.log("department selected: ", formdata);      
     });
-
-    NewRecFromFave(courses, random);
-    NewRecFromX(courses);
-  
-  
 }
 
-function displayPage() {
+function refreshPage(){
+  const random = Math.floor(Math.random() * courses.length); 
   
+  currCourse = courses[random];    
+  const avgGPAitem = avgGPA(courses[random].course_id)
+  const course_popup = document.querySelector(".course-rec");
+  course_popup.innerHTML = 
+    `<!-- Course Code and Title -->
+  <div id="for_bookmarks">
+    <div class='course-title-home' > 
+      <div class="tile is-parent" >
+        <div class="tile is-child box" id="course-code">
+          <p class="title" id="courseID">${courses[random].course_id}</p>
+          <p class="subtitle" id="courseTitle">${courses[random].name}</p>
+        </div>
+      </div>
+    </div>
+  
+  <!-- THIS IS THE TILE I ADDED - ISABEAU  
+  <div class="tile is-child box" id="saved-course"> -->
+  <!-- Course Stat Tiles -->
+      <div class="course-stats">
+        <div class="tile is-ancestor">
+          <div class="tile is-parent">
+            <article class="tile is-child box" id="course-stat">
+              <p class="title" id="credit">${courses[random].credits}</p>
+              <p class="subtitle">Credits</p>
+            </article>
+          </div>
+          
+        
+          <div class="tile is-parent">
+            <article class="tile is-child box" id="course-stat">
+              <p class="title" id="gened">${courses[random].gen_ed}</p>
+              <p class="subtitle">Gen-Ed</p>
+            </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child box" id="course-stat">
+              <p class="title" id="method">${courses[random].grading_method}</p>
+              <p class="subtitle">Grading Method</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>  
+  <!-- Course Description -->
+  <div class='course-description-home' > 
+    <div class="tile is-parent" >
+      <div class="tile is-child box" id="home-description">
+        <p class="title" >Description</p>
+        <p class="subtitle" id="description">${courses[random].description}</p>
+        </div>
+    </div>
+  </div>
+  <!-- Average Grade -->
+    <div class="tile is-parent" >
+      <div class="tile is-child box" id="average-grade">
+        <p id="avgGrade"><b>Average Grade: </b>
+        ${avgGPAitem}
+        </p>
+      </div>
+    </div>`
+    
 }
+
 function avgGPA(course_id) {
   //Fetching PlanetTerp API
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -200,22 +165,8 @@ function avgGPA(course_id) {
 
 
 //Show New Course Recommendation and Save To Bookmarks
-function NewRecFromFave(courses, random){
-  bookmark.push(currCourse); //ADDED DONGYEON
-  console.log(bookmark) //ADDED DONGYEON 
-
+function NewRecFromFave(){
   const favbutton = document.querySelector("#fav_button");
-  favbutton.addEventListener("click", (event) => {
-
-    
-    event.preventDefault();
-    console.log("Tis my fave");
-    const data = $(event.target).serializeArray();
-
-    // send this random course to server.js
-    // create new put endpoint 
-    // empty array
-    //send request
 
     /* Alternative 
     > Create empty array at top test
@@ -225,13 +176,13 @@ function NewRecFromFave(courses, random){
     */
     
     //const random = Math.floor(Math.random() * courses.length); 
-    let id = courseID.innerHTML = courses[random].course_id;
-    let ctitle = courseTitle.innerHTML = courses[random].name;
-    let cred = credit.innerHTML = courses[random].credits;
-    let ge = gened.innerHTML = courses[random].gen_ed;
-    let gm = method.innerHTML = courses[random].grading_method;
-    description.innerHTML = courses[random].description;
-    avgGPA(courses[random].course_id);
+    // let id = courseID.innerHTML = bookmark[random].course_id;
+    // let ctitle = courseTitle.innerHTML = bookmark[random].name;
+    // let cred = credit.innerHTML = bookmark[random].credits;
+    // let ge = gened.innerHTML = bookmark[random].gen_ed;
+    // let gm = method.innerHTML = bookmark[random].grading_method;
+    // description.innerHTML = bookmark[random].description;
+    // avgGPA(bookmark[random].course_id);
 
     //Kennedy's attempt to format the boomarks properly
     const saves = document.querySelector(".saves");
@@ -240,26 +191,26 @@ function NewRecFromFave(courses, random){
       <div class="tile is-parent" >
         <div class="tile is-child box" id="saved-course">
           <div id="course-info">      
-            <p class="title" id="bookmark_item"> <b>${id}</b> <small>${ctitle}</small></p>
+            <p class="title" id="bookmark_item"> <b>${currCourse.course_id}</b> <small>${currCourse.name}</small></p>
             <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
           </div>
             <div class="course-stats">
             <div class="tile is-ancestor">
               <div class="tile is-parent">
                 <article class="tile is-child box" id="course-stat">
-                  <p class="title" id="credit">${cred}</p>
+                  <p class="title" id="credit">${currCourse.credits}</p>
                   <p class="subtitle">Credits</p>
                 </article>
               </div>
               <div class="tile is-parent">
                 <article class="tile is-child box" id="course-stat">
-                  <p class="title" id="gened">${ge}</p>
+                  <p class="title" id="gened">${currCourse.gen_ed}</p>
                   <p class="subtitle">Gen-Ed</p>
                 </article>
               </div>
               <div class="tile is-parent">
                 <article class="tile is-child box" id="course-stat">
-                  <p class="title" id="method">${gm}</p>
+                  <p class="title" id="method">${currCourse.grading_method}</p>
                   <p class="subtitle">Grading Method</p>
                 </article>
               </div>
@@ -273,8 +224,8 @@ function NewRecFromFave(courses, random){
         </div>
       </div>
     </li>`;
-   
-  });
+
+    refreshPage(); //refresh recommendation 
 };
 
 function NewRecFromX(availCourses){
