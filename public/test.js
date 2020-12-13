@@ -38,6 +38,7 @@ async function main() {
   const gened = document.querySelector("#gened");
   const method = document.querySelector("#method");
   const description = document.querySelector("#description");
+  const random = Math.floor(Math.random() * courses.length); 
 
 
    
@@ -51,11 +52,12 @@ async function main() {
 
     //formdata = department names 
     const formdata = $(event.target).serializeArray();
-    console.log("djiasjdf")
-    console.log(formdata);
+    // Grad programs have a name of "grad-program" in this array
+    console.log("department selected: ", formdata);
 
      //When user chooses a program, the page gets updated with corresponding data
-     const random = Math.floor(Math.random() * courses.length); 
+     //const random = Math.floor(Math.random() * courses.length); 
+     console.log("random course: ", random);
      currCourse = courses[random]; //ADDED DONGYEON 
      courseID.innerHTML = courses[random].course_id;
      courseTitle.innerHTML = courses[random].name;
@@ -65,25 +67,11 @@ async function main() {
      description.innerHTML = courses[random].description;
      avgGPA(courses[random].course_id);
     
-     
-  
-
-
-    //list of courses that matches that department 
-    /*
-    const availCourses = courses.filter(course => {
-        console.log(formdata[0].value)
-        console.log(course.department)
-        console.log(course)
-        return course.department === formdata[0].value})
-    console.table(availCourses)
-    console.log("yooooo");
-    console.log(availCourses);
-    */
+    
     
   });
 
-  NewRecFromFave(courses);
+  NewRecFromFave(courses, random);
   NewRecFromX(courses);
 
   
@@ -143,7 +131,7 @@ function avgGPA(course_id) {
 }
 
 //Show New Course Recommendation and Save To Bookmarks
-function NewRecFromFave(courses){
+function NewRecFromFave(courses, random){
   bookmark.push(currCourse); //ADDED DONGYEON
   console.log(bookmark) //ADDED DONGYEON 
 
@@ -167,7 +155,7 @@ function NewRecFromFave(courses){
     > Might have reviste remove function and delete from aray 
     */
     
-    const random = Math.floor(Math.random() * courses.length); 
+    //const random = Math.floor(Math.random() * courses.length); 
     let id = courseID.innerHTML = courses[random].course_id;
     let ctitle = courseTitle.innerHTML = courses[random].name;
     let cred = credit.innerHTML = courses[random].credits;
@@ -242,6 +230,7 @@ function NewRecFromX(availCourses){
   })
 }
 
+
 function findMatches(wordsToMatch, courses) {
   return courses.filter((course) => {
     const regex = new RegExp(wordsToMatch, "gi");
@@ -301,26 +290,27 @@ async function getDepartments() {
 function removeSavedCourse() {
   console.log("removing course warning");
   // BOOKMARKS REMOVE BUTTON -ISABEAU
-  const savedcourse = document.getElementsById("#for_bookmarks");
+  const savedcourse = document.getElementsById("saved_course");
   savedcourse.remove();
 }
+
 
 // REPLACE THIS WITH QUERY SELECTOR
 function show(shown, hidden) {
   document.getElementById(shown).style.display='block';
   document.getElementById(hidden).style.display='none';
   return false;
-}
+};
 
 function loadBookMarks(){
   console.log("bookmarks page ----")
     for(i = 0; i <bookmark.length; i++){
       document.write(JSON.stringify(bookmark[i]));
     };
-}
+};
 
 
-// favbutton.addEventListener("click", (event) => {
+/* favbutton.addEventListener("click", (event) => {
   // function copybook() {
 
     // THIS IS THE ORIGINAL BUTTON FOR TESTING IT WILL NEED TO GO INTO 
@@ -357,7 +347,7 @@ function loadBookMarks(){
   //   bookmarks_card.innerHTML = bookmark_item; 
   //   console.log(bookmark_item)   
   //   const bookmarks_card = document.querySelector('.saves');
-  // }
+  // } */
 
 
 removeSavedCourse;
