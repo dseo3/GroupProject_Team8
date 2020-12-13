@@ -2,140 +2,144 @@ let courses = []; //ADDED DONGYEON
 let bookmark = []; // ADDDED DONGYEON
 let currCourse = new Object(); //ADDED DONGYEON
 
+function loadcard() {
+  const course_popup = document.querySelector(".course-rec");
+  course_popup.innerHTML += 
+  `<!-- Course Code and Title -->
+<div id="for_bookmarks">
+  <div class='course-title-home' > 
+    <div class="tile is-parent" >
+      <div class="tile is-child box" id="course-code">
+        <p class="title" id="courseID"></p>
+        <p class="subtitle" id="courseTitle"></p>
+      </div>
+    </div>
+  </div>
+
+<!-- THIS IS THE TILE I ADDED - ISABEAU  
+<div class="tile is-child box" id="saved-course"> -->
+<!-- Course Stat Tiles -->
+    <div class="course-stats">
+      <div class="tile is-ancestor">
+        <div class="tile is-parent">
+          <article class="tile is-child box" id="course-stat">
+            <p class="title" id="credit"></p>
+            <p class="subtitle">Credits</p>
+          </article>
+        </div>
+        
+      
+        <div class="tile is-parent">
+          <article class="tile is-child box" id="course-stat">
+            <p class="title" id="gened"></p>
+            <p class="subtitle">Gen-Ed</p>
+          </article>
+        </div>
+        <div class="tile is-parent">
+          <article class="tile is-child box" id="course-stat">
+            <p class="title" id="method"></p>
+            <p class="subtitle">Grading Method</p>
+          </article>
+        </div>
+      </div>
+    </div>
+  </div>  
+
+
+<!-- Course Description -->
+<div class='course-description-home' > 
+  <div class="tile is-parent" >
+    <div class="tile is-child box" id="home-description">
+      <p class="title" >Description</p>
+      <p class="subtitle" id="description">
+      </p>
+      </div>
+  </div>
+</div>
+
+
+<!-- Average Grade -->
+  <div class="tile is-parent" >
+    <div class="tile is-child box" id="average-grade">
+      <p id="avgGrade"><b>Average Grade: </b></p>
+    </div>
+  </div>`
+  }
+ 
+
 //Prefrences Dropdown Bar 
 async function main() {
 
   //Yomi's function that gets the departments for the dropdown 
   await getDepartments();
 
-  // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
-  const dept_id_here = document.forms[0].elements[0];
-  //No longer Spaghetti code yay!
-  const dept_id_for_data = dept_id_here.value.substring(0,4);
-  console.log("Selected Department Code:", dept_id_for_data);
-  // Just stringing together the API url here before we fetch the data 
-  const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
 
-  console.log("API url is", pref_api)
+    // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
+    const dept_id_here = document.forms[0].elements[0];
+    //No longer Spaghetti code yay!
+    const dept_id_for_data = dept_id_here.value.substring(0,4);
+    console.log("Selected Department Code:", dept_id_for_data);
+    // Just stringing together the API url here before we fetch the data 
+    const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
 
+    console.log("API url is", pref_api)
+
+    
+    const availCourses = await fetch(pref_api); 
+    // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
+      
+    console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
+    
+    //parses api data into json value
+    const courses = await availCourses.json(); 
+    console.log("Courses within selected department", courses)
+    
+    
+    const favbutton = document.querySelector("#fav_button");
+    const form = document.querySelector(".course_select");
+    const program = document.querySelector("#program");
+    const courseID = document.querySelector("#courseID");
+    const courseTitle = document.querySelector("#courseTitle");
+    const credit = document.querySelector("#credit");
+    const gened = document.querySelector("#gened");
+    const method = document.querySelector("#method");
+    const description = document.querySelector("#description");
+    const random = Math.floor(Math.random() * courses.length); 
+
+
+    
+
+
+    form.addEventListener("submit", (event) => {
+      
+      event.preventDefault();
+      
+      console.log("HELLO?");
+
+      //formdata = department names 
+      const formdata = $(event.target).serializeArray();
+      // Grad programs have a name of "grad-program" in this array
+      console.log("department selected: ", formdata);
+
+      //When user chooses a program, the page gets updated with corresponding data
+      //const random = Math.floor(Math.random() * courses.length); 
+      console.log("random course: ", random);
+      currCourse = courses[random]; //ADDED DONGYEON 
+      courseID.innerHTML = courses[random].course_id;
+      courseTitle.innerHTML = courses[random].name;
+      credit.innerHTML = courses[random].credits;
+      gened.innerHTML = courses[random].gen_ed;
+      method.innerHTML = courses[random].grading_method;
+      description.innerHTML = courses[random].description;
+      avgGPA(courses[random].course_id);
+      
+      
+      
+    });
+
+    NewRecFromFave(courses, random);
+    NewRecFromX(courses);
   
-  const availCourses = await fetch(pref_api); 
-  // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
-    
-  console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
-  
-  //parses api data into json value
-  const courses = await availCourses.json(); 
-  console.log("Courses within selected department", courses)
-
-  <section class="course-rec">
-            <!-- Course Code and Title -->
-          <div id="for_bookmarks">
-            <div class='course-title-home' > 
-              <div class="tile is-parent" >
-                <div class="tile is-child box" id="course-code">
-                  <p class="title" id="courseID">INST612</p>
-                  <p class="subtitle" id="courseTitle">Advanced Usability Testing</p>
-                </div>
-              </div>
-            </div>
-        
-          <!-- THIS IS THE TILE I ADDED - ISABEAU  
-          <div class="tile is-child box" id="saved-course"> -->
-          <!-- Course Stat Tiles -->
-              <div class="course-stats">
-                <div class="tile is-ancestor">
-                  <div class="tile is-parent">
-                    <article class="tile is-child box" id="course-stat">
-                      <p class="title" id="credit">3</p>
-                      <p class="subtitle">Credits</p>
-                    </article>
-                  </div>
-                  
-                 
-                  <div class="tile is-parent">
-                    <article class="tile is-child box" id="course-stat">
-                      <p class="title" id="gened">N/A</p>
-                      <p class="subtitle">Gen-Ed</p>
-                    </article>
-                  </div>
-                  <div class="tile is-parent">
-                    <article class="tile is-child box" id="course-stat">
-                      <p class="title" id="method">Regular, Audit</p>
-                      <p class="subtitle">Grading Method</p>
-                    </article>
-                  </div>
-                </div>
-              </div>
-            </div>  
-        
-        
-          <!-- Course Description -->
-          <div class='course-description-home' > 
-            <div class="tile is-parent" >
-              <div class="tile is-child box" id="home-description">
-                <p class="title" >Description</p>
-                <p class="subtitle" id="description">
-                  Nature, structure, development and application of information policy. Interactions of social objectives, stakeholders, technology and other forces that shape policy decisions.
-                </p>
-                </div>
-            </div>
-          </div>
-        
-        
-          <!-- Average Grade -->
-            <div class="tile is-parent" >
-              <div class="tile is-child box" id="average-grade">
-                <p id="avgGrade"><b>Average Grade: </b>B-</p>
-              </div>
-            </div>
-        </section>
-
-  const favbutton = document.querySelector("#fav_button");
-  const form = document.querySelector(".course_select");
-  const program = document.querySelector("#program");
-  const courseID = document.querySelector("#courseID");
-  const courseTitle = document.querySelector("#courseTitle");
-  const credit = document.querySelector("#credit");
-  const gened = document.querySelector("#gened");
-  const method = document.querySelector("#method");
-  const description = document.querySelector("#description");
-  const random = Math.floor(Math.random() * courses.length); 
-
-
-   
-
-
-  form.addEventListener("submit", (event) => {
-    
-    event.preventDefault();
-    
-    console.log("HELLO?");
-
-    //formdata = department names 
-    const formdata = $(event.target).serializeArray();
-    // Grad programs have a name of "grad-program" in this array
-    console.log("department selected: ", formdata);
-
-     //When user chooses a program, the page gets updated with corresponding data
-     //const random = Math.floor(Math.random() * courses.length); 
-     console.log("random course: ", random);
-     currCourse = courses[random]; //ADDED DONGYEON 
-     courseID.innerHTML = courses[random].course_id;
-     courseTitle.innerHTML = courses[random].name;
-     credit.innerHTML = courses[random].credits;
-     gened.innerHTML = courses[random].gen_ed;
-     method.innerHTML = courses[random].grading_method;
-     description.innerHTML = courses[random].description;
-     avgGPA(courses[random].course_id);
-    
-    
-    
-  });
-
-  NewRecFromFave(courses, random);
-  NewRecFromX(courses);
-
   
 }
 
@@ -257,12 +261,7 @@ function NewRecFromFave(courses, random){
                 </article>
               </div>
             </div>
-          </div>   
-          <div class="learn-more-button">  
-          <a href="course.html" class="learn">
-            <button class="learn-more">Learn More</button>
-          </a> 
-        </div>       
+          </div>         
         </div>
       </div>
     </li>`;
@@ -348,7 +347,7 @@ async function getDepartments() {
 function removeSavedCourse() {
   console.log("removing course warning");
   // BOOKMARKS REMOVE BUTTON -ISABEAU
-  const savedcourse = document.getElementById("saved_course");
+  const savedcourse = document.getElementsById("saved_course");
   savedcourse.remove();
 }
 
@@ -359,6 +358,14 @@ function show(shown, hidden) {
   document.getElementById(hidden).style.display='none';
   return false;
 };
+
+function loadBookMarks(){
+  console.log("bookmarks page ----")
+    for(i = 0; i <bookmark.length; i++){
+      document.write(JSON.stringify(bookmark[i]));
+    };
+};
+
 
 removeSavedCourse;
 
