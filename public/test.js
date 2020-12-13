@@ -70,12 +70,10 @@ async function main() {
     //list of courses that matches that department 
     /*
     const availCourses = courses.filter(course => {
-
         console.log(formdata[0].value)
         console.log(course.department)
         console.log(course)
         return course.department === formdata[0].value})
-
     console.table(availCourses)
     console.log("yooooo");
     console.log(availCourses);
