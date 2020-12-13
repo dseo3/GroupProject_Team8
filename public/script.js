@@ -44,8 +44,8 @@ async function main() {
   
       //formdata = department names 
       const formdata = $(event.target).serializeArray();
-      console.log("djiasjdf")
-      console.log(formdata);
+    
+      console.log("Formdata", formdata);
   
        //When user chooses a program, the page gets updated with corresponding data
        const random = Math.floor(Math.random() * courses.length); 
