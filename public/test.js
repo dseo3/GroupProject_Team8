@@ -264,7 +264,12 @@ function NewRecFromFave(courses, random){
                 </article>
               </div>
             </div>
-          </div>         
+          </div>
+          <div class="learn-more-button">  
+          <a href="course.html" class="learn">
+            <button class="learn-more">Learn More</button>
+          </a> 
+        </div>            
         </div>
       </div>
     </li>`;
