@@ -229,6 +229,49 @@ function NewRecFromFave(){
     refreshPage(); //refresh recommendation 
 };
 
+function DetailsPage(){
+  //Kennedy's attempt to format the boomarks properly
+  const item_details_page = document.querySelector("#item_details");
+  item_details_page.innerHTML += `
+    <div class="tile is-parent" >
+    <div class="tile is-child box" id="saved-course">
+      <div id="course-info">      
+        <p class="title" id="bookmark_item"> <b>${currCourse.course_id}</b> <small>${currCourse.name}</small></p>
+        <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
+      </div>
+        <div class="course-stats">
+        <div class="tile is-ancestor">
+          <div class="tile is-parent">
+            <article class="tile is-child box" id="course-stat">
+              <p class="title" id="credit">${currCourse.credits}</p>
+              <p class="subtitle">Credits</p>
+            </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child box" id="course-stat">
+              <p class="title" id="gened">${currCourse.gen_ed}</p>
+              <p class="subtitle">Gen-Ed</p>
+            </article>
+          </div>
+          <div class="tile is-parent">
+            <article class="tile is-child box" id="course-stat">
+              <p class="title" id="method">${currCourse.grading_method}</p>
+              <p class="subtitle">Grading Method</p>
+            </article>
+          </div>
+        </div>
+      </div>
+      <div class="learn-more-button">  
+      <a href="#" class="learn" onclick="return show('details-page','index_page','bookmarks_page');">
+        <button class="learn-more">Learn More</button>
+      </a> 
+    </div>            
+    </div>
+  </div>
+        `;
+};
+
+
 function NewRecFromX(){
   refreshPage();
 
@@ -322,6 +365,9 @@ function show(shown, hidden1, hidden2) {
   document.getElementById(shown).style.display='block';
   document.getElementById(hidden1).style.display='none';
   document.getElementById(hidden2).style.display='none';
+  if (shown === 'details-page') {
+    DetailsPage();
+  }
   return false;
 };
 
