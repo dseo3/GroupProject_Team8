@@ -19,141 +19,103 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
 
-  <body class="search-page">
+  <body class="search-page" >
+    <!-- will add style="display:none" -->
     <div class="global-features">
       <!-- Golobal Header -->
-      <section class="hero is-primary">
-        <div class="hero-body">
+          <section class="hero is-primary">
+          <div class="hero-body">
+              <div class="container">
+              <h1 class="title">
+                  Course Connector
+              </h1>
+              </div>
+          </div>
+          </section>
+      
+          <!-- Golobal Navigation bar -->
+          <div id="navbar">
+          <nav class="navbar is-light">
+              <a class="navbar-item">
+                <!-- href="index.html" -->
+                <a href="#" onclick="return show('index_page','bookmarks_page');"><i class="fas fa-home fa-4x"></i></a>
+                <!-- <button> <i class="fas fa-home fa-4x"></i> </button> -->
+              </a>
+              <a class="navbar-item" href="search.html">
+                  <button> <i class="fas fa-search fa-4x"></i> </button>
+              </a> 
+              <a class="navbar-item"> 
+                <!-- href="bookmarks.html" -->
+                <a href="#" onclick="return show('bookmarks_page','index_page');"><i class="far fa-bookmark fa-4x"></i></a>  
+                <!-- <button> <i class="far fa-bookmark fa-4x"></i> </button> -->
+              </a>
+          </nav>
+          </div>
+    </div>
+        <!-- Dropdown Header -->
+        <section class="section">
           <div class="container">
-            <h1 class="title">Course Connector</h1>
+            <h1 class="is-size-1 has-text-centered">
+              Select Your Graduate Program
+            </h1>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Golobal Navigation bar -->
-      <div class="navbar">
-        <nav class="navbar is-light">
-          <a class="navbar-item" href="index.html">
-            <button><i class="fas fa-home fa-4x"></i></button>
-          </a>
-          <a class="navbar-item" href="search.html">
-            <button><i class="fas fa-search fa-4x"></i></button>
-          </a>
-          <a class="navbar-item" href="bookmarks.html">
-            <button><i class="far fa-bookmark fa-4x"></i></button>
-          </a>
-        </nav>
-      </div>
-    </div>
-
-    <div class="department-list">
-      <ul class="suggest" id="department_list"></ul>
-    </div>
-
-    <!-- Trigger/Open The Modal -->
-    <button id="myBtn">Filter</button>
-    <div id="’rick’"></div>
-
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-      <!-- Modal content -->
-      <div class="modal-content">
-        <!-- <span class="close">&times;</span> -->
-        <form>
-          <input
-            class="input"
-            type="text"
-            placeholder="Type in the course you're looking for"
-          />
-          <!--the type needs to be search like the asst2 JS-->
-          <div id="navContainer">
-            <ul class="suggestions"></ul>
-          </div>
-
-          <input
-            class="input section"
-            type="text"
-            placeholder="Type in the section you're looking for"
-          />
-          <!--the type needs to be search like the asst2 JS-->
-
-          <input
-            class="input instructor"
-            type="text"
-            placeholder="Type in the instructor you're looking for"
-          />
-          <!--the type needs to be search like the asst2 JS-->
-
+        <!-- Dropdown bar/ New Prefrences -->
+        <form class="course_select">
           <div class="field has-addons">
             <div class="control is-expanded">
               <div class="select is-fullwidth">
-                <select name="course" id="course">
-                  <!--CONTENT NEEDS TO GO HERE-->
+                <select name="grad-program" id="grad-program">
+                  <!-- in JS need to add options values -->
+                  <option value="test">Select Your Program</option>
                 </select>
               </div>
             </div>
-          </div>
-          <div class="field has-addons">
-            <div class="control is-expanded">
-              <div class="select is-fullwidth">
-                <select name="section" id="section">
-                  <!--CONTENT NEEDS TO GO HERE-->
-                </select>
-              </div>
+            <div class="control">
+              <button type="submit" class="button is-dark" id="program" onclick="main()">Choose</button>
             </div>
           </div>
-          <div class="field has-addons">
-            <div class="control is-expanded">
-              <div class="select is-fullwidth">
-                <select name="term" id="term"></select>
-              </div>
-            </div>
-          </div>
-
-          <div class="field has-addons">
-            <div class="control is-expanded">
-              <div class="select is-fullwidth">
-                <select name="greaterorless" id="greaterorless">
-                  <!--CONTENT NEEDS TO GO HERE-->
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="field has-addons">
-            <div class="control is-expanded">
-              <div class="select is-fullwidth">
-                <select name="credit" id="credit">
-                  <!--CONTENT NEEDS TO GO HERE-->
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="field has-addons">
-            <div class="control is-expanded">
-              <div class="select is-fullwidth">
-                <select name="starttime" id="starttime">
-                  <!--CONTENT NEEDS TO GO HERE-->
-                </select>
-              </div>
-            </div>
-          </div>
-          <div class="field has-addons">
-            <div class="control is-expanded">
-              <div class="select is-fullwidth">
-                <select name="delivery" id="delivery">
-                  <!--CONTENT NEEDS TO GO HERE-->
-                </select>
-              </div>
-            </div>
-          </div>
-          <span class="close">
-            <button type="submit" class="button is-dark close">
-              Confirm Filters
-            </button>
-          </span>
         </form>
-      </div>
-    </div>
+
+        <div class="saved-list">
+          <ul class="saves" id="saves">
+              <li id="saved_couse">
+              <div class="tile is-parent" >
+                  <div class="tile is-child box" id="saved-course">
+                    <div id="course-info">      
+                      <p class="title" id="bookmark_item"> <b>INST377</b> <small>Dynamic Web Applications</small></p>
+                      <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
+                    </div>
+                      <div class="course-stats">
+                      <div class="tile is-ancestor">
+                        <div class="tile is-parent">
+                          <article class="tile is-child box" id="course-stat">
+                            <p class="title" id="credit">3</p>
+                            <p class="subtitle">Credits</p>
+                          </article>
+                        </div>
+                        <div class="tile is-parent">
+                          <article class="tile is-child box" id="course-stat">
+                            <p class="title" id="gened">N/A</p>
+                            <p class="subtitle">Gen-Ed</p>
+                          </article>
+                        </div>
+                        <div class="tile is-parent">
+                          <article class="tile is-child box" id="course-stat">
+                            <p class="title" id="method">Regular, Audit</p>
+                            <p class="subtitle">Grading Method</p>
+                          </article>
+                        </div>
+                      </div>
+                    </div>         
+                  </div>
+                </div>
+            </li>
+          </ul>
+        </div>
+
+    
   </body>
 
   <script src="test.js"></script>

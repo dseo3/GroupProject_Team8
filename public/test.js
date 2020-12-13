@@ -38,7 +38,7 @@ async function main() {
 
    
 
-
+  // Listens for users selected Department and populates those results on the home page
   form.addEventListener("submit", (event) => {
     
     event.preventDefault();
@@ -60,6 +60,8 @@ async function main() {
      description.innerHTML = courses[random].description;
      avgGPA(courses[random].course_id);
     
+     //Displays new card when user clicks the heart of X button
+     // Look below for details on the function
      NewRecFromFave(courses);
      NewRecFromX(courses);
   
@@ -84,9 +86,12 @@ async function main() {
   
 }
 
+// Team: Is this Function ever being used? if so may you comment for what exactly
 function displayPage() {
   
 }
+
+//Displays the average grade for a course using grade data from Planet Terp 
 function avgGPA(course_id) {
   //Fetching PlanetTerp API
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -143,7 +148,7 @@ function NewRecFromFave(courses){
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
 
-    // ISABEAU APPEND TO BOOKMARKS
+    // ISABEAU APPEND TO BOOKMARKS 
     // $("#courseTitle").clone().appendTo($("#saves"));
     $("#for_bookmarks").clone().appendTo($("#saves"));
     $("#course-stat").clone().appendTo($("#saves"));
@@ -178,6 +183,7 @@ function NewRecFromFave(courses){
   });
 };
 
+// Displays a new course recommendation when you click the X button
 function NewRecFromX(availCourses){
   const favbutton = document.querySelector(".float-x");
   favbutton.addEventListener("click", (event) => {
