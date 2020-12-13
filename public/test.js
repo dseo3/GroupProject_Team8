@@ -1,3 +1,6 @@
+let courses = []; //ADDED DONGYEON
+let bookmark = []; // ADDDED DONGYEON
+let currCourse = new Object(); //ADDED DONGYEON
 
 //Prefrences Dropdown Bar 
 async function main() {
@@ -39,7 +42,7 @@ async function main() {
 
    
 
-  // Listens for users selected Department and populates those results on the home page
+
   form.addEventListener("submit", (event) => {
     
     event.preventDefault();
@@ -53,6 +56,7 @@ async function main() {
 
      //When user chooses a program, the page gets updated with corresponding data
      const random = Math.floor(Math.random() * courses.length); 
+     currCourse = courses[random]; //ADDED DONGYEON 
      courseID.innerHTML = courses[random].course_id;
      courseTitle.innerHTML = courses[random].name;
      credit.innerHTML = courses[random].credits;
@@ -61,10 +65,7 @@ async function main() {
      description.innerHTML = courses[random].description;
      avgGPA(courses[random].course_id);
     
-     //Displays new card when user clicks the heart of X button
-     // Look below for details on the function
-     NewRecFromFave(courses);
-     NewRecFromX(courses);
+     
   
 
 
@@ -82,15 +83,15 @@ async function main() {
     
   });
 
+  NewRecFromFave(courses);
+  NewRecFromX(courses);
+
   
 }
 
-// Team: Is this Function ever being used? if so may you comment for what exactly
 function displayPage() {
   
 }
-
-//Displays the average grade for a course using grade data from Planet Terp 
 function avgGPA(course_id) {
   //Fetching PlanetTerp API
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -143,8 +144,9 @@ function avgGPA(course_id) {
 
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(courses){
+  bookmark.push(currCourse); //ADDED DONGYEON
+  console.log(bookmark) //ADDED DONGYEON 
 
-  
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
 
@@ -222,7 +224,6 @@ function NewRecFromFave(courses){
   });
 };
 
-// Displays a new course recommendation when you click the X button
 function NewRecFromX(availCourses){
   const favbutton = document.querySelector(".float-x");
   favbutton.addEventListener("click", (event) => {
@@ -310,6 +311,14 @@ function show(shown, hidden) {
   document.getElementById(hidden).style.display='none';
   return false;
 }
+
+function loadBookMarks(){
+  console.log("bookmarks page ----")
+    for(i = 0; i <bookmark.length; i++){
+      document.write(JSON.stringify(bookmark[i]));
+    };
+}
+
 
 // favbutton.addEventListener("click", (event) => {
   // function copybook() {
