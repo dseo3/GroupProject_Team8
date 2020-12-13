@@ -339,5 +339,3 @@ function displayMatches() {
 
 
 window.onload = main;
-
-
