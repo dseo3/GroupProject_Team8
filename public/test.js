@@ -217,7 +217,7 @@ function NewRecFromFave(){
             </div>
           </div>
           <div class="learn-more-button">  
-          <a href="course.html" class="learn">
+          <a href="#" class="learn" onclick="return show('details-page','index_page','bookmarks_page');">
             <button class="learn-more">Learn More</button>
           </a> 
         </div>            
@@ -314,9 +314,10 @@ function removeSavedCourse() {
 
 
 // REPLACE THIS WITH QUERY SELECTOR
-function show(shown, hidden) {
+function show(shown, hidden1, hidden2) {
   document.getElementById(shown).style.display='block';
-  document.getElementById(hidden).style.display='none';
+  document.getElementById(hidden1).style.display='none';
+  document.getElementById(hidden2).style.display='none';
   return false;
 };
 
@@ -331,3 +332,4 @@ function loadBookMarks(){
 removeSavedCourse;
 
 window.onload = main;
+
