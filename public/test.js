@@ -1,13 +1,8 @@
-let courses = []; // entire courses 
-let bookmark = []; // save favorite courses in bookmark 
-var currCourse = new Object(); //current course 
-
 //Prefrences Dropdown Bar 
 async function main() {
 
   //Yomi's function that gets the departments for the dropdown 
   await getDepartments();
-  
 
   // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
   const dept_id_here = document.forms[0].elements[0];
@@ -17,36 +12,17 @@ async function main() {
   // Just stringing together the API url here before we fetch the data 
   const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
 
-  /*The console.log below shows that it actually fetching the API data 
-    if you click the link in the console after inspecting the page
-    it should take you too the application tab and you can see all the courses
-    for the selected department, so Good Job ISABEAU!
-    Hoowwwever something weird is happening here when we try and fetch that data
-  
-  */
   console.log("API url is", pref_api)
 
-  /* 
-  I've tried putting the first paginated API back in 
-  and I'm getting the same weird response when I fetch the data
-  so I do not the the pref_api variable is wrong it is something else 
-  that is refusing to to pull the data from the link
-
-  I think we need to get just the const data, from below 
-  working again and then replace it with pref_api
-  */
-
-   //const data = await fetch("https://api.umd.io/v1/courses");
   
   const availCourses = await fetch(pref_api); 
   // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
     
   console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
   
- 
-  
   //parses api data into json value
-  courses = await availCourses.json(); 
+  const courses = await availCourses.json(); 
+  console.log("Does this work", courses)
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
   const suggestions = document.querySelector(".suggestions"); //not being used right now
   const favbutton = document.querySelector("#fav_button");
@@ -67,13 +43,15 @@ async function main() {
     
     event.preventDefault();
     
+    console.log("HELLO?");
+
     //formdata = department names 
     const formdata = $(event.target).serializeArray();
+    console.log("djiasjdf")
     console.log(formdata);
 
      //When user chooses a program, the page gets updated with corresponding data
      const random = Math.floor(Math.random() * courses.length); 
-     currCourse = courses[random];
      courseID.innerHTML = courses[random].course_id;
      courseTitle.innerHTML = courses[random].name;
      credit.innerHTML = courses[random].credits;
@@ -82,6 +60,7 @@ async function main() {
      description.innerHTML = courses[random].description;
      avgGPA(courses[random].course_id);
     
+     NewRecFromFave(courses);
      NewRecFromX(courses);
   
 
@@ -89,20 +68,23 @@ async function main() {
     //list of courses that matches that department 
     /*
     const availCourses = courses.filter(course => {
-
         console.log(formdata[0].value)
         console.log(course.department)
         console.log(course)
         return course.department === formdata[0].value})
-
     console.table(availCourses)
     console.log("yooooo");
     console.log(availCourses);
     */
     
-  });  
+  });
+
+  
 }
 
+function displayPage() {
+  
+}
 function avgGPA(course_id) {
   //Fetching PlanetTerp API
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -154,27 +136,32 @@ function avgGPA(course_id) {
 }
 
 //Show New Course Recommendation and Save To Bookmarks
-function NewRecFromFave(){
-  bookmark.push(currCourse);
-  console.log(bookmark)
- 
+function NewRecFromFave(courses){
+  
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
-    event.preventDefault();
-    const data = $(event.target).serializeArray();
-  //   // send this random course to server.js
-  //   // create new put endpoint 
-  //   // empty array
-  //   //send request
 
-  //   /* Alternative 
-  //   > Create empty array at top test
-  //   > Send random to that array 
-  //   > Load in bookmarks
-  //   > Might have reviste remove function and delete from aray 
-  //   */
+    // ISABEAU APPEND TO BOOKMARKS
+    // $("#courseTitle").clone().appendTo($("#saves"));
+    $("#for_bookmarks").clone().appendTo($("#saves"));
+    $("#course-stat").clone().appendTo($("#saves"));
+    
+    event.preventDefault();
+    console.log("Tis my fave");
+    const data = $(event.target).serializeArray();
+
+    // send this random course to server.js
+    // create new put endpoint 
+    // empty array
+    //send request
+
+    /* Alternative 
+    > Create empty array at top test
+    > Send random to that array 
+    > Load in bookmarks
+    > Might have reviste remove function and delete from aray 
+    */
     const random = Math.floor(Math.random() * courses.length); 
-    currCourse = courses[random];
     courseID.innerHTML = courses[random].course_id;
     courseTitle.innerHTML = courses[random].name;
     credit.innerHTML = courses[random].credits;
@@ -182,9 +169,11 @@ function NewRecFromFave(){
     method.innerHTML = courses[random].grading_method;
     description.innerHTML = courses[random].description;
     avgGPA(courses[random].course_id);
-  });
 
- 
+
+
+   
+  });
 };
 
 function NewRecFromX(availCourses){
@@ -194,7 +183,6 @@ function NewRecFromX(availCourses){
     console.log("Don't Like Dis");
     // let coursecode1 = document.getElementById("code");
     const random = Math.floor(Math.random() * availCourses.length); 
-    currCourse = courses[random];
     courseID.innerHTML = availCourses[random].course_id;
     courseTitle.innerHTML = availCourses[random].name;
     credit.innerHTML = availCourses[random].credits;
@@ -261,16 +249,13 @@ async function getDepartments() {
   //document.getElementById('grad-program').innerHTML = dep_list ;
 }
 
-
 //Removing saved course when you click the bookmark button
 function removeSavedCourse() {
   console.log("removing course warning");
-  const savedcourse = document.getElementById("saved_couse");
+  // BOOKMARKS REMOVE BUTTON -ISABEAU
+  const savedcourse = document.getElementsById("#for_bookmarks");
   savedcourse.remove();
 }
-
-window.onload = main;
-
 
 // REPLACE THIS WITH QUERY SELECTOR
 function show(shown, hidden) {
@@ -279,6 +264,46 @@ function show(shown, hidden) {
   return false;
 }
 
+// favbutton.addEventListener("click", (event) => {
+  // function copybook() {
+
+    // THIS IS THE ORIGINAL BUTTON FOR TESTING IT WILL NEED TO GO INTO 
+    // <a href="#" onclick="copybook()">
+    // <button> CLICK ME! </button> 
+    // </a>
+
+    // $("#for_bookmarks").clone().appendTo($("#saves"));
+
+    // $(".learn").clone().appendTo($("#saves"));
+    // const bookmark_button = document.createElement("button");
+
+    // const span = document.createElement("span");
+    // span.className = "name";
+    // span.innerText = course.name;
+    // li.append(span);
+    // return li;
+
+    // <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
+
+  
+
+  // PUTTING HTML ON THE PAGE
+  //let bookmark_item = []
+  //   bookmark_item = bookmarksfromDongyeon.map((favorite_item) => `  
+  //   <div class="tile is-parent">
+  //     <article class="tile is-child box" id="course-stat">
+  //       <p class="title" id="gened">N/A</p>
+  //       <p class="subtitle">${favorite_item.name}</p>
+  //     </article>
+  //   </div>
+  //  `).join("");
+
+  //   bookmarks_card.innerHTML = bookmark_item; 
+  //   console.log(bookmark_item)   
+  //   const bookmarks_card = document.querySelector('.saves');
+  // }
+
+
 removeSavedCourse;
 
-
+window.onload = main;
