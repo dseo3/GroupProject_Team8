@@ -175,6 +175,7 @@ function NewRecFromFave(){
     > Might have reviste remove function and delete from aray 
     */
     
+    // THIS IS THE OLD WAY WE SWITCHED BETWEEN CARDS
     //const random = Math.floor(Math.random() * courses.length); 
     // let id = courseID.innerHTML = bookmark[random].course_id;
     // let ctitle = courseTitle.innerHTML = bookmark[random].name;
@@ -228,22 +229,25 @@ function NewRecFromFave(){
     refreshPage(); //refresh recommendation 
 };
 
-function NewRecFromX(availCourses){
-  const favbutton = document.querySelector(".float-x");
-  favbutton.addEventListener("click", (event) => {
-    event.preventDefault();
-    console.log("Don't Like Dis");
-    // let coursecode1 = document.getElementById("code");
-    const random = Math.floor(Math.random() * availCourses.length); 
-    courseID.innerHTML = availCourses[random].course_id;
-    courseTitle.innerHTML = availCourses[random].name;
-    credit.innerHTML = availCourses[random].credits;
-    gened.innerHTML = availCourses[random].gen_ed;
-    method.innerHTML = availCourses[random].grading_method;
-    description.innerHTML = availCourses[random].description;
-    avgGPA(availCourses[random].course_id);
+function NewRecFromX(){
+  refreshPage();
+
+  // THIS IS THE OLD WAY WE SWITCHED BETWEEN CARDS
+  // const favbutton = document.querySelector(".float-x");
+  // favbutton.addEventListener("click", (event) => {
+  //   event.preventDefault();
+  //   console.log("Don't Like Dis");
+  //   // let coursecode1 = document.getElementById("code");
+  //   const random = Math.floor(Math.random() * availCourses.length); 
+  //   courseID.innerHTML = availCourses[random].course_id;
+  //   courseTitle.innerHTML = availCourses[random].name;
+  //   credit.innerHTML = availCourses[random].credits;
+  //   gened.innerHTML = availCourses[random].gen_ed;
+  //   method.innerHTML = availCourses[random].grading_method;
+  //   description.innerHTML = availCourses[random].description;
+  //   avgGPA(availCourses[random].course_id);
    
-  })
+  // })
 }
 
 
