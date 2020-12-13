@@ -278,8 +278,39 @@ function show(shown, hidden) {
 
 // favbutton.addEventListener("click", (event) => {
   function copybook() {
-    $("#for_bookmarks").clone().appendTo($("#bookmarks_page"));
+
+
+    $("#for_bookmarks").clone().appendTo($("#saves"));
+    
+    // $(".learn").clone().appendTo($("#saves"));
+    // const bookmark_button = document.createElement("button");
+
+    // const span = document.createElement("span");
+    // span.className = "name";
+    // span.innerText = course.name;
+    // li.append(span);
+    // return li;
+
+    // <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
+
+  
+
+  // PUTTING HTML ON THE PAGE
+  //let bookmark_item = []
+  //   bookmark_item = bookmarksfromDongyeon.map((favorite_item) => `  
+  //   <div class="tile is-parent">
+  //     <article class="tile is-child box" id="course-stat">
+  //       <p class="title" id="gened">N/A</p>
+  //       <p class="subtitle">${favorite_item.name}</p>
+  //     </article>
+  //   </div>
+  //  `).join("");
+
+  //   bookmarks_card.innerHTML = bookmark_item; 
+  //   console.log(bookmark_item)   
+  //   const bookmarks_card = document.querySelector('.saves');
   }
+
 
 removeSavedCourse;
 

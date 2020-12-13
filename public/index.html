@@ -82,18 +82,18 @@
         </form>
 
         <!-- Course Content -->
-        <section class="course-rec">
-          <!-- Course Code and Title -->
-          <div class='course-title-home' > 
-            <div class="tile is-parent" >
-              <div class="tile is-child box" id="course-code">
-                <p class="title" id="courseID">INST612</p>
-                <p class="subtitle" id="courseTitle">Advanced Usability Testing</p>
+        <div id="for_bookmarks">  
+          <section class="course-rec">
+            <!-- Course Code and Title -->
+            <div class='course-title-home' > 
+              <div class="tile is-parent" >
+                <div class="tile is-child box" id="course-code">
+                  <p class="title" id="courseID">INST612</p>
+                  <p class="subtitle" id="courseTitle">Advanced Usability Testing</p>
+                </div>
               </div>
             </div>
-          </div>
         
-        <div id="for_bookmarks">  
           <!-- THIS IS THE TILE I ADDED - ISABEAU  -->
           <div class="tile is-child box" id="saved-course">
           <!-- Course Stat Tiles -->
@@ -145,17 +145,11 @@
         
         <!-- Heart & X Buttons -->
         <div class="rec-buttons">
-            <!-- Button to more detailed couse page -->
-            <a href="course.html" class="learn">
-              <button type="button" class="learn-more">Learn More</button>
-            </a>
-        
+            <!-- Heart Button to save and see next -->
             <a href="#" onclick="copybook()">
               <button> CLICK ME! </button> 
               </a>
-
-            <!-- Heart Button to save and see next -->
-            
+              
               <button type="click" id="fav_button" href="#" class="float" onclick="NewRecFromFave()" >
                 <i class="far fa-heart fa-2x my-float"></i>
               </button>
@@ -191,7 +185,7 @@
           </section>
 
             <div class="saved-list">
-              <ul class="saves">
+              <ul class="saves" id="saves">
                   <li id="saved_couse">
                   <div class="tile is-parent" >
                       <div class="tile is-child box" id="saved-course">
@@ -220,50 +214,7 @@
                               </article>
                             </div>
                           </div>
-                        </div>
-                        <div class="learn-more-button">  
-                          <a href="course.html" class="learn">
-                            <button class="learn-more">Learn More</button>
-                          </a> 
-                        </div>            
-                      </div>
-                    </div>
-                </li>
-
-                <li id="saved_couse">
-                  <div class="tile is-parent" >
-                      <div class="tile is-child box" id="saved-course">
-                        <div id="course-info">
-                          <p class="title" id="bookmark_item"> <b>INST327</b> <small>Database Design & Modeling</small></p>
-                          <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
-                        </div>
-                          <div class="course-stats">
-                          <div class="tile is-ancestor">
-                            <div class="tile is-parent">
-                              <article class="tile is-child box" id="course-stat">
-                                <p class="title" id="credit">3</p>
-                                <p class="subtitle">Credits</p>
-                              </article>
-                            </div>
-                            <div class="tile is-parent">
-                              <article class="tile is-child box" id="course-stat">
-                                <p class="title" id="gened">N/A</p>
-                                <p class="subtitle">Gen-Ed</p>
-                              </article>
-                            </div>
-                            <div class="tile is-parent">
-                              <article class="tile is-child box" id="course-stat">
-                                <p class="title" id="method">Regular, Audit</p>
-                                <p class="subtitle">Grading Method</p>
-                              </article>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="learn-more-button">  
-                          <a href="course.html" class="learn">
-                            <button class="learn-more">Learn More</button>
-                          </a> 
-                        </div>               
+                        </div>         
                       </div>
                     </div>
                 </li>
