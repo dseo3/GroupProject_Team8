@@ -194,6 +194,10 @@ function NewRecFromFave(courses, random){
                   <p class="subtitle">Grading Method</p>
                 </article>
               </div>
+              <div class="buttons">
+  <button class="button is-primary is-light">Primary</button>
+  <button class="button is-link is-light">Link</button>
+</div>
             </div>
           </div>         
         </div>
