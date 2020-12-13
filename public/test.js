@@ -217,7 +217,7 @@ function NewRecFromFave(){
             </div>
           </div>
           <div class="learn-more-button">  
-          <a href="course.html" class="learn">
+          <a href="#" onclick="return show('details-page','index_page','bookmarks_page');" class="learn">
             <button class="learn-more">Learn More</button>
           </a> 
         </div>            
