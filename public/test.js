@@ -191,7 +191,6 @@ function avgGPA(course_id) {
       "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
   });
 }
-
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(courses, random){
   bookmark.push(currCourse); //ADDED DONGYEON
@@ -256,10 +255,6 @@ function NewRecFromFave(courses, random){
                   <p class="subtitle">Grading Method</p>
                 </article>
               </div>
-              <div class="buttons">
-  <button class="button is-primary is-light">Primary</button>
-  <button class="button is-link is-light">Link</button>
-</div>
             </div>
           </div>   
           <div class="learn-more-button">  
@@ -317,7 +312,6 @@ function displayMatches() {
 
   return HTMLmatches;
 }
-
 // Yomi's Code: for Preferences Departments Drop down at top of index/home page
 const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101"; // I ALSO CHANGED THE SEMESTER HERE - ISABEAU
 
@@ -335,7 +329,6 @@ async function getDepartments() {
   for (var i = 0; i < departments.length; i++) {
     dep_list.push([departments[i].dept_id + " - " + departments[i].department]); // I ALSO CHANGED THIS HERE! - ISABEAU
   }
-
   //add department list to drop down menu
   var select = document.getElementById("grad-program");
   for (var i in dep_list) {
@@ -347,7 +340,6 @@ async function getDepartments() {
   console.log(dep_list);
   //document.getElementById('grad-program').innerHTML = dep_list ;
 }
-
 //Removing saved course when you click the bookmark button
 function removeSavedCourse() {
   console.log("removing course warning");
@@ -355,8 +347,6 @@ function removeSavedCourse() {
   const savedcourse = document.getElementById("saved_course");
   savedcourse.remove();
 }
-
-
 // REPLACE THIS WITH QUERY SELECTOR
 function show(shown, hidden) {
   document.getElementById(shown).style.display='block';
