@@ -266,7 +266,7 @@ function NewRecFromFave(courses, random){
             </div>
           </div>
           <div class="learn-more-button">  
-          <a href="#" onclick="return show('details-page','index_page','bookmarks_page');" class="learn">
+          <a href="course.html" class="learn">
             <button class="learn-more">Learn More</button>
           </a> 
         </div>            
@@ -363,10 +363,9 @@ function removeSavedCourse() {
 
 
 // REPLACE THIS WITH QUERY SELECTOR
-function show(shown, hidden1, hidden2) {
+function show(shown, hidden) {
   document.getElementById(shown).style.display='block';
-  document.getElementById(hidden1).style.display='none';
-  document.getElementById(hidden2).style.display='none';
+  document.getElementById(hidden).style.display='none';
   return false;
 };
 
