@@ -1,154 +1,153 @@
 // Creates and empty array for users fav course
-mybookmarks = []; 
+
+
+let courses = []; //ADDED DONGYEON
+let bookmark = []; // ADDDED DONGYEON
+let currCourse = new Object(); //ADDED DONGYEON
+
 /* for each item in mybookmarks 
       add a card to the bookmarks page
       populate with API data
 
 */
 
-
-//Main function does all the important stuff on load
+//Prefrences Dropdown Bar 
 async function main() {
-
-  //Calling the Departments for the dropdown
+  if (document.querySelector('#tester_option').text === "") {
+  //Yomi's function that gets the departments for the dropdown 
   await getDepartments();
+  console.log(document.querySelector('#tester_option').text);
+  }  
+  // }
 
-  // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
-  const dept_id_here = document.forms[0].elements[0];
-  //No longer Spaghetti code yay!
-  const dept_id_for_data = dept_id_here.value.substring(0,4);
-  console.log("Selected Department Code:", dept_id_for_data);
-  // Just stringing together the API url here before we fetch the data 
-  const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
+    // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
+    const dept_id_here = document.forms[0].elements[0];
+    //No longer Spaghetti code yay!
+    const dept_id_for_data = dept_id_here.value.substring(0,4);
+    console.log("Selected Department Code:", dept_id_for_data);
+    // Just stringing together the API url here before we fetch the data 
+    const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
 
-  console.log("API url is", pref_api)
+    console.log("API url is", pref_api)
 
-  const availCourses = await fetch(pref_api); 
     
-  console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
-  
-  //parses api data into json value
-  const courses = await availCourses.json(); 
-  console.log("Courses in selected department", courses)
-  const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
-  const suggestions = document.querySelector(".suggestions"); //not being used right now
-  const favbutton = document.querySelector("#fav_button");
-  const form = document.querySelector(".course_select");
-  const program = document.querySelector("#program");
-  const courseID = document.querySelector("#courseID");
-  const courseTitle = document.querySelector("#courseTitle");
-  const credit = document.querySelector("#credit");
-  const gened = document.querySelector("#gened");
-  const method = document.querySelector("#method");
-  const description = document.querySelector("#description");
-
-
-   
-
-// Choose Button this confirms users program preference 
-  form.addEventListener("submit", (event) => {
+    const availCourses = await fetch(pref_api); 
+    // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
+      
+    console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
     
-    event.preventDefault();
+    //parses api data into json value
+    const courses = await availCourses.json(); 
+    console.log("Courses within selected department", courses)
     
-    console.log("HELLO?");
+    const favbutton = document.querySelector("#fav_button");
+    const form = document.querySelector(".course_select");
+    const program = document.querySelector("#program");
+    const courseID = document.querySelector("#courseID");
+    const courseTitle = document.querySelector("#courseTitle");
+    const credit = document.querySelector("#credit");
+    const gened = document.querySelector("#gened");
+    const method = document.querySelector("#method");
+    const description = document.querySelector("#description");
+    const random = Math.floor(Math.random() * courses.length); 
 
-    //formdata = department names that the user selected
-    const formdata = $(event.target).serializeArray();
-    console.log("djiasjdf")
-    console.log(formdata);
 
-     //When user chooses a program, the page gets updated with corresponding data
-     const random = Math.floor(Math.random() * courses.length); 
-     courseID.innerHTML = courses[random].course_id;
-     courseTitle.innerHTML = courses[random].name;
-     credit.innerHTML = courses[random].credits;
-     gened.innerHTML = courses[random].gen_ed;
-     method.innerHTML = courses[random].grading_method;
-     description.innerHTML = courses[random].description;
-     avgGPA(courses[random].course_id);
-    
-     NewRecFromFave(courses);
-     NewRecFromX(courses);
+    form.addEventListener("submit", (event) => {
+      
+      event.preventDefault();
+      
+      console.log("HELLO?");
+      const avgGPAitem = avgGPA(courses[random].course_id)
+      console.log(avgGPAitem)
+        const course_popup = document.querySelector(".course-rec");
+        course_popup.innerHTML = 
+        `<!-- Course Code and Title -->
+      <div id="for_bookmarks">
+        <div class='course-title-home' > 
+          <div class="tile is-parent" >
+            <div class="tile is-child box" id="course-code">
+              <p class="title" id="courseID">${courses[random].course_id}</p>
+              <p class="subtitle" id="courseTitle">${courses[random].name}</p>
+            </div>
+          </div>
+        </div>
+      
+      <!-- THIS IS THE TILE I ADDED - ISABEAU  
+      <div class="tile is-child box" id="saved-course"> -->
+      <!-- Course Stat Tiles -->
+          <div class="course-stats">
+            <div class="tile is-ancestor">
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="credit">${courses[random].credits}</p>
+                  <p class="subtitle">Credits</p>
+                </article>
+              </div>
+              
+            
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="gened">${courses[random].gen_ed}</p>
+                  <p class="subtitle">Gen-Ed</p>
+                </article>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="method">${courses[random].grading_method}</p>
+                  <p class="subtitle">Grading Method</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>  
+
+      <!-- Course Description -->
+      <div class='course-description-home' > 
+        <div class="tile is-parent" >
+          <div class="tile is-child box" id="home-description">
+            <p class="title" >Description</p>
+            <p class="subtitle" id="description">${courses[random].description}</p>
+            </div>
+        </div>
+      </div>
+
+      <!-- Average Grade -->
+        <div class="tile is-parent" >
+          <div class="tile is-child box" id="average-grade">
+            <p id="avgGrade"><b>Average Grade: </b>
+            ${avgGPAitem}
+            </p>
+          </div>
+        </div>`;
+        
+      //formdata = department names 
+      const formdata = $(event.target).serializeArray();
+      // Grad programs have a name of "grad-program" in this array
+      console.log("department selected: ", formdata);
+
+      //When user chooses a program, the page gets updated with corresponding data
+      //const random = Math.floor(Math.random() * courses.length); 
+      
+      // ISABEAU PUT THIS IN THE HTML ABOVE
+      // console.log("random course: ", random);
+      // currCourse = courses[random]; //ADDED DONGYEON 
+      // courseID.innerHTML = courses[random].course_id;
+      // courseTitle.innerHTML = courses[random].name;
+      // credit.innerHTML = courses[random].credits;
+      // gened.innerHTML = courses[random].gen_ed;
+      // method.innerHTML = courses[random].grading_method;
+      // description.innerHTML = courses[random].description;
+      // avgGPA(courses[random].course_id);
+      
+      
+      
+    });
+
+    NewRecFromFave(courses, random);
+    NewRecFromX(courses);
   
+  };
 
-
-    //list of courses that matches that department 
-    /*
-    const availCourses = courses.filter(course => {
-
-        console.log(formdata[0].value)
-        console.log(course.department)
-        console.log(course)
-        return course.department === formdata[0].value})
-
-    console.table(availCourses)
-    console.log("yooooo");
-    console.log(availCourses);
-    */
-    
-  });
-
-  
-}
-
-// Yomi's Code: for Preferences Departments Drop down at top of index/home page
-const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101";
-
-async function getDepartments() {
-  //get department data from api
-  const response = await fetch(dep_api_url);
-  const json = await response.json();
-
-  console.log(json);
-
-  //create a list of lists of departments
-  var departments = json;
-  //create a list of departments names
-  var dep_list = [];
-
-  //populates list of depatartment names
-  for (var i = 0; i < departments.length; i++) {
-    dep_list.push(departments[i].department);
-  }
-
-  //add department list to drop down menu
-  var select = document.getElementById("grad-program");
-  for (var i in dep_list) {
-    var option = document.createElement("option");
-    option.text = option.value = dep_list[i];
-    select.add(option);
-  }
-
-  console.log("Dept_name_list", dep_list);
-
-  var dep_code = []
-  //populates list of depatartment ids
-  for (var i = 0; i < departments.length; i++) {
-    dep_code.push(departments[i].dept_id);
-  
-  /*
-    // Isabeaus's Pagination attempts
-    for (var i = 0; i < dep_code.length;) {  
-      if (dep_code[i] === formdata[0].value) 
-      {    return dep_code[i];  }}
-  
-  // Kennedy's Pagination psuedo for paginiation  
-  var choosen_dep = [];
-  for i in dep_code:
-    if choosen_dep is in dep_code:
-      const course_by_dept = "https://api.umd.io/v1/courses?dept_id="+choosen_dep;
-
-  */
-
-
-
-  }
-  console.log("department ids", dep_code)
-
-
-  
-  //document.getElementById('grad-program').innerHTML = dep_list ;
-}
 
 function displayPage() {
   
@@ -201,13 +200,22 @@ function avgGPA(course_id) {
     console.log("Class Average Grade:", TotalClassGPA.toFixed(2));
     document.getElementById("avgGrade").innerHTML =
       "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
+    return TotalClassGPA.toFixed(2)
+    // document.getElementById("avgGrade").innerHTML =
+    //   "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
   });
 }
 
+
 //Show New Course Recommendation and Save To Bookmarks
-function NewRecFromFave(courses){
+function NewRecFromFave(courses, random){
+  bookmark.push(currCourse); //ADDED DONGYEON
+  console.log(bookmark) //ADDED DONGYEON 
+
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
+
+    
     event.preventDefault();
     console.log("Tis my fave");
     const data = $(event.target).serializeArray();
@@ -238,13 +246,64 @@ function NewRecFromFave(courses){
 
     //Each time you click fave button send that course to 
     //the mybookmarks array
-    mybookmarks.push(randomfave[values]);
-    console.log("bookmarks:", mybookmarks);
+    //mybookmarks.push(randomfave[values]);
+    //console.log("bookmarks:", mybookmarks);
 
     // bookmark_item.innerHTML = courses[randomfave].course_id;
     // bookmark_title.innerHTML = courses[randomfave].name;
     
 
+    
+    //const random = Math.floor(Math.random() * courses.length); 
+    let id = courseID.innerHTML = courses[random].course_id;
+    let ctitle = courseTitle.innerHTML = courses[random].name;
+    let cred = credit.innerHTML = courses[random].credits;
+    let ge = gened.innerHTML = courses[random].gen_ed;
+    let gm = method.innerHTML = courses[random].grading_method;
+    description.innerHTML = courses[random].description;
+    avgGPA(courses[random].course_id);
+
+    //Kennedy's attempt to format the boomarks properly
+    const saves = document.querySelector(".saves");
+    saves.innerHTML += `
+    <li id="saved_course">
+      <div class="tile is-parent" >
+        <div class="tile is-child box" id="saved-course">
+          <div id="course-info">      
+            <p class="title" id="bookmark_item"> <b>${id}</b> <small>${ctitle}</small></p>
+            <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
+          </div>
+            <div class="course-stats">
+            <div class="tile is-ancestor">
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="credit">${cred}</p>
+                  <p class="subtitle">Credits</p>
+                </article>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="gened">${ge}</p>
+                  <p class="subtitle">Gen-Ed</p>
+                </article>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="method">${gm}</p>
+                  <p class="subtitle">Grading Method</p>
+                </article>
+              </div>
+            </div>
+          </div>
+          <div class="learn-more-button">  
+          <a href="course.html" class="learn">
+            <button class="learn-more">Learn More</button>
+          </a> 
+        </div>            
+        </div>
+      </div>
+    </li>`;
+   
   });
 };
 
@@ -267,6 +326,7 @@ function NewRecFromX(availCourses){
    
   })
 }
+
 
 function findMatches(wordsToMatch, courses) {
   return courses.filter((course) => {
@@ -293,5 +353,78 @@ function displayMatches() {
   return HTMLmatches;
 }
 
+// Yomi's Code: for Preferences Departments Drop down at top of index/home page
+const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101"; // I ALSO CHANGED THE SEMESTER HERE - ISABEAU
+
+async function getDepartments() {
+  //get department data from api
+  const response = await fetch(dep_api_url);
+  const json = await response.json();
+
+  console.log(json);
+
+  //create a list of departments
+  var departments = json;
+  //create a list of departments names
+  var dep_list = [];
+    //populates list of depatartment names
+  for (var i = 0; i < departments.length; i++) {
+    dep_list.push([departments[i].dept_id + " - " + departments[i].department]); // I ALSO CHANGED THIS HERE! - ISABEAU
+  }
+
+  //add department list to drop down menu
+  var select = document.getElementById("grad-program");
+  for (var i in dep_list) {
+    var option = document.createElement("option");
+    option.text = option.value = dep_list[i];
+    select.add(option);
+  }
+
+  const change_tester = document.querySelector('#tester_option');
+  change_tester.innerText = "Select Your Program"
+  console.log(dep_list);
+
+  /*
+  console.log("Dept_name_list", dep_list);
+
+  var dep_code = []
+  //populates list of depatartment ids
+  for (var i = 0; i < departments.length; i++) {
+    dep_code.push(departments[i].dept_id);
+
+
+  }
+  
+  console.log("department ids", dep_code)
+
+  */
+  //document.getElementById('grad-program').innerHTML = dep_list ;
+}
+
+//Removing saved course when you click the bookmark button
+function removeSavedCourse() {
+  console.log("removing course warning");
+  // BOOKMARKS REMOVE BUTTON -ISABEAU
+  const savedcourse = document.getElementById("saved_course");
+  savedcourse.remove();
+}
+
+
+// REPLACE THIS WITH QUERY SELECTOR
+function show(shown, hidden) {
+  document.getElementById(shown).style.display='block';
+  document.getElementById(hidden).style.display='none';
+  return false;
+};
+
+function loadBookMarks(){
+  console.log("bookmarks page ----")
+    for(i = 0; i <bookmark.length; i++){
+      document.write(JSON.stringify(bookmark[i]));
+    };
+};
+
+
+removeSavedCourse;
 
 window.onload = main;
