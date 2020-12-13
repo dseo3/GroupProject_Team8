@@ -1,3 +1,4 @@
+
 //Prefrences Dropdown Bar 
 async function main() {
 
@@ -22,7 +23,7 @@ async function main() {
   
   //parses api data into json value
   const courses = await availCourses.json(); 
-  console.log("Does this work", courses)
+  console.log("Courses within selected department", courses)
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
   const suggestions = document.querySelector(".suggestions"); //not being used right now
   const favbutton = document.querySelector("#fav_button");
@@ -142,14 +143,11 @@ function avgGPA(course_id) {
 
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(courses){
+
   
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
 
-    // ISABEAU APPEND TO BOOKMARKS 
-    // $("#courseTitle").clone().appendTo($("#saves"));
-    $("#for_bookmarks").clone().appendTo($("#saves"));
-    $("#course-stat").clone().appendTo($("#saves"));
     
     event.preventDefault();
     console.log("Tis my fave");
@@ -166,17 +164,60 @@ function NewRecFromFave(courses){
     > Load in bookmarks
     > Might have reviste remove function and delete from aray 
     */
+    
     const random = Math.floor(Math.random() * courses.length); 
-    courseID.innerHTML = courses[random].course_id;
-    courseTitle.innerHTML = courses[random].name;
-    credit.innerHTML = courses[random].credits;
-    gened.innerHTML = courses[random].gen_ed;
-    method.innerHTML = courses[random].grading_method;
+    let id = courseID.innerHTML = courses[random].course_id;
+    let ctitle = courseTitle.innerHTML = courses[random].name;
+    let cred = credit.innerHTML = courses[random].credits;
+    let ge = gened.innerHTML = courses[random].gen_ed;
+    let gm = method.innerHTML = courses[random].grading_method;
     description.innerHTML = courses[random].description;
     avgGPA(courses[random].course_id);
 
+    //Kennedy's attempt to format the boomarks properly
+    const saves = document.querySelector(".saves");
+    saves.innerHTML += `
+    <li id="saved_course">
+      <div class="tile is-parent" >
+        <div class="tile is-child box" id="saved-course">
+          <div id="course-info">      
+            <p class="title" id="bookmark_item"> <b>${id}</b> <small>${ctitle}</small></p>
+            <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
+          </div>
+            <div class="course-stats">
+            <div class="tile is-ancestor">
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="credit">${cred}</p>
+                  <p class="subtitle">Credits</p>
+                </article>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="gened">${ge}</p>
+                  <p class="subtitle">Gen-Ed</p>
+                </article>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="method">${gm}</p>
+                  <p class="subtitle">Grading Method</p>
+                </article>
+              </div>
+            </div>
+          </div>         
+        </div>
+      </div>
+    </li>`;
 
+    /*
+     // ISABEAU APPEND TO BOOKMARKS JQuery
+    // $("#courseTitle").clone().appendTo($("#saves"));
+    $("#for_bookmarks").clone().appendTo($("#saves"));
+    $("#course-stat").clone().appendTo($("#saves"));
 
+    */
+  
    
   });
 };
