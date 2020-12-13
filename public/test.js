@@ -26,70 +26,7 @@ async function main() {
   
   //parses api data into json value
   const courses = await availCourses.json(); 
-  console.log("Courses within selected department", courses)
-
-  <section class="course-rec">
-            <!-- Course Code and Title -->
-          <div id="for_bookmarks">
-            <div class='course-title-home' > 
-              <div class="tile is-parent" >
-                <div class="tile is-child box" id="course-code">
-                  <p class="title" id="courseID">INST612</p>
-                  <p class="subtitle" id="courseTitle">Advanced Usability Testing</p>
-                </div>
-              </div>
-            </div>
-        
-          <!-- THIS IS THE TILE I ADDED - ISABEAU  
-          <div class="tile is-child box" id="saved-course"> -->
-          <!-- Course Stat Tiles -->
-              <div class="course-stats">
-                <div class="tile is-ancestor">
-                  <div class="tile is-parent">
-                    <article class="tile is-child box" id="course-stat">
-                      <p class="title" id="credit">3</p>
-                      <p class="subtitle">Credits</p>
-                    </article>
-                  </div>
-                  
-                 
-                  <div class="tile is-parent">
-                    <article class="tile is-child box" id="course-stat">
-                      <p class="title" id="gened">N/A</p>
-                      <p class="subtitle">Gen-Ed</p>
-                    </article>
-                  </div>
-                  <div class="tile is-parent">
-                    <article class="tile is-child box" id="course-stat">
-                      <p class="title" id="method">Regular, Audit</p>
-                      <p class="subtitle">Grading Method</p>
-                    </article>
-                  </div>
-                </div>
-              </div>
-            </div>  
-        
-        
-          <!-- Course Description -->
-          <div class='course-description-home' > 
-            <div class="tile is-parent" >
-              <div class="tile is-child box" id="home-description">
-                <p class="title" >Description</p>
-                <p class="subtitle" id="description">
-                  Nature, structure, development and application of information policy. Interactions of social objectives, stakeholders, technology and other forces that shape policy decisions.
-                </p>
-                </div>
-            </div>
-          </div>
-        
-        
-          <!-- Average Grade -->
-            <div class="tile is-parent" >
-              <div class="tile is-child box" id="average-grade">
-                <p id="avgGrade"><b>Average Grade: </b>B-</p>
-              </div>
-            </div>
-        </section>
+  console.log("Courses within selected department", courses);
 
   const favbutton = document.querySelector("#fav_button");
   const form = document.querySelector(".course_select");
