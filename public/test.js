@@ -1,3 +1,6 @@
+let courses = [];
+let bookmark = [];
+var currCourse = new Object();
 //Prefrences Dropdown Bar 
 async function main() {
 
@@ -39,7 +42,7 @@ async function main() {
   console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
   
   //parses api data into json value
-  const courses = await availCourses.json(); 
+  courses = await availCourses.json(); 
   console.log("Does this work", courses)
   const searchInput = document.querySelector(".search");  //TBD not being used right now -> will be used for serach page 
   const suggestions = document.querySelector(".suggestions"); //not being used right now
@@ -70,6 +73,7 @@ async function main() {
 
      //When user chooses a program, the page gets updated with corresponding data
      const random = Math.floor(Math.random() * courses.length); 
+     currCourse = courses[random];
      courseID.innerHTML = courses[random].course_id;
      courseTitle.innerHTML = courses[random].name;
      credit.innerHTML = courses[random].credits;
@@ -78,11 +82,9 @@ async function main() {
      description.innerHTML = courses[random].description;
      avgGPA(courses[random].course_id);
     
-     NewRecFromFave(courses);
-     NewRecFromX(courses);
-  
+    
 
-
+    console.log("I am in forms " + bookmark[0]);
     //list of courses that matches that department 
     /*
     const availCourses = courses.filter(course => {
@@ -98,6 +100,9 @@ async function main() {
     */
     
   });
+
+  NewRecFromFave(courses);
+  NewRecFromX(courses);
 
   
 }
@@ -157,6 +162,10 @@ function avgGPA(course_id) {
 
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(courses){
+  bookmark.push(currCourse);
+  console.log(currCourse)
+  console.log("hitting bookmark here!!")
+  console.log(bookmark)
   const favbutton = document.querySelector("#fav_button");
   favbutton.addEventListener("click", (event) => {
     event.preventDefault();
@@ -175,6 +184,7 @@ function NewRecFromFave(courses){
     > Might have reviste remove function and delete from aray 
     */
     const random = Math.floor(Math.random() * courses.length); 
+    currCourse = courses[random];
     courseID.innerHTML = courses[random].course_id;
     courseTitle.innerHTML = courses[random].name;
     credit.innerHTML = courses[random].credits;
@@ -196,6 +206,7 @@ function NewRecFromX(availCourses){
     console.log("Don't Like Dis");
     // let coursecode1 = document.getElementById("code");
     const random = Math.floor(Math.random() * availCourses.length); 
+    currCourse = courses[random];
     courseID.innerHTML = availCourses[random].course_id;
     courseTitle.innerHTML = availCourses[random].name;
     credit.innerHTML = availCourses[random].credits;
