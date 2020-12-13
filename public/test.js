@@ -211,7 +211,7 @@ function NewRecFromFave(){
               <div class="tile is-parent">
                 <article class="tile is-child box" id="course-stat">
                   <p class="title" id="method">${currCourse.grading_method}</p>
-                  <p class="subtitle">Grading Method</p>
+                  <p class="subtitle">Grading MethodDDDDDDDDDDDDDDDDDDDDD</p>
                 </article>
               </div>
             </div>
