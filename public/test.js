@@ -269,6 +269,17 @@ function removeSavedCourse() {
   savedcourse.remove();
 }
 
+<<<<<<< Updated upstream
 window.onload = main;
 
+=======
+// REPLACE THIS WITH QUERY SELECTOR
+function show(shown, hidden) {
+  document.getElementById(shown).style.display='block';
+  document.getElementById(hidden).style.display='none';
+  return false;
+}
+
+removeSavedCourse;
+>>>>>>> Stashed changes
 
