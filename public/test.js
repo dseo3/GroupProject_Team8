@@ -44,6 +44,9 @@ async function main() {
       // Grad programs have a name of "grad-program" in this array
       console.log("department selected: ", formdata);      
     });
+
+
+
 }
 
 function refreshPage(){
@@ -226,6 +229,7 @@ function NewRecFromFave(){
       </div>
     </li>`;
 
+
     refreshPage(); //refresh recommendation 
 };
 
@@ -356,7 +360,10 @@ function removeSavedCourse() {
   console.log("removing course warning");
   // BOOKMARKS REMOVE BUTTON -ISABEAU
   const savedcourse = document.getElementById("saved_course");
+  // savedcourse.className += "1" : test to uniquely identify each li element
   savedcourse.remove();
+
+  //notes: trying to figure out how to individually identify each bookmark and then remove based on this unique identifier
 }
 
 
@@ -378,6 +385,24 @@ function loadBookMarks(){
     };
 };
 
+
+
+//Yomi's code - javascript for snackbar
+function snackBar(){
+  if(document.getElementById(saves) === null){
+    const snackbar = document.createElement("div");
+    const snackbarText = document.createTextNode("Please favorite courses from the home page to have them added to your bookmarks! Click to remove");
+    snackbar.appendChild(snackbarText);
+    snackbar.setAttribute("id","snackbar");
+    snackbar.setAttribute("onclick","snackbar.remove()");
+    const testvar = document.getElementById("saved-list")
+    testvar.appendChild(snackbar)
+    //return snackbar;
+  }
+
+};
+
+console.log(snackBar());
 
 removeSavedCourse;
 
