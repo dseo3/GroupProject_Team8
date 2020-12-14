@@ -32,8 +32,59 @@ async function main() {
     const method = document.querySelector("#method");
     const description = document.querySelector("#description");
   
+  /*
   
-     
+//search page variables
+  for (course in courses){
+    let id = course.course_id;
+    console.log("id", id);
+    let ctitle = course.name;
+    let cred = course.credits;
+    let ge = course.gen_ed;
+    let gm = course.grading_method;
+
+  }
+    
+ // search page function
+    function searchResults() {
+      const search_page = document.querySelector('.search-results'); 
+      search_page.innerHTML += `<li id="searched_couse">
+      <div class="tile is-parent" >
+          <div class="tile is-child box" id="saved-course">
+            <div id="course-info">      
+              <p class="title" id="bookmark_item"> <b>${id}</b> <small>${ctitle}</small></p>
+              <button class="bookmark_button" onclick="saveCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
+            </div>
+              <div class="course-stats">
+              <div class="tile is-ancestor">
+                <div class="tile is-parent">
+                  <article class="tile is-child box" id="course-stat">
+                    <p class="title" id="credit">${cred}</p>
+                    <p class="subtitle">Credits</p>
+                  </article>
+                </div>
+                <div class="tile is-parent">
+                  <article class="tile is-child box" id="course-stat">
+                    <p class="title" id="gened">${ge}</p>
+                    <p class="subtitle">Gen-Ed</p>
+                  </article>
+                </div>
+                <div class="tile is-parent">
+                  <article class="tile is-child box" id="course-stat">
+                    <p class="title" id="method">${gm}</p>
+                    <p class="subtitle">Grading Method</p>
+                  </article>
+                </div>
+              </div>
+            </div>         
+          </div>
+        </div>
+    </li>`
+
+    }; 
+    
+    course.map(searchResults) 
+    */
   
     // Listens for users selected Department and populates those results on the home page
     form.addEventListener("submit", (event) => {

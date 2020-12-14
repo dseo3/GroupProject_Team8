@@ -1,7 +1,7 @@
 let courses = []; //ADDED DONGYEON
 let currCourse = new Object(); //ADDED DONGYEON
 
-//Prefrences Dropdown Bar 
+
 async function main() {
   if (document.querySelector('#tester_option').text === "") {
   //Yomi's function that gets the departments for the dropdown 
@@ -166,8 +166,6 @@ function avgGPA(course_id) {
     //   "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
   });
 };
-
-
 
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(){
@@ -397,7 +395,6 @@ function removeSavedCourse() {
   const savedcourse = document.getElementById("saved_course");
   savedcourse.remove();
 }
-
 
 // REPLACE THIS WITH QUERY SELECTOR
 function show(shown, hidden1, hidden2) {
