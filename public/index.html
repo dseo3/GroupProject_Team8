@@ -36,7 +36,6 @@
           <div id="navbar">
           <nav class="navbar is-light">
               <a class="navbar-item">
-                <!-- href="index.html" -->
                 <a href="#" onclick="return show('index_page','bookmarks_page', 'details-page');"><i class="fas fa-home fa-4x"></i></a>
                 <!-- <button> <i class="fas fa-home fa-4x"></i> </button> -->
               </a>
@@ -47,6 +46,8 @@
                 <!-- href="bookmarks.html" -->
                 <a href="#" onclick="return show('bookmarks_page','index_page', 'details-page');"><i class="far fa-bookmark fa-4x"></i></a>  
                 <!-- <button> <i class="far fa-bookmark fa-4x"></i> </button> -->
+              </a>
+
               </a>
             
           </nav>
@@ -60,6 +61,9 @@
             <h1 class="is-size-1 has-text-centered">
               Select Your Graduate Program
             </h1>
+            <h2 class="is-size-4 has-text-centered">
+              Pro-Tip: Click Choose to Enter Your Request. Click Choose Again to See Results for Your Dream Course.
+            </h2>
           </div>
         </section>
 
@@ -82,7 +86,7 @@
 
         <!-- Course Content -->
         <section class="course-rec">
-        <!-- THIS IS WHERE THE COURSE DETAILS WILL GO WHEN THEY SELECT CHOOSE BUTTON -->'
+        <!-- THIS IS WHERE THE COURSE DETAILS WILL GO WHEN THEY SELECT CHOOSE BUTTON -->
         </section>
         
         <!-- Heart & X Buttons -->
@@ -96,7 +100,7 @@
             <!-- X Button to see next -->
             
               <button href="#" class="float-x" onclick="NewRecFromX()" >
-                  <i class="fas fa-arrow-right fa-2x my-float"></i> 
+                  <i class="fas fa-times fa-2x my-float"></i> 
               </button>
         </div>
     </div>
@@ -115,72 +119,23 @@
             <!-- All Bookmarks -->
             <div class="saved-list">
               <ul class="saves" id="saves">
-                <li id="saved_course">
-                  <div class="tile is-parent" >
                       <!-- THIS IS WHERE THE BOOKMARKS WILL GO WHEN WE CREATE THEM WITH JS -->
-                  </div> 
-                </li>
               </ul>
             </div>
           
     </div>
-
     <div id="details-page" style="display:none" > 
-        <!-- Course Code and Title -->
-        <div class='course-title-home' > 
-          <div class="tile is-parent" >
-            <div class="tile is-child box" id="course-code">
-              <p class="title" id="code">INST612</p>
-              <p class="subtitle" id="title">Advanced Usability Testing</p>
-            </div>
-          </div>
-        </div>
-      
-       <!-- Course Stat Tiles -->
-        <div class="course-stats">
-          <div class="tile is-ancestor">
-            <div class="tile is-parent">
-              <article class="tile is-child box" id="course-stat">
-                <p class="title" id="credit">3</p>
-                <p class="subtitle">Credits</p>
-              </article>
-            </div>
-            <div class="tile is-parent">
-              <article class="tile is-child box" id="course-stat">
-                <p class="title" id="gened">N/A</p>
-                <p class="subtitle">Gen-Ed</p>
-              </article>
-            </div>
-            <div class="tile is-parent">
-              <article class="tile is-child box" id="course-stat">
-                <p class="title" id="method">Regular</p>
-                <p class="subtitle">Grading Method</p>
-              </article>
-            </div>
-          </div>
-        </div>
+      <div id="item_details"> 
+
         
-      
-        <!-- Course Description -->
-        <div class='course-description-home' > 
-          <div class="tile is-parent" >
-            <div class="tile is-child box" id="home-description">
-              <p class="title" >Description</p>
-              <p class="subtitle" id="description">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-            </div>
-          </div>
-        </div>
-      
-      
-         <!-- Average Grade -->
-          <div class="tile is-parent" >
-            <div class="tile is-child box" id="average-grade">
-              <p id="avgGrade"></p>
-            </div>
-          </div>
-        
-    </div>
+      </div> 
+      <a href="#" onclick="return show('bookmarks_page','details-page','index_page');">
+        <button class="learn-more">Go Back to Your Bookmarks</button>
+      </a>
+  </div>
+
 
     <script src="test.js"></script>
   </body>
 </html>
+
