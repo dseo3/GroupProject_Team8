@@ -394,10 +394,11 @@ function removeSavedCourse(book_item_id) {
 }
 
 // SHOW ONLY A SINGLE PAGE AT A TIME FUNCTION
-function showpage(shown, hidden1, hidden2) {
+function showpage(shown, hidden1, hidden2, hidden3) {
   document.getElementById(shown).style.display='block';
   document.getElementById(hidden1).style.display='none';
   document.getElementById(hidden2).style.display='none';
+  document.getElementById(hidden3).style.display='none';
   if (shown === 'details-page') {
     DetailsPage();
   }
