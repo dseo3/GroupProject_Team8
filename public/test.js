@@ -2,25 +2,28 @@
 
 
 let courses = []; //ADDED DONGYEON
+let book_collection = []
 let currCourse = new Object(); //ADDED DONGYEON
 
 //Prefrences Dropdown Bar 
 async function main() {
+  
+  // Make sure the deparments are only added to the dropdown once
   if (document.querySelector('#tester_option').text === "") {
-  //Yomi's function that gets the departments for the dropdown 
-  await getDepartments();
-  console.log(document.querySelector('#tester_option').text);
+    //Yomi's function that gets the departments for the dropdown 
+    await getDepartments();
+    console.log(document.querySelector('#tester_option').text);
   } 
-    // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
+    
     const dept_id_here = document.forms[0].elements[0];
-    //No longer Spaghetti code yay!
+  
     const dept_id_for_data = dept_id_here.value.substring(0,4);
     console.log("Selected Department Code:", dept_id_for_data);
     // Just stringing together the API url here before we fetch the data 
     const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
     console.log("API url is", pref_api)
     const availCourses = await fetch(pref_api); 
-    // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
+
       
     console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
     
@@ -28,6 +31,7 @@ async function main() {
     courses = await availCourses.json(); 
     console.log("Courses within selected department", courses)
     
+    // get all of the div tags we will use to add our stuff from the API to the page
     const favbutton = document.querySelector("#fav_button");
     const form = document.querySelector(".course_select");
     const program = document.querySelector("#program");
@@ -40,6 +44,7 @@ async function main() {
 
     form.addEventListener("submit", (event) => {
       event.preventDefault();
+      //THiS STILL NEEDS TO BE FIXED -isabeau
       refreshPage();
       
       const formdata = $(event.target).serializeArray();
@@ -48,16 +53,22 @@ async function main() {
     });
 }
 
+
 function refreshPage(){
+  
+  // display message notifying the user that there are no courses for that department that exist in the API
   if (courses.length === 0) {
     const no_courses_message = document.querySelector(".course-rec");
     no_courses_message.innerHTML = `<p class="no_courses" id="no_courses">We're sorry for any inconvienience. This isn't an error. It looks like our API doesn't have courses for that department. We want you to have access to all of our data, so we kept this department in the list. If you want to see if Testudo has more information on whether this department has classes you can go here:</p>
     <a href="https://app.testudo.umd.edu/soc/202101">Link to Testudo's Schedule of Classes</a>`
   }
   
+  // Add course details to main page
   const random = Math.floor(Math.random() * courses.length); 
   
-  currCourse = courses[random];    
+  currCourse = courses[random]; 
+  console.log(currCourse, "SINGLE COURSE")   
+  console.log(avgGPA(), "GPA HERE!")
   const avgGPAitem = avgGPA(courses[random].course_id)
   const course_popup = document.querySelector(".course-rec");
   course_popup.innerHTML = 
@@ -120,6 +131,7 @@ function refreshPage(){
     
 }
 
+// Function to get the average GPA for a course
 function avgGPA(course_id) {
   //Fetching PlanetTerp API
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -164,9 +176,6 @@ function avgGPA(course_id) {
     });
 
     TotalClassGPA /= data.length;
-    console.log("Class Average Grade:", TotalClassGPA.toFixed(2));
-    document.getElementById("avgGrade").innerHTML =
-      "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
     return TotalClassGPA.toFixed(2)
     // document.getElementById("avgGrade").innerHTML =
     //   "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
@@ -179,6 +188,9 @@ function NewRecFromFave(){
   if (!document.getElementById(`${currCourse.course_id}`)){
     const favbutton = document.querySelector("#fav_button");
 
+    // ADD THE BOOKMARKED COURSE TO THE ARRAY FOR DISPLAYING ON THE DETAILS PAGE
+    book_collection.push(currCourse)
+    console.log(book_collection, "BOOOK ARRAY")
     console.log(`${currCourse.course_id}`)
       //Kennedy's attempt to format the boomarks properly
       const saves = document.querySelector(".saves");
@@ -214,8 +226,8 @@ function NewRecFromFave(){
                 </div>
               </div>
             </div>
-            <div class="learn-more-button">  
-            <a href="#" class="learn" onclick="DetailsPage(${currCourse.course_id});return show('details-page','index_page','bookmarks_page');">
+            <div class="learn-more-button ${currCourse.course_id}">  
+            <a href="#" class="learn" onclick="DetailsPage(${currCourse.course_id}, book_collection);return showpage('details-page','index_page','bookmarks_page');">
               <button class="learn-more">Learn More</button>
             </a> 
           </div>            
@@ -310,13 +322,12 @@ function DetailsPage(book_item_id, book_collection){
 };
   }; }
 
-
+// DISPLAY A NEW RECOMMENDATION BUT DO NOT SAVE IT TO BOOKMARKS
 function NewRecFromX(){
   refreshPage();
-
 }
 
-
+// FUNCTION FOR SEARCH PAGE IF WE HAVE ONE
 function findMatches(wordsToMatch, courses) {
   return courses.filter((course) => {
     const regex = new RegExp(wordsToMatch, "gi");
@@ -324,6 +335,7 @@ function findMatches(wordsToMatch, courses) {
   });
 }
 
+// FUNCTION FOR SEARCH PAGE IF WE HAVE ONE
 function displayMatches() {
   const matchArray = findMatches(this.value, courses);
   // NEED TO MAKE SURE THIS ONLY RUNS if the person has clicked the button 3 times
@@ -343,8 +355,8 @@ function displayMatches() {
   return HTMLmatches;
 }
 
-// Yomi's Code: for Preferences Departments Drop down at top of index/home page
-const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101"; // I ALSO CHANGED THE SEMESTER HERE - ISABEAU
+// GET THE DEPARTMENTS TO DISPLAY THEM ON THE DROPDOWN
+const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101"; 
 
 async function getDepartments() {
   //get department data from api
@@ -391,7 +403,7 @@ async function getDepartments() {
   //document.getElementById('grad-program').innerHTML = dep_list ;
 }
 
-//Removing saved course when you click the bookmark button
+// REMOVE SAVED COURSE WHEN YOU CLICK REMOVE BOOKMARKS BUTTON
 function removeSavedCourse(book_item_id) {
   console.log("removing course warning");
   console.log(book_item_id);
@@ -399,8 +411,8 @@ function removeSavedCourse(book_item_id) {
 }
 
 
-// REPLACE THIS WITH QUERY SELECTOR
-function show(shown, hidden1, hidden2) {
+// SHOW ONLY A SINGLE PAGE AT A TIME FUNCTION
+function showpage(shown, hidden1, hidden2) {
   document.getElementById(shown).style.display='block';
   document.getElementById(hidden1).style.display='none';
   document.getElementById(hidden2).style.display='none';
@@ -410,6 +422,7 @@ function show(shown, hidden1, hidden2) {
   return false;
 };
 
+// NOT SURE THIS IS BEING USED STILL -isabeau
 function loadBookMarks(){
   console.log("bookmarks page ----")
     for(i = 0; i <bookmark.length; i++){
