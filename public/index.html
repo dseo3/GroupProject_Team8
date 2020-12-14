@@ -38,7 +38,6 @@
                     </li> 
                     <li><a href="about.html">About </a></li>
                     <li><a href="userdoc.html">User Manual</a></li>
-                    <li><a href="devdoc.html">Developer Manual</a></li>
                     </ul>
                 </div>
             </nav>     
@@ -47,26 +46,6 @@
         
       </section>
       
-          <!-- Golobal Navigation bar -->
-          <div id="navbar">
-          <nav class="navbar is-light">
-              <a class="navbar-item">
-                <a href="#" onclick="return showpage('index_page','bookmarks_page', 'details-page');"><i class="fas fa-home fa-4x"></i></a>
-                <!-- <button> <i class="fas fa-home fa-4x"></i> </button> -->
-              </a>
-              <!-- <a class="navbar-item" href="search.html">
-                  <button> <i class="fas fa-search fa-4x"></i> </button>
-              </a> -->
-              <a class="navbar-item"> 
-                <!-- href="bookmarks.html" -->
-                <a href="#" onclick="return showpage('bookmarks_page','index_page', 'details-page');"><i class="far fa-bookmark fa-4x"></i></a>  
-                <!-- <button> <i class="far fa-bookmark fa-4x"></i> </button> -->
-              </a>
-
-              </a>
-            
-          </nav>
-          </div>
     </div>
     <div id="index_page">
           <!-- Dropdown Header -->
@@ -131,7 +110,7 @@
           </section>
           
             <!-- All Bookmarks -->
-            <div class="saved-list">
+            <div class="saved-list"  id="saved-list">
               <ul class="saves" id="saves">
                       <!-- THIS IS WHERE THE BOOKMARKS WILL GO WHEN WE CREATE THEM WITH JS -->
               </ul>

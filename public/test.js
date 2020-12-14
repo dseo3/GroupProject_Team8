@@ -393,7 +393,6 @@ function removeSavedCourse(book_item_id) {
   book_item_id.remove();
 }
 
-
 // SHOW ONLY A SINGLE PAGE AT A TIME FUNCTION
 function showpage(shown, hidden1, hidden2) {
   document.getElementById(shown).style.display='block';
@@ -413,6 +412,22 @@ function loadBookMarks(){
     };
 };
 
+//Pop up for bookmarks
+function snackBar(){
+  if(document.getElementById(saves) === null){
+    const snackbar = document.createElement("div");
+    const snackbarText = document.createTextNode("Please favorite courses from the home page to have them added to your bookmarks! Click to remove");
+    snackbar.appendChild(snackbarText);
+    snackbar.setAttribute("id","snackbar");
+    snackbar.setAttribute("onclick","snackbar.remove()");
+    const testvar = document.getElementById("saved-list");
+    testvar.appendChild(snackbar);
+    //return snackbar;
+  }
+
+};
+
+console.log(snackBar());
 
 removeSavedCourse;
 
