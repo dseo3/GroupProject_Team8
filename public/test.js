@@ -326,33 +326,6 @@ function NewRecFromX(){
   refreshPage();
 }
 
-// FUNCTION FOR SEARCH PAGE IF WE HAVE ONE
-function findMatches(wordsToMatch, courses) {
-  return courses.filter((course) => {
-    const regex = new RegExp(wordsToMatch, "gi");
-    return course.name.match(regex);
-  });
-}
-
-// FUNCTION FOR SEARCH PAGE IF WE HAVE ONE
-function displayMatches() {
-  const matchArray = findMatches(this.value, courses);
-  // NEED TO MAKE SURE THIS ONLY RUNS if the person has clicked the button 3 times
-  if (matchArray.length === 0) {
-    console.log("no matches");
-    return [];
-  }
-  const HTMLmatches = matchArray.map((course) => {
-    const li = document.createElement("li");
-    const span = document.createElement("span");
-    span.className = "name";
-    span.innerText = course.name;
-    li.append(span);
-    return li;
-  });
-
-  return HTMLmatches;
-}
 
 // GET THE DEPARTMENTS TO DISPLAY THEM ON THE DROPDOWN
 const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101"; 
@@ -405,13 +378,6 @@ function showpage(shown, hidden1, hidden2, hidden3) {
   return false;
 };
 
-// NOT SURE THIS IS BEING USED STILL -isabeau
-function loadBookMarks(){
-  console.log("bookmarks page ----")
-    for(i = 0; i <bookmark.length; i++){
-      document.write(JSON.stringify(bookmark[i]));
-    };
-};
 
 //Pop up for bookmarks
 function snackBar(){
