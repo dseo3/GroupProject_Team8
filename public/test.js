@@ -223,8 +223,8 @@ function NewRecFromFave(){
                 </div>
               </div>
             </div>
-            <div class="learn-more-button">  
-            <a href="#" class="learn" onclick="DetailsPage('AGNR301');return showpage('details-page','index_page','bookmarks_page');">
+            <div class="learn-more-button ${currCourse.course_id}">  
+            <a href="#" class="learn" onclick="DetailsPage(${currCourse.course_id}, book_collection);return showpage('details-page','index_page','bookmarks_page');">
               <button class="learn-more">Learn More</button>
             </a> 
           </div>            
@@ -236,24 +236,28 @@ function NewRecFromFave(){
   };
 
 // FUNCTION TO DISPLAY SINGLE COURSE CONTENT ON THE LEARN MORE PAGE
-function DetailsPage(book_item_id){
+function DetailsPage(book_item_id, book_collection){
   // Remove what's there to prep for what will be added
   const detailcontent = document.querySelector("#item_details");
   detailcontent.innerHTML = '';
 
 
-  console.log(document.querySelector("#item_details"), 'TergergHIS IS HTE CODE')
-  console.log(book_item_id, 'THIS IS HTE BOOK ITEM ID')
+  console.log(document.querySelector("#item_details"), 'Where details are going')
+  console.log(book_item_id.id, 'course code to find bookmark item')
+  console.log(book_collection, 'course code to find bookmark item')
   
-  // need to get the courseID from book item id to display the desciption and average grade information by grabbing it from whatever array it was in to display it
   // need to do an if statement that limits the number of appends here
+  for(i = 0; i < book_collection.length; i++) {
+    console.log(i) //two of the curly braces
+    if (book_item_id.id === book_collection[i].course_id) {
+      
+      console.log(book_collection[i].course_id, 'this is items id in the collection of saved bookmarks')
 
-
-  const item_details_page = document.querySelector("#item_details");
-  
-  const specific_fave_deat = document.getElementById(book_item_id);
-  console.log(specific_fave_deat, "THIS IS THE ITEM BEING MOVE TO DETAILS")
-  item_details_page.append(specific_fave_deat)
+      const item_learn_more_page = document.querySelector("#item_details");
+      const book_to_learn_more = document.getElementById(book_item_id);
+      
+      // Add the course details to the page
+      item_learn_more_page.append(book_to_learn_more)}}
   // item_details_page.innerHTML = `
   //   <li id=${currCourse.course_id}>
   //   <!-- Course Code and Title -->
