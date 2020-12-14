@@ -25,7 +25,8 @@
 /*global nav stlyes*/
 .navbar{
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    /* justify-content: center; */
     justify-content: space-around;
     position: fixed;
     width: 100%;
@@ -176,9 +177,6 @@ cursor: pointer;
     justify-content: space-between;
 }
 
-.bookmark-button{
-    justify-content: end;
-}
 
 h1 {
     color: white;
