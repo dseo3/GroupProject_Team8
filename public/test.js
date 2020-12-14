@@ -38,7 +38,7 @@ async function main() {
     form.addEventListener("submit", (event) => {
       event.preventDefault();
       refreshPage();
-      //formdata = department names 
+      
       const formdata = $(event.target).serializeArray();
       // Grad programs have a name of "grad-program" in this array
       console.log("department selected: ", formdata);      
@@ -46,6 +46,12 @@ async function main() {
 }
 
 function refreshPage(){
+  if (courses.length === 0) {
+    const no_courses_message = document.querySelector(".course-rec");
+    no_courses_message.innerHTML = `<p class="no_courses" id="no_courses">We're sorry for any inconvienience. This isn't an error. It looks like our API doesn't have courses for that department. We want you to have access to all of our data, so we kept this department in the list. If you want to see if Testudo has more information on whether this department has classes you can go here:</p>
+    <a href="https://app.testudo.umd.edu/soc/202101">Link to Testudo's Schedule of Classes</a>`
+  }
+  
   const random = Math.floor(Math.random() * courses.length); 
   
   currCourse = courses[random];    
@@ -165,165 +171,130 @@ function avgGPA(course_id) {
 
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(){
-  const favbutton = document.querySelector("#fav_button");
+  if (!document.getElementById(`${currCourse.course_id}`)){
+    const favbutton = document.querySelector("#fav_button");
 
-    /* Alternative 
-    > Create empty array at top test
-    > Send random to that array 
-    > Load in bookmarks
-    > Might have reviste remove function and delete from aray 
-    */
-    
-    // THIS IS THE OLD WAY WE SWITCHED BETWEEN CARDS
-    //const random = Math.floor(Math.random() * courses.length); 
-    // let id = courseID.innerHTML = bookmark[random].course_id;
-    // let ctitle = courseTitle.innerHTML = bookmark[random].name;
-    // let cred = credit.innerHTML = bookmark[random].credits;
-    // let ge = gened.innerHTML = bookmark[random].gen_ed;
-    // let gm = method.innerHTML = bookmark[random].grading_method;
-    // description.innerHTML = bookmark[random].description;
-    // avgGPA(bookmark[random].course_id);
-
-    //Kennedy's attempt to format the boomarks properly
-    const saves = document.querySelector(".saves");
-    saves.innerHTML += `
-    <li id="saved_course">
-      <div class="tile is-parent" >
-        <div class="tile is-child box" id="saved-course">
-          <div id="course-info">      
-           
-            <p class="title" id="bookmark_item"> <b>${currCourse.course_id}</b> <small>${currCourse.name}</small></p>
-          
-            <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
-          </div>
-            <div class="course-stats">
-            <div class="tile is-ancestor">
-              <div class="tile is-parent">
-                <article class="tile is-child box" id="course-stat">
-                  <p class="title" id="credit">${currCourse.credits}</p>
-                  <p class="subtitle">Credits</p>
-                </article>
-              </div>
-              <div class="tile is-parent">
-                <article class="tile is-child box" id="course-stat">
-                  <p class="title" id="gened">${currCourse.gen_ed}</p>
-                  <p class="subtitle">Gen-Ed</p>
-                </article>
-              </div>
-              <div class="tile is-parent">
-                <article class="tile is-child box" id="course-stat">
-                  <p class="title" id="method">${currCourse.grading_method}</p>
-                  <p class="subtitle">Grading Method</p>
-                </article>
+    console.log(`${currCourse.course_id}`)
+      //Kennedy's attempt to format the boomarks properly
+      const saves = document.querySelector(".saves");
+      saves.innerHTML += `
+      <li id=${currCourse.course_id}>
+        <div class="tile is-parent tester_item">
+          <div class="tile is-child box" id="saved-course">
+            <div id="course-info">      
+            
+              <p class="title" id="bookmark_item"> <b>${currCourse.course_id}</b> <small>${currCourse.name}</small></p>
+            
+              <button class="bookmark_button" onclick="removeSavedCourse(${currCourse.course_id})"> <i class="fas fa-bookmark fa-2x"></i> </button>
+            </div>
+              <div class="course-stats">
+              <div class="tile is-ancestor">
+                <div class="tile is-parent">
+                  <article class="tile is-child box" id="course-stat">
+                    <p class="title" id="credit">${currCourse.credits}</p>
+                    <p class="subtitle">Credits</p>
+                  </article>
+                </div>
+                <div class="tile is-parent">
+                  <article class="tile is-child box" id="course-stat">
+                    <p class="title" id="gened">${currCourse.gen_ed}</p>
+                    <p class="subtitle">Gen-Ed</p>
+                  </article>
+                </div>
+                <div class="tile is-parent">
+                  <article class="tile is-child box" id="course-stat">
+                    <p class="title" id="method">${currCourse.grading_method}</p>
+                    <p class="subtitle">Grading Method</p>
+                  </article>
+                </div>
               </div>
             </div>
+            <div class="learn-more-button">  
+            <a href="#" class="learn" onclick="DetailsPage(${currCourse.course_id});return show('details-page','index_page','bookmarks_page');">
+              <button class="learn-more">Learn More</button>
+            </a> 
+          </div>            
           </div>
-          <div class="learn-more-button">  
-          <a href="#" class="learn" onclick="return show('details-page','index_page','bookmarks_page');">
-            <button class="learn-more">Learn More</button>
-          </a> 
-        </div>            
         </div>
-      </div>
-    </li>`;
+      </li>`;
+    }
+      refreshPage(); //refresh recommendation 
+  };
 
-    refreshPage(); //refresh recommendation 
-};
+function DetailsPage(book_item_id){
 
-function DetailsPage(){
-
-  // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
-  // const dept_id_here = document.querySelector('.title');
+  // need to get the courseID from book item id to display the desciption and average grade information by grabbing it from whatever array it was in to display it
+  // need to do an if statement that limits the number of appends here
+  const item_details_page = document.getElementById("item_details");
   
-  // const dept_id_for_data = dept_id_here.value.substring(0,4);
-  // console.log("Selected Department Code:", dept_id_for_data);
-  // // Just stringing together the API url here before we fetch the data 
-  // const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
-  // console.log("API url is", pref_api)
-  // const availCourses = await fetch(pref_api); 
-  // // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
+  const specific_fave_deat = document.getElementById(book_item_id);
+  console.log(specific_fave_deat, "THIS IS THE ITEM BEING MOVE TO DETAILS")
+  item_details_page.append(specific_fave_deat)
+  // item_details_page.innerHTML = `
+  //   <li id=${currCourse.course_id}>
+  //   <!-- Course Code and Title -->
+  //   <div id="for_bookmarks">
+  //     <div class='course-title-home' > 
+  //       <div class="tile is-parent" >
+  //         <div class="tile is-child box" id="course-code">
+  //           <p class="title" id="courseID">${courses[random].course_id}</p>
+  //           <p class="subtitle" id="courseTitle">${courses[random].name}</p>
+  //         </div>
+  //       </div>
+  //     </div>
     
-  // console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
-  
-  // //parses api data into json value
-  // courses = await availCourses.json(); 
-  // console.log("Courses within selected department", courses)
-  
-  // const favbutton = document.querySelector("#fav_button");
-  // const form = document.querySelector(".course_select");
-  // const program = document.querySelector("#program");
-  // const courseID = document.querySelector("#courseID");
-  // const courseTitle = document.querySelector("#courseTitle");
-  // const credit = document.querySelector("#credit");
-  // const gened = document.querySelector("#gened");
-  // const method = document.querySelector("#method");
-  // const description = document.querySelector("#description");
-  
-
-
-
-
-  //Kennedy's attempt to format the boomarks properly
-  const item_details_page = document.querySelector("#item_details");
-  item_details_page.innerHTML += `
-    <div class="tile is-parent" >
-    <div class="tile is-child box" id="saved-course">
-      <div id="course-info">      
-        <p class="title" id="bookmark_item"> <b>${currCourse.course_id}</b> <small>${currCourse.name}</small></p>
-        <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
-      </div>
-        <div class="course-stats">
-        <div class="tile is-ancestor">
-          <div class="tile is-parent">
-            <article class="tile is-child box" id="course-stat">
-              <p class="title" id="credit">${currCourse.credits}</p>
-              <p class="subtitle">Credits</p>
-            </article>
-          </div>
-          <div class="tile is-parent">
-            <article class="tile is-child box" id="course-stat">
-              <p class="title" id="gened">${currCourse.gen_ed}</p>
-              <p class="subtitle">Gen-Ed</p>
-            </article>
-          </div>
-          <div class="tile is-parent">
-            <article class="tile is-child box" id="course-stat">
-              <p class="title" id="method">${currCourse.grading_method}</p>
-              <p class="subtitle">Grading Method</p>
-            </article>
-          </div>
-        </div>
-      </div>
-      <div class="learn-more-button">  
-      <a href="#" class="learn" onclick="return show('details-page','index_page','bookmarks_page');">
-        <button class="learn-more">Learn More</button>
-      </a> 
-    </div>            
-    </div>
-  </div>
-        `;
+  //   <!-- THIS IS THE TILE I ADDED - ISABEAU  
+  //   <div class="tile is-child box" id="saved-course"> -->
+  //   <!-- Course Stat Tiles -->
+  //       <div class="course-stats">
+  //         <div class="tile is-ancestor">
+  //           <div class="tile is-parent">
+  //             <article class="tile is-child box" id="course-stat">
+  //               <p class="title" id="credit">${courses[random].credits}</p>
+  //               <p class="subtitle">Credits</p>
+  //             </article>
+  //           </div>
+            
+          
+  //           <div class="tile is-parent">
+  //             <article class="tile is-child box" id="course-stat">
+  //               <p class="title" id="gened">${courses[random].gen_ed}</p>
+  //               <p class="subtitle">Gen-Ed</p>
+  //             </article>
+  //           </div>
+  //           <div class="tile is-parent">
+  //             <article class="tile is-child box" id="course-stat">
+  //               <p class="title" id="method">${courses[random].grading_method}</p>
+  //               <p class="subtitle">Grading Method</p>
+  //             </article>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>  
+  //   <!-- Course Description -->
+  //   <div class='course-description-home' > 
+  //     <div class="tile is-parent" >
+  //       <div class="tile is-child box" id="home-description">
+  //         <p class="title" >Description</p>
+  //         <p class="subtitle" id="description">${courses[random].description}</p>
+  //         </div>
+  //     </div>
+  //   </div>
+  //   <!-- Average Grade -->
+  //     <div class="tile is-parent" >
+  //       <div class="tile is-child box" id="average-grade">
+  //         <p id="avgGrade"><b>Average Grade: </b>
+  //         ${avgGPAitem}
+  //         </p>
+  //       </div>
+  //     </div>
+  //       `;
 };
 
 
 function NewRecFromX(){
   refreshPage();
 
-  // THIS IS THE OLD WAY WE SWITCHED BETWEEN CARDS
-  // const favbutton = document.querySelector(".float-x");
-  // favbutton.addEventListener("click", (event) => {
-  //   event.preventDefault();
-  //   console.log("Don't Like Dis");
-  //   // let coursecode1 = document.getElementById("code");
-  //   const random = Math.floor(Math.random() * availCourses.length); 
-  //   courseID.innerHTML = availCourses[random].course_id;
-  //   courseTitle.innerHTML = availCourses[random].name;
-  //   credit.innerHTML = availCourses[random].credits;
-  //   gened.innerHTML = availCourses[random].gen_ed;
-  //   method.innerHTML = availCourses[random].grading_method;
-  //   description.innerHTML = availCourses[random].description;
-  //   avgGPA(availCourses[random].course_id);
-   
-  // })
 }
 
 
@@ -336,6 +307,7 @@ function findMatches(wordsToMatch, courses) {
 
 function displayMatches() {
   const matchArray = findMatches(this.value, courses);
+  // NEED TO MAKE SURE THIS ONLY RUNS if the person has clicked the button 3 times
   if (matchArray.length === 0) {
     console.log("no matches");
     return [];
@@ -385,11 +357,10 @@ async function getDepartments() {
 }
 
 //Removing saved course when you click the bookmark button
-function removeSavedCourse() {
+function removeSavedCourse(book_item_id) {
   console.log("removing course warning");
-  // BOOKMARKS REMOVE BUTTON -ISABEAU
-  const savedcourse = document.getElementById("saved_course");
-  savedcourse.remove();
+  console.log(book_item_id);
+  book_item_id.remove();
 }
 
 
@@ -415,4 +386,3 @@ function loadBookMarks(){
 removeSavedCourse;
 
 window.onload = main;
-
