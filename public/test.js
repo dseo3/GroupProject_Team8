@@ -210,7 +210,7 @@ function NewRecFromFave(){
               </div>
             </div>
             <div class="learn-more-button">  
-            <a href="#" class="learn" onclick="return show('details-page','index_page','bookmarks_page');DetailsPage(${currCourse.course_id});">
+            <a href="#" class="learn" onclick="DetailsPage(${currCourse.course_id});return show('details-page','index_page','bookmarks_page');">
               <button class="learn-more">Learn More</button>
             </a> 
           </div>            
@@ -222,68 +222,73 @@ function NewRecFromFave(){
   };
 
 function DetailsPage(book_item_id){
-  const item_details_page = document.getElementById(`${currCourse.course_id}`);
-  //Kennedy's attempt to format the boomarks properly
-  const specific_item_fave = document.getElementById(book_item_id);
-  item_details_page.innerHTML = `
-    <li id=${currCourse.course_id}>
-    <!-- Course Code and Title -->
-    <div id="for_bookmarks">
-      <div class='course-title-home' > 
-        <div class="tile is-parent" >
-          <div class="tile is-child box" id="course-code">
-            <p class="title" id="courseID">${courses[random].course_id}</p>
-            <p class="subtitle" id="courseTitle">${courses[random].name}</p>
-          </div>
-        </div>
-      </div>
+
+  // need to get the courseID from book item id to display the desciption and average grade information by grabbing it from whatever array it was in to display it
+  // need to do an if statement that limits the number of appends here
+  const item_details_page = document.getElementById("item_details");
+  
+  const specific_fave_deat = document.getElementById(book_item_id);
+  console.log(specific_fave_deat, "THIS IS THE ITEM BEING MOVE TO DETAILS")
+  item_details_page.append(specific_fave_deat)
+  // item_details_page.innerHTML = `
+  //   <li id=${currCourse.course_id}>
+  //   <!-- Course Code and Title -->
+  //   <div id="for_bookmarks">
+  //     <div class='course-title-home' > 
+  //       <div class="tile is-parent" >
+  //         <div class="tile is-child box" id="course-code">
+  //           <p class="title" id="courseID">${courses[random].course_id}</p>
+  //           <p class="subtitle" id="courseTitle">${courses[random].name}</p>
+  //         </div>
+  //       </div>
+  //     </div>
     
-    <!-- THIS IS THE TILE I ADDED - ISABEAU  
-    <div class="tile is-child box" id="saved-course"> -->
-    <!-- Course Stat Tiles -->
-        <div class="course-stats">
-          <div class="tile is-ancestor">
-            <div class="tile is-parent">
-              <article class="tile is-child box" id="course-stat">
-                <p class="title" id="credit">${courses[random].credits}</p>
-                <p class="subtitle">Credits</p>
-              </article>
-            </div>
+  //   <!-- THIS IS THE TILE I ADDED - ISABEAU  
+  //   <div class="tile is-child box" id="saved-course"> -->
+  //   <!-- Course Stat Tiles -->
+  //       <div class="course-stats">
+  //         <div class="tile is-ancestor">
+  //           <div class="tile is-parent">
+  //             <article class="tile is-child box" id="course-stat">
+  //               <p class="title" id="credit">${courses[random].credits}</p>
+  //               <p class="subtitle">Credits</p>
+  //             </article>
+  //           </div>
             
           
-            <div class="tile is-parent">
-              <article class="tile is-child box" id="course-stat">
-                <p class="title" id="gened">${courses[random].gen_ed}</p>
-                <p class="subtitle">Gen-Ed</p>
-              </article>
-            </div>
-            <div class="tile is-parent">
-              <article class="tile is-child box" id="course-stat">
-                <p class="title" id="method">${courses[random].grading_method}</p>
-                <p class="subtitle">Grading Method</p>
-              </article>
-            </div>
-          </div>
-        </div>
-      </div>  
-    <!-- Course Description -->
-    <div class='course-description-home' > 
-      <div class="tile is-parent" >
-        <div class="tile is-child box" id="home-description">
-          <p class="title" >Description</p>
-          <p class="subtitle" id="description">${courses[random].description}</p>
-          </div>
-      </div>
-    </div>
-    <!-- Average Grade -->
-      <div class="tile is-parent" >
-        <div class="tile is-child box" id="average-grade">
-          <p id="avgGrade"><b>Average Grade: </b>
-          ${avgGPAitem}
-          </p>
-        </div>
-      </div>
-        `;
+  //           <div class="tile is-parent">
+  //             <article class="tile is-child box" id="course-stat">
+  //               <p class="title" id="gened">${courses[random].gen_ed}</p>
+  //               <p class="subtitle">Gen-Ed</p>
+  //             </article>
+  //           </div>
+  //           <div class="tile is-parent">
+  //             <article class="tile is-child box" id="course-stat">
+  //               <p class="title" id="method">${courses[random].grading_method}</p>
+  //               <p class="subtitle">Grading Method</p>
+  //             </article>
+  //           </div>
+  //         </div>
+  //       </div>
+  //     </div>  
+  //   <!-- Course Description -->
+  //   <div class='course-description-home' > 
+  //     <div class="tile is-parent" >
+  //       <div class="tile is-child box" id="home-description">
+  //         <p class="title" >Description</p>
+  //         <p class="subtitle" id="description">${courses[random].description}</p>
+  //         </div>
+  //     </div>
+  //   </div>
+  //   <!-- Average Grade -->
+  //     <div class="tile is-parent" >
+  //       <div class="tile is-child box" id="average-grade">
+  //         <p id="avgGrade"><b>Average Grade: </b>
+  //         ${avgGPAitem}
+  //         </p>
+  //       </div>
+  //     </div>
+  //       `;
 };
 
 
@@ -302,6 +307,7 @@ function findMatches(wordsToMatch, courses) {
 
 function displayMatches() {
   const matchArray = findMatches(this.value, courses);
+  // NEED TO MAKE SURE THIS ONLY RUNS if the person has clicked the button 3 times
   if (matchArray.length === 0) {
     console.log("no matches");
     return [];
