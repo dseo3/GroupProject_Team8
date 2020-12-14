@@ -186,3 +186,11 @@ h1 {
     margin-bottom: 80px;
 
 }
+
+#book_descrip{
+    color: grey; 
+    text-overflow: ellipsis; 
+    overflow: hidden; 
+    white-space: nowrap; 
+    line-height: 16px; 
+}
