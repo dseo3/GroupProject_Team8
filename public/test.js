@@ -48,7 +48,7 @@ async function main() {
       // Grad programs have a name of "grad-program" in this array
       console.log("department selected: ", formdata);      
     });
-}
+};
 
 
 function refreshPage(){
@@ -126,7 +126,7 @@ function refreshPage(){
       </div>
     </div>`
     
-}
+};
 
 // Function to get the average GPA for a course
 function avgGPA(course_id) {
@@ -177,7 +177,7 @@ function avgGPA(course_id) {
     // document.getElementById("avgGrade").innerHTML =
     //   "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
   });
-}
+};
 
 
 //Show New Course Recommendation and Save To Bookmarks
@@ -231,7 +231,7 @@ function NewRecFromFave(){
           </div>
         </div>
       </li>`;
-    }
+    };
       refreshPage(); //refresh recommendation 
   };
 
@@ -239,11 +239,11 @@ function NewRecFromFave(){
 function DetailsPage(book_item_id, book_collection){
   // Remove what's there to prep for what will be added
   const detailcontent = document.querySelector("#item_details");
-  detailcontent.innerHTML = '';
+  
 
 
   console.log(document.querySelector("#item_details"), 'Where details are going')
-  console.log(book_item_id.id, 'course code to find bookmark item')
+  
   console.log(book_collection, 'course code to find bookmark item')
   
   // need to do an if statement that limits the number of appends here
@@ -253,71 +253,73 @@ function DetailsPage(book_item_id, book_collection){
       
       console.log(book_collection[i].course_id, 'this is items id in the collection of saved bookmarks')
 
-      const item_learn_more_page = document.querySelector("#item_details");
-      const book_to_learn_more = document.getElementById(book_item_id);
-      
+      const coursedetail = book_collection[i];
       // Add the course details to the page
-      item_learn_more_page.append(book_to_learn_more)}}
-  // item_details_page.innerHTML = `
-  //   <li id=${currCourse.course_id}>
-  //   <!-- Course Code and Title -->
-  //   <div id="for_bookmarks">
-  //     <div class='course-title-home' > 
-  //       <div class="tile is-parent" >
-  //         <div class="tile is-child box" id="course-code">
-  //           <p class="title" id="courseID">${courses[random].course_id}</p>
-  //           <p class="subtitle" id="courseTitle">${courses[random].name}</p>
-  //         </div>
-  //       </div>
-  //     </div>
-    
-  //   <!-- THIS IS THE TILE I ADDED - ISABEAU  
-  //   <div class="tile is-child box" id="saved-course"> -->
-  //   <!-- Course Stat Tiles -->
-  //       <div class="course-stats">
-  //         <div class="tile is-ancestor">
-  //           <div class="tile is-parent">
-  //             <article class="tile is-child box" id="course-stat">
-  //               <p class="title" id="credit">${courses[random].credits}</p>
-  //               <p class="subtitle">Credits</p>
-  //             </article>
-  //           </div>
+      console.log(coursedetail)
+      
+      detailcontent.innerHTML = '';
+
+      detailcontent.innerHTML += `
+      <div id="for_bookmarks">
+        <div class='course-title-home' > 
+          <div class="tile is-parent" >
+            <div class="tile is-child box" id="course-code">
+              <p class="title" id="courseID">${coursedetail.course_id}</p>
+              <p class="subtitle" id="courseTitle">${coursedetail.name}</p>
+            </div>
+          </div>
+        </div>
+      
+      <!-- THIS IS THE TILE I ADDED - ISABEAU  
+      <div class="tile is-child box" id="saved-course"> -->
+      <!-- Course Stat Tiles -->
+          <div class="course-stats">
+            <div class="tile is-ancestor">
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="credit">${coursedetail.credits}</p>
+                  <p class="subtitle">Credits</p>
+                </article>
+              </div>
+              
             
-          
-  //           <div class="tile is-parent">
-  //             <article class="tile is-child box" id="course-stat">
-  //               <p class="title" id="gened">${courses[random].gen_ed}</p>
-  //               <p class="subtitle">Gen-Ed</p>
-  //             </article>
-  //           </div>
-  //           <div class="tile is-parent">
-  //             <article class="tile is-child box" id="course-stat">
-  //               <p class="title" id="method">${courses[random].grading_method}</p>
-  //               <p class="subtitle">Grading Method</p>
-  //             </article>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>  
-  //   <!-- Course Description -->
-  //   <div class='course-description-home' > 
-  //     <div class="tile is-parent" >
-  //       <div class="tile is-child box" id="home-description">
-  //         <p class="title" >Description</p>
-  //         <p class="subtitle" id="description">${courses[random].description}</p>
-  //         </div>
-  //     </div>
-  //   </div>
-  //   <!-- Average Grade -->
-  //     <div class="tile is-parent" >
-  //       <div class="tile is-child box" id="average-grade">
-  //         <p id="avgGrade"><b>Average Grade: </b>
-  //         ${avgGPAitem}
-  //         </p>
-  //       </div>
-  //     </div>
-  //       `;
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="gened">${coursedetail.gen_ed}</p>
+                  <p class="subtitle">Gen-Ed</p>
+                </article>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="method">${coursedetail.grading_method}</p>
+                  <p class="subtitle">Grading Method</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>  
+      <!-- Course Description -->
+      <div class='course-description-home' > 
+        <div class="tile is-parent" >
+          <div class="tile is-child box" id="home-description">
+            <p class="title" >Description</p>
+            <p class="subtitle" id="description">${coursedetail.description}</p>
+            </div>
+        </div>
+      </div>
+      <!-- Average Grade -->
+        <div class="tile is-parent" >
+          <div class="tile is-child box" id="average-grade">
+            <p id="avgGrade"><b>Average Grade: </b>
+            ${avgGPA(coursedetail.course_id)}
+            </p>
+          </div>
+        </div> `;
+      
+   
+ 
 };
+  }; }
 
 // DISPLAY A NEW RECOMMENDATION BUT DO NOT SAVE IT TO BOOKMARKS
 function NewRecFromX(){
