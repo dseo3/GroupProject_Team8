@@ -30,7 +30,12 @@
               <nav>
                 <div class="tabs is-centered"> 
                 <ul>
-                    <li><a href="index.html">Home</a></li>  
+                    <li><a href="#" onclick="return show('index_page','bookmarks_page', 'details-page');">Home</a>
+                    </li> 
+                    <li>
+                      <a href="#" onclick="return show('bookmarks_page','index_page', 'details-page');">Bookmarks</i></a>  
+                      <!-- <button> <i class="far fa-bookmark fa-4x"></i> </button> -->
+                    </li> 
                     <li><a href="about.html">About </a></li>
                     <li><a href="userdoc.html">User Manual</a></li>
                     <li><a href="devdoc.html">Developer Manual</a></li>
@@ -42,23 +47,7 @@
         
       </section>
     
-          <!-- Bottom Golobal Navigation bar -->
-      <div id="navbar">
-        <nav class="navbar is-light">
-            <a class="navbar-item">
-              <a href="#" onclick="return show('index_page','bookmarks_page', 'details-page');"><i class="fas fa-home fa-4x"></i></a>
-              <!-- <button> <i class="fas fa-home fa-4x"></i> </button> -->
-            </a>
-            <!-- <a class="navbar-item" href="search.html">
-                <button> <i class="fas fa-search fa-4x"></i> </button>
-            </a> -->
-            <a class="navbar-item"> 
-              <!-- href="bookmarks.html" -->
-              <a href="#" onclick="return show('bookmarks_page','index_page', 'details-page');"><i class="far fa-bookmark fa-4x"></i></a>  
-              <!-- <button> <i class="far fa-bookmark fa-4x"></i> </button> -->
-            </a>
-          
-        </nav>
+      
       </div>
     </div>
 

@@ -1,3 +1,7 @@
+html{
+    background-color:rgb(10, 8, 8);
+}
+
 
 .bookmarks {
     position: relative;
@@ -21,19 +25,6 @@
 .bookmarks li:nth-child() {
     background: linear-gradient(to top, #D8D8D8 25%,#8A74D4 80%);
 }
-
-/*global nav stlyes*/
-.navbar{
-    display: flex;
-    align-items: center;
-    /* justify-content: center; */
-    justify-content: space-around;
-    position: fixed;
-    width: 100%;
-    bottom: 0; 
-    height: 80px;
-}
-
 
 .hero-body{
     background-color: red;
@@ -90,7 +81,7 @@
 	position:fixed;
 	width:60px;
 	height:60px;
-	bottom:100px;
+	bottom:150px;
 	right:40px;
 	background-color:rgb(169, 172, 171);
 	color:#FFF;
@@ -104,7 +95,7 @@
 	position:fixed;
 	width:60px;
 	height:60px;
-	bottom:100px;
+	bottom:150px;
 	left:40px;
 	background-color:rgb(169, 172, 171);
 	color:#FFF;
@@ -121,7 +112,6 @@
 /* search page */
 
 body {
-    background-color: rgb(10, 8, 8);
     font-family: Arial, Helvetica, sans-serif;
 }
 
