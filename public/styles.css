@@ -183,4 +183,8 @@ cursor: pointer;
 h1 {
     color: white;
 }
-    
+
+#bookmarks_page {
+    margin-bottom: 80px;
+
+}
