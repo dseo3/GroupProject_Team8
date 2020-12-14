@@ -46,6 +46,12 @@ async function main() {
 }
 
 function refreshPage(){
+  if (courses.length === 0) {
+    const no_courses_message = document.querySelector(".course-rec");
+    no_courses_message.innerHTML = `<p class="no_courses" id="no_courses">We're sorry for any inconvienience. This isn't an error. It looks like our API doesn't have courses for that department. We want you to have access to all of our data, so we kept this department in the list. If you want to see if Testudo has more information on whether this department has classes you can go here:</p>
+    <a href="https://app.testudo.umd.edu/soc/202101">Link to Testudo's Schedule of Classes</a>`
+  }
+  
   const random = Math.floor(Math.random() * courses.length); 
   
   currCourse = courses[random];    
