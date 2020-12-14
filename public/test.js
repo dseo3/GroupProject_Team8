@@ -179,7 +179,6 @@ function avgGPA(course_id) {
   });
 }
 
-
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(){
   if (!document.getElementById(`${currCourse.course_id}`)){
@@ -325,7 +324,6 @@ function DetailsPage(book_item_id, book_collection){
 function NewRecFromX(){
   refreshPage();
 }
-
 
 // GET THE DEPARTMENTS TO DISPLAY THEM ON THE DROPDOWN
 const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101"; 
