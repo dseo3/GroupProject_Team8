@@ -1,3 +1,7 @@
+html{ 
+    background-color: rgb(10, 8, 8);
+}
+
 
 .bookmarks {
     position: relative;
@@ -89,7 +93,7 @@
 	position:fixed;
 	width:60px;
 	height:60px;
-	bottom:100px;
+	bottom:150px;
 	right:40px;
 	background-color:rgb(169, 172, 171);
 	color:#FFF;
@@ -103,7 +107,7 @@
 	position:fixed;
 	width:60px;
 	height:60px;
-	bottom:100px;
+	bottom:150px;
 	left:40px;
 	background-color:rgb(169, 172, 171);
 	color:#FFF;
