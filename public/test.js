@@ -1,7 +1,6 @@
 let courses = []; //ADDED DONGYEON
 let currCourse = new Object(); //ADDED DONGYEON
 
-
 //Prefrences Dropdown Bar 
 async function main() {
   if (document.querySelector('#tester_option').text === "") {
@@ -192,7 +191,9 @@ function NewRecFromFave(){
       <div class="tile is-parent" >
         <div class="tile is-child box" id="saved-course">
           <div id="course-info">      
+           
             <p class="title" id="bookmark_item"> <b>${currCourse.course_id}</b> <small>${currCourse.name}</small></p>
+          
             <button class="bookmark_button" onclick="removeSavedCourse()"> <i class="fas fa-bookmark fa-2x"></i> </button>
           </div>
             <div class="course-stats">
@@ -230,6 +231,38 @@ function NewRecFromFave(){
 };
 
 function DetailsPage(){
+
+  // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
+  // const dept_id_here = document.querySelector('.title');
+  
+  // const dept_id_for_data = dept_id_here.value.substring(0,4);
+  // console.log("Selected Department Code:", dept_id_for_data);
+  // // Just stringing together the API url here before we fetch the data 
+  // const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
+  // console.log("API url is", pref_api)
+  // const availCourses = await fetch(pref_api); 
+  // // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
+    
+  // console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
+  
+  // //parses api data into json value
+  // courses = await availCourses.json(); 
+  // console.log("Courses within selected department", courses)
+  
+  // const favbutton = document.querySelector("#fav_button");
+  // const form = document.querySelector(".course_select");
+  // const program = document.querySelector("#program");
+  // const courseID = document.querySelector("#courseID");
+  // const courseTitle = document.querySelector("#courseTitle");
+  // const credit = document.querySelector("#credit");
+  // const gened = document.querySelector("#gened");
+  // const method = document.querySelector("#method");
+  // const description = document.querySelector("#description");
+  
+
+
+
+
   //Kennedy's attempt to format the boomarks properly
   const item_details_page = document.querySelector("#item_details");
   item_details_page.innerHTML += `
