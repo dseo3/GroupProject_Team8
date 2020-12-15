@@ -20,22 +20,6 @@ app.use((req, res, next) => {
   next();
 });
 
-/*Aaron's server text
-app.route('/api')
-  .get(async(req, res) => {
-    console.log('GET request detected');
-    const data = await fetch('https://api.umd.io/v0/courses/departments?semester=202008');
-    const json = await data.json();
-    //console.log('data from fetch',json)
-    res.send(json);
-  })
-  .post(async (req, res) => {
-    console.log('POST request detected');
-    const data = await fetch('https://api.umd.io/v0/courses/departments?semester=202008');
-    const json = await data.json();
-    res.send(json);
-  });
-  */
 
 app.route('/api')
   .get((req, res) => {
