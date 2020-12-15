@@ -1,3 +1,7 @@
+html{ 
+    background-color: rgb(10, 8, 8);
+}
+
 
 .bookmarks {
     position: relative;
@@ -89,7 +93,7 @@
 	position:fixed;
 	width:60px;
 	height:60px;
-	bottom:100px;
+	bottom:150px;
 	right:40px;
 	background-color:rgb(169, 172, 171);
 	color:#FFF;
@@ -103,7 +107,7 @@
 	position:fixed;
 	width:60px;
 	height:60px;
-	bottom:100px;
+	bottom:150px;
 	left:40px;
 	background-color:rgb(169, 172, 171);
 	color:#FFF;
@@ -183,4 +187,45 @@ cursor: pointer;
 h1 {
     color: white;
 }
-    
+
+
+#bookmarks_page {
+    margin-bottom: 80px;
+
+}
+
+#details_page {
+    margin-bottom: 80px;
+
+}
+
+#index_page {
+    margin-bottom: 80px;
+
+}
+
+#snackbar {
+    visibility: visible; 
+    min-width: 250px;
+    background-color: rgb(226, 230, 15); 
+    color: rgb(0, 0, 0); 
+    text-align: center; 
+    border-radius: 2px; 
+    padding: 16px; 
+    position: fixed; 
+    left: 320px; 
+    bottom: 300px; 
+    animation: fadein 1s;
+
+  }
+
+  @keyframes fadein {
+    from {bottom: 0; opacity: 0;}
+    to {bottom: 300px; opacity: 1;}
+  }
+
+
+  @keyframes fadeout {
+    from {bottom: 300px; opacity: 1;}
+    to {bottom: 0px; opacity: 0;}
+  }

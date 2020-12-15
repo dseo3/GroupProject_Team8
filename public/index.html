@@ -19,46 +19,40 @@
     <link rel="stylesheet" type="text/css" href="styles.css" />
   </head>
 
-  <body>
+<body>
+    <!-- Golobal Features -->
     <div class="global-features">
-      <!-- Golobal Header -->
-          <section class="hero is-primary">
-          <div class="hero-body">
-              <div class="container">
-              <h1 class="title">
-                  Course Connector
-              </h1>
-              </div>
-          </div>
-          </section>
-      
-          <!-- Golobal Navigation bar -->
-          <div id="navbar">
-          <nav class="navbar is-light">
-              <a class="navbar-item">
-                <a href="#" onclick="return show('index_page','bookmarks_page', 'details-page');"><i class="fas fa-home fa-4x"></i></a>
-                <!-- <button> <i class="fas fa-home fa-4x"></i> </button> -->
-              </a>
-              <!-- <a class="navbar-item" href="search.html">
-                  <button> <i class="fas fa-search fa-4x"></i> </button>
-              </a> -->
-              <a class="navbar-item"> 
-                <!-- href="bookmarks.html" -->
-                <a href="#" onclick="return show('bookmarks_page','index_page', 'details-page');"><i class="far fa-bookmark fa-4x"></i></a>  
-                <!-- <button> <i class="far fa-bookmark fa-4x"></i> </button> -->
-              </a>
-
-              </a>
-            
-          </nav>
-          </div>
+      <section class="hero is-primary">
+        <div class="hero-body">
+            <div class="container">
+              <a href="index.html"><h1 class="title">Course Connector</h1></a>
+             
+              <nav>
+                <div class="tabs is-centered"> 
+                <ul>
+                    <li><a href="#" onclick="return showpage('index_page','bookmarks_page', 'details-page', 'about-page');">Home</a>
+                    </li> 
+                    <li>
+                      <a href="#" onclick="return showpage('bookmarks_page','index_page', 'details-page', 'about-page');">Bookmarks</i></a>  
+                      <!-- <button> <i class="far fa-bookmark fa-4x"></i> </button> -->
+                    </li> 
+                    <li><a href="#" onclick="return showpage('about-page', 'index_page','bookmarks_page', 'details-page');">About </a></li>
+                    </ul>
+                </div>
+            </nav>     
+            </div>
+        </div>
+        
+      </section>
     </div>
+
+    <!-- Home Page -->
     <div id="index_page">
           <!-- Dropdown Header -->
         <section class="section">
           <div class="container">
             <h1 class="is-size-1 has-text-centered">
-              Select Your Graduate Program
+              Select Your Program
             </h1>
             <!-- <h2 class="is-size-4 has-text-centered">
               Pro-Tip: Click Choose to Enter Your Request. Click Choose Again to See Results for Your Dream Course.
@@ -78,7 +72,7 @@
               </div>
             </div>
             <div class="control">
-              <button type="submit" class="button is-dark" id="program" onclick="main()">Choose</button>
+              <button type="submit" class="button is-dark" id="program">Choose</button>
             </div>
           </div>
         </form>
@@ -104,6 +98,7 @@
         </div>
     </div>
 
+    <!-- Bookmarks Page -->
     <div id="bookmarks_page" style="display:none" > 
       <!-- onclick="loadBookMarks()" -->     
           <!-- Page Header -->
@@ -116,23 +111,60 @@
           </section>
           
             <!-- All Bookmarks -->
-            <div class="saved-list">
+            <div class="saved-list"  id="saved-list">
               <ul class="saves" id="saves">
                       <!-- THIS IS WHERE THE BOOKMARKS WILL GO WHEN WE CREATE THEM WITH JS -->
               </ul>
             </div>
           
     </div>
+
+    <!-- Detaile Course Page From Bookmarks -->
     <div id="details-page" style="display:none" > 
       <div id="item_details"> 
-
+        <p>Avril Lavigne Fan CLub</p>
         
       </div> 
-      <a href="#" onclick="return show('bookmarks_page','details-page','index_page');">
+      <a href="#" onclick="return showpage('bookmarks_page','details-page','index_page');">
         <button class="learn-more">Go Back to Your Bookmarks</button>
       </a>
-  </div>
+    </div>
 
+     <!-- About Page -->
+    <div id="about-page" style="display:none">
+        <!-- About Course Connector -->
+        <div class='course-title-home' > 
+            <div class="tile is-parent" >
+              <div class="tile is-child box" id="about">
+                <p class="title" id="about-title">What Course Connector Aims to Accomplish</p>
+                <p id="about-content">Course Connector is a web application that allows students at the University of Maryland find courses that not only fulfill their major requirements, but align with their interests as well.  </p>
+                <p>This application will provide students with random course recommendations based on their selected major. By displaying a single course at a time, users will be able to discover courses that align with their interests in a more consumable fashion and save them to reference later.  
+                </p>
+              </div>
+            </div>
+          </div>
+  
+
+      <!-- User Manuel -->
+      <div class='course-title-home' > 
+          <div class="tile is-parent" >
+            <div class="tile is-child box" id="about">
+              <p class="title" id="about-title">How To Use Course Connector</p>
+              <ol>
+                  <li>Begin by selecting the department associated with your declared major or major of interest in the dropdown menu. </li>
+                  <li>Once you find your major confirm your choice by clicking the “Choose” button next to the dropdown bar</li>
+                  <li>After hitting the “Choose” button you should see a new course recommendation that aligns with your selected department</li>
+                  <li>Review the Details of the course in the tiles presented below </li>
+                  <li>If you are not interested in the displayed course click the “X” button on the bottom left hand side of the window to view a new course recommendation</li>
+                  <li>If you like the course and would consider enrolling it, click the heart button in the bottom right hand corner to save it to your bookmarked courses.</li>
+                  <li>After clicking this button you will also see a new course recommendation </li>
+                  <li>To view your saved courses, click the bookmarks icon at the navigation bar on the bottom of the page.</li>
+                  <li>To view more details about your saved courses such as the full description, average grade and sections, click the “Learn More” button on the saved course tile </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+    </div>
 
     <script src="test.js"></script>
   </body>

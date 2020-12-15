@@ -1,8 +1,11 @@
-let courses = []; 
-let currCourse = new Object(); 
+let courses = []; //ADDED DONGYEON
+let book_collection = []
+let currCourse = new Object(); //ADDED DONGYEON
 
 //Prefrences Dropdown Bar 
 async function main() {
+  
+  // Make sure the deparments are only added to the dropdown once
   if (document.querySelector('#tester_option').text === "") {
   //Yomi's function that gets the departments for the dropdown 
     getDepartments();
@@ -17,23 +20,23 @@ async function main() {
     const gened = document.querySelector("#gened");
     const method = document.querySelector("#method");
     const description = document.querySelector("#description");
-
+  
+    // DONGYEON ADDED
     form.addEventListener("submit", async(event) => {
       event.preventDefault();
       await loadCourses();
       await refreshPage();
     
       const formdata = $(event.target).serializeArray();
-      // Grad programs have a name of "grad-program" in this array
-      //console.log("department selected: ", formdata);      
     });
 }
+
+// DONGYEON ADDED
 async function loadCourses(){
+  console.log("load courses licked");
   const dept_id_here = document.forms[0].elements[0];
-  //No longer Spaghetti code yay!
   const dept_id_for_data = dept_id_here.value.substring(0,4);
-  // Just stringing together the API url here before we fetch the data 
-  //const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
+
   await fetch('/getCourses/'+ dept_id_for_data, {
     method: 'GET'
   })
@@ -43,17 +46,18 @@ async function loadCourses(){
   });
 }
 
+
 async function refreshPage(){
+  // display message notifying the user that there are no courses for that department that exist in the API
   if (courses.length === 0) {
     const no_courses_message = document.querySelector(".course-rec");
     no_courses_message.innerHTML = `<p class="no_courses" id="no_courses">We're sorry for any inconvienience. This isn't an error. It looks like our API doesn't have courses for that department. We want you to have access to all of our data, so we kept this department in the list. If you want to see if Testudo has more information on whether this department has classes you can go here:</p>
     <a href="https://app.testudo.umd.edu/soc/202101">Link to Testudo's Schedule of Classes</a>`
   }
-
+  // DONGYEON ADDED
   const random = Math.floor(Math.random() * courses.length); 
   currCourse = courses[random];  
   const avgGPAitem =  await avgGPA(courses[random].course_id);
-  console.log(avgGPAitem)
   const course_popup = document.querySelector(".course-rec");
   course_popup.innerHTML = 
     `<!-- Course Code and Title -->
@@ -114,7 +118,8 @@ async function refreshPage(){
     </div>`
     
 }
-
+ 
+// DONGYEON ADDED
 async function avgGPA(course_id) {
   //Fetching PlanetTerp API
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -164,12 +169,15 @@ async function avgGPA(course_id) {
   });
 }
 
-
 //Show New Course Recommendation and Save To Bookmarks
 function NewRecFromFave(){
   if (!document.getElementById(`${currCourse.course_id}`)){
     const favbutton = document.querySelector("#fav_button");
 
+    // ADD THE BOOKMARKED COURSE TO THE ARRAY FOR DISPLAYING ON THE DETAILS PAGE
+    book_collection.push(currCourse)
+    console.log(book_collection, "BOOOK ARRAY")
+    console.log(`${currCourse.course_id}`);
       //Kennedy's attempt to format the boomarks properly
       const saves = document.querySelector(".saves");
       saves.innerHTML += `
@@ -204,8 +212,8 @@ function NewRecFromFave(){
                 </div>
               </div>
             </div>
-            <div class="learn-more-button">  
-            <a href="#" class="learn" onclick="DetailsPage(${currCourse.course_id});return show('details-page','index_page','bookmarks_page');">
+            <div class="learn-more-button ${currCourse.course_id}">  
+            <a href="#" class="learn" onclick="DetailsPage(${currCourse.course_id}, book_collection);return showpage('details-page','index_page','bookmarks_page');">
               <button class="learn-more">Learn More</button>
             </a> 
           </div>            
@@ -216,109 +224,99 @@ function NewRecFromFave(){
       refreshPage(); //refresh recommendation 
   };
 
-function DetailsPage(book_item_id){
-
-  // need to get the courseID from book item id to display the desciption and average grade information by grabbing it from whatever array it was in to display it
-  // need to do an if statement that limits the number of appends here
-  const item_details_page = document.getElementById("item_details");
+// FUNCTION TO DISPLAY SINGLE COURSE CONTENT ON THE LEARN MORE PAGE
+function DetailsPage(book_item_id, book_collection){
+  // Remove what's there to prep for what will be added
+  const detailcontent = document.querySelector("#item_details");
   
-  const specific_fave_deat = document.getElementById(book_item_id);
-  item_details_page.append(specific_fave_deat)
-  // item_details_page.innerHTML = `
-  //   <li id=${currCourse.course_id}>
-  //   <!-- Course Code and Title -->
-  //   <div id="for_bookmarks">
-  //     <div class='course-title-home' > 
-  //       <div class="tile is-parent" >
-  //         <div class="tile is-child box" id="course-code">
-  //           <p class="title" id="courseID">${courses[random].course_id}</p>
-  //           <p class="subtitle" id="courseTitle">${courses[random].name}</p>
-  //         </div>
-  //       </div>
-  //     </div>
-    
-  //   <!-- THIS IS THE TILE I ADDED - ISABEAU  
-  //   <div class="tile is-child box" id="saved-course"> -->
-  //   <!-- Course Stat Tiles -->
-  //       <div class="course-stats">
-  //         <div class="tile is-ancestor">
-  //           <div class="tile is-parent">
-  //             <article class="tile is-child box" id="course-stat">
-  //               <p class="title" id="credit">${courses[random].credits}</p>
-  //               <p class="subtitle">Credits</p>
-  //             </article>
-  //           </div>
+
+
+  console.log(document.querySelector("#item_details"), 'Where details are going')
+  
+  console.log(book_collection, 'course code to find bookmark item')
+  
+  // need to do an if statement that limits the number of appends here
+  for(i = 0; i < book_collection.length; i++) {
+    console.log(i) //two of the curly braces
+    if (book_item_id.id === book_collection[i].course_id) {
+      
+      console.log(book_collection[i].course_id, 'this is items id in the collection of saved bookmarks')
+
+      const coursedetail = book_collection[i];
+      // Add the course details to the page
+      console.log(coursedetail)
+      
+      detailcontent.innerHTML = '';
+
+      detailcontent.innerHTML += `
+      <div id="for_bookmarks">
+        <div class='course-title-home' > 
+          <div class="tile is-parent" >
+            <div class="tile is-child box" id="course-code">
+              <p class="title" id="courseID">${coursedetail.course_id}</p>
+              <p class="subtitle" id="courseTitle">${coursedetail.name}</p>
+            </div>
+          </div>
+        </div>
+      
+      <!-- THIS IS THE TILE I ADDED - ISABEAU  
+      <div class="tile is-child box" id="saved-course"> -->
+      <!-- Course Stat Tiles -->
+          <div class="course-stats">
+            <div class="tile is-ancestor">
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="credit">${coursedetail.credits}</p>
+                  <p class="subtitle">Credits</p>
+                </article>
+              </div>
+              
             
-          
-  //           <div class="tile is-parent">
-  //             <article class="tile is-child box" id="course-stat">
-  //               <p class="title" id="gened">${courses[random].gen_ed}</p>
-  //               <p class="subtitle">Gen-Ed</p>
-  //             </article>
-  //           </div>
-  //           <div class="tile is-parent">
-  //             <article class="tile is-child box" id="course-stat">
-  //               <p class="title" id="method">${courses[random].grading_method}</p>
-  //               <p class="subtitle">Grading Method</p>
-  //             </article>
-  //           </div>
-  //         </div>
-  //       </div>
-  //     </div>  
-  //   <!-- Course Description -->
-  //   <div class='course-description-home' > 
-  //     <div class="tile is-parent" >
-  //       <div class="tile is-child box" id="home-description">
-  //         <p class="title" >Description</p>
-  //         <p class="subtitle" id="description">${courses[random].description}</p>
-  //         </div>
-  //     </div>
-  //   </div>
-  //   <!-- Average Grade -->
-  //     <div class="tile is-parent" >
-  //       <div class="tile is-child box" id="average-grade">
-  //         <p id="avgGrade"><b>Average Grade: </b>
-  //         ${avgGPAitem}
-  //         </p>
-  //       </div>
-  //     </div>
-  //       `;
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="gened">${coursedetail.gen_ed}</p>
+                  <p class="subtitle">Gen-Ed</p>
+                </article>
+              </div>
+              <div class="tile is-parent">
+                <article class="tile is-child box" id="course-stat">
+                  <p class="title" id="method">${coursedetail.grading_method}</p>
+                  <p class="subtitle">Grading Method</p>
+                </article>
+              </div>
+            </div>
+          </div>
+        </div>  
+      <!-- Course Description -->
+      <div class='course-description-home' > 
+        <div class="tile is-parent" >
+          <div class="tile is-child box" id="home-description">
+            <p class="title" >Description</p>
+            <p class="subtitle" id="description">${coursedetail.description}</p>
+            </div>
+        </div>
+      </div>
+      <!-- Average Grade -->
+        <div class="tile is-parent" >
+          <div class="tile is-child box" id="average-grade">
+            <p id="avgGrade"><b>Average Grade: </b>
+            ${avgGPA(coursedetail.course_id)}
+            </p>
+          </div>
+        </div> `;
+      
+   
+ 
 };
+  }; }
 
-
+// DISPLAY A NEW RECOMMENDATION BUT DO NOT SAVE IT TO BOOKMARKS
 function NewRecFromX(){
   refreshPage();
-
 }
 
-
-function findMatches(wordsToMatch, courses) {
-  return courses.filter((course) => {
-    const regex = new RegExp(wordsToMatch, "gi");
-    return course.name.match(regex);
-  });
-}
-
-function displayMatches() {
-  const matchArray = findMatches(this.value, courses);
-  // NEED TO MAKE SURE THIS ONLY RUNS if the person has clicked the button 3 times
-  if (matchArray.length === 0) {
-    return [];
-  }
-  const HTMLmatches = matchArray.map((course) => {
-    const li = document.createElement("li");
-    const span = document.createElement("span");
-    span.className = "name";
-    span.innerText = course.name;
-    li.append(span);
-    return li;
-  });
-
-  return HTMLmatches;
-}
-
-// Yomi's Code: for Preferences Departments Drop down at top of index/home page
-const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101"; // I ALSO CHANGED THE SEMESTER HERE - ISABEAU
+// GET THE DEPARTMENTS TO DISPLAY THEM ON THE DROPDOWN
+const dep_api_url = "https://api.umd.io/v1/courses/departments?semester=202101"; 
 
 async function getDepartments() {
   //get department data from api
@@ -346,29 +344,40 @@ async function getDepartments() {
   //document.getElementById('grad-program').innerHTML = dep_list ;
 }
 
-//Removing saved course when you click the bookmark button
+// REMOVE SAVED COURSE WHEN YOU CLICK REMOVE BOOKMARKS BUTTON
 function removeSavedCourse(book_item_id) {
   book_item_id.remove();
 }
 
-
-// REPLACE THIS WITH QUERY SELECTOR
-function show(shown, hidden1, hidden2) {
+// SHOW ONLY A SINGLE PAGE AT A TIME FUNCTION
+function showpage(shown, hidden1, hidden2, hidden3) {
   document.getElementById(shown).style.display='block';
   document.getElementById(hidden1).style.display='none';
   document.getElementById(hidden2).style.display='none';
+  document.getElementById(hidden3).style.display='none';
   if (shown === 'details-page') {
     DetailsPage();
   }
   return false;
 };
 
-function loadBookMarks(){
-    for(i = 0; i <bookmark.length; i++){
-      document.write(JSON.stringify(bookmark[i]));
-    };
+
+//Pop up for bookmarks
+function snackBar(){
+  if(document.getElementById(saves) === null){
+    const snackbar = document.createElement("div");
+    const snackbarText = document.createTextNode("Please favorite courses from the home page to have them added to your bookmarks! Click to remove");
+    snackbar.appendChild(snackbarText);
+    snackbar.setAttribute("id","snackbar");
+    snackbar.setAttribute("onclick","snackbar.remove()");
+    const testvar = document.getElementById("saved-list");
+    testvar.appendChild(snackbar);
+    //return snackbar;
+  }
+
 };
 
+console.log(snackBar());
 
 removeSavedCourse;
 
