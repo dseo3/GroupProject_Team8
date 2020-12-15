@@ -1,6 +1,6 @@
-let courses = []; //ADDED DONGYEON
+let courses = []; 
 let book_collection = []
-let currCourse = new Object(); //ADDED DONGYEON
+let currCourse = new Object(); 
 let avgGPAitem = 0.0;
 
 //Prefrences Dropdown Bar 
@@ -8,7 +8,7 @@ async function main() {
   
   // Make sure the deparments are only added to the dropdown once
   if (document.querySelector('#tester_option').text === "") {
-  //Yomi's function that gets the departments for the dropdown 
+    //Yomi's function that gets the departments for the dropdown 
     getDepartments();
   } 
     // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
@@ -32,7 +32,7 @@ async function main() {
     });
 }
 
-// DONGYEON ADDED
+// Loads courses from the API by getting the course code (e.g. INST, ENGR) and using it to specify the page of the api
 async function loadCourses(){
   const dept_id_here = document.forms[0].elements[0];
   const dept_id_for_data = dept_id_here.value.substring(0,4);
@@ -46,19 +46,22 @@ async function loadCourses(){
   });
 }
 
-
+// Refresh the page function
 async function refreshPage(){
+  
   // display message notifying the user that there are no courses for that department that exist in the API
   if (courses.length === 0) {
     const no_courses_message = document.querySelector(".course-rec");
     no_courses_message.innerHTML = `<p class="no_courses" id="no_courses">We're sorry for any inconvienience. This isn't an error. It looks like our API doesn't have courses for that department. We want you to have access to all of our data, so we kept this department in the list. If you want to see if Testudo has more information on whether this department has classes you can go here:</p>
     <a href="https://app.testudo.umd.edu/soc/202101">Link to Testudo's Schedule of Classes</a>`
   }
-  // DONGYEON ADDED
+
+  // Function to calculate the average GPA for a given course is called here and a random course is displayed
   const random = Math.floor(Math.random() * courses.length); 
   currCourse = courses[random];  
   await avgGPA(courses[random].course_id);
 
+  // Code to have the course details pop up once you hit the button
   const course_popup = document.querySelector(".course-rec");
   course_popup.innerHTML = 
     `<!-- Course Code and Title -->
@@ -72,8 +75,7 @@ async function refreshPage(){
       </div>
     </div>
   
-  <!-- THIS IS THE TILE I ADDED - ISABEAU  
-  <div class="tile is-child box" id="saved-course"> -->
+
   <!-- Course Stat Tiles -->
       <div class="course-stats">
         <div class="tile is-ancestor">
@@ -84,13 +86,15 @@ async function refreshPage(){
             </article>
           </div>
           
-        
+        <!-- GEN-ED -->
           <div class="tile is-parent">
             <article class="tile is-child box" id="course-stat">
               <p class="title" id="gened">${courses[random].gen_ed}</p>
               <p class="subtitle">Gen-Ed</p>
             </article>
           </div>
+
+        <!-- GRADING METHOD -->
           <div class="tile is-parent">
             <article class="tile is-child box" id="course-stat">
               <p class="title" id="method">${courses[random].grading_method}</p>
@@ -100,6 +104,7 @@ async function refreshPage(){
         </div>
       </div>
     </div>  
+
   <!-- Course Description -->
   <div class='course-description-home' > 
     <div class="tile is-parent" >
@@ -109,6 +114,7 @@ async function refreshPage(){
         </div>
     </div>
   </div>
+
   <!-- Average Grade -->
     <div class="tile is-parent" >
       <div class="tile is-child box" id="average-grade">
@@ -120,7 +126,7 @@ async function refreshPage(){
     
 }
  
-// DONGYEON ADDED
+// Calculate the average GPA function
 async function avgGPA(course_id) {
   //Fetching PlanetTerp API
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
@@ -129,7 +135,7 @@ async function avgGPA(course_id) {
 
   await fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
   .then((response) => response.json())
-  .then((data) => { // i know you've done this with data but alex explicitly said it needs to be avail courses
+  .then((data) => { 
     data.forEach((item) => {   
       let total =
         item["A+"] * 4.0 +
@@ -168,18 +174,21 @@ async function avgGPA(course_id) {
   });
 }
 
-//Show New Course Recommendation and Save To Bookmarks
+//Show New Course Recommendation and Save current one to Bookmarks page
 function NewRecFromFave(){
+  
+  // if the course is not already on the bookmarks page, add it
   if (!document.getElementById(`${currCourse.course_id}`)){
     const favbutton = document.querySelector("#fav_button");
 
     // ADD THE BOOKMARKED COURSE TO THE ARRAY FOR DISPLAYING ON THE DETAILS PAGE
     book_collection.push(currCourse)
-    console.log(book_collection, "BOOOK ARRAY")
-    console.log(`${currCourse.course_id}`);
-      //Kennedy's attempt to format the boomarks properly
-      const saves = document.querySelector(".saves");
-      saves.innerHTML += `
+    console.log(book_collection, "Array of the books the user has saved")
+    console.log(`${currCourse.course_id}`, "id of the current course in new rec from fave");
+      
+    // Add the details for the course to the bookmarks page
+    const saves = document.querySelector(".saves");
+    saves.innerHTML += `
       <li id=${currCourse.course_id}>
         <div class="tile is-parent tester_item">
           <div class="tile is-child box" id="saved-course">
@@ -220,29 +229,30 @@ function NewRecFromFave(){
         </div>
       </li>`;
     }
-      refreshPage(); //refresh recommendation 
+    
+    //Function to refresh the page with new course details
+    refreshPage(); //refresh recommendation 
   };
 
 // FUNCTION TO DISPLAY SINGLE COURSE CONTENT ON THE LEARN MORE PAGE
 function DetailsPage(book_item_id, book_collection){
-  // Remove what's there to prep for what will be added
+  
+  // Remove what's on that page to prep for what will be added
   const detailcontent = document.querySelector("#item_details");
   
-
-
   console.log(document.querySelector("#item_details"), 'Where details are going')
   
   console.log(book_collection, 'course code to find bookmark item')
   
-  // need to do an if statement that limits the number of appends here
+  // Add the course details to the page
   for(i = 0; i < book_collection.length; i++) {
-    console.log(i) //two of the curly braces
+    console.log(i)
     if (book_item_id.id === book_collection[i].course_id) {
       
       console.log(book_collection[i].course_id, 'this is items id in the collection of saved bookmarks')
 
       const coursedetail = book_collection[i];
-      // Add the course details to the page
+      
       console.log(coursedetail)
       
       detailcontent.innerHTML = '';
@@ -258,8 +268,6 @@ function DetailsPage(book_item_id, book_collection){
           </div>
         </div>
       
-      <!-- THIS IS THE TILE I ADDED - ISABEAU  
-      <div class="tile is-child box" id="saved-course"> -->
       <!-- Course Stat Tiles -->
           <div class="course-stats">
             <div class="tile is-ancestor">
@@ -303,9 +311,6 @@ function DetailsPage(book_item_id, book_collection){
             </p>
           </div>
         </div> `;
-      
-   
- 
 };
   }; }
 
