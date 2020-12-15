@@ -35,7 +35,7 @@ app.route('/api')
     res.json(json_isa);
   });
   
-// DONGYEON ADDED
+// TO GET COURSES BY DEPARTMENT
 app.route('/getCourses/:id')
   .get( async (req, res) => {
     console.log('GET request detected for get Courses');
