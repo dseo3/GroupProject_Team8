@@ -1,6 +1,7 @@
 let courses = []; //ADDED DONGYEON
 let book_collection = []
 let currCourse = new Object(); //ADDED DONGYEON
+let avgGPAitem = 0.0;
 
 //Prefrences Dropdown Bar 
 async function main() {
@@ -33,7 +34,6 @@ async function main() {
 
 // DONGYEON ADDED
 async function loadCourses(){
-  console.log("load courses licked");
   const dept_id_here = document.forms[0].elements[0];
   const dept_id_for_data = dept_id_here.value.substring(0,4);
 
@@ -57,7 +57,8 @@ async function refreshPage(){
   // DONGYEON ADDED
   const random = Math.floor(Math.random() * courses.length); 
   currCourse = courses[random];  
-  const avgGPAitem =  await avgGPA(courses[random].course_id);
+  await avgGPA(courses[random].course_id);
+
   const course_popup = document.querySelector(".course-rec");
   course_popup.innerHTML = 
     `<!-- Course Code and Title -->
@@ -163,9 +164,7 @@ async function avgGPA(course_id) {
     });
 
     TotalClassGPA /= data.length;
-    return TotalClassGPA.toFixed(2)
-    // document.getElementById("avgGrade").innerHTML =
-    //   "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
+    avgGPAitem = TotalClassGPA.toFixed(2);
   });
 }
 
