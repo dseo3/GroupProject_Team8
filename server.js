@@ -51,6 +51,15 @@ app.route('/api')
     res.json(json_isa);
   });
 
+app.route('/getCourses/:id')
+  .get( async (req, res) => {
+    console.log('GET request detected');
+    const pref_api = "https://api.umd.io/v1/courses?dept_id=" + req.params.id
+    const data = await fetch(pref_api);
+    const json = await data.json();
+    res.json(json);
+  });
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}!`);
 });

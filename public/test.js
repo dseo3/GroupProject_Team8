@@ -1,30 +1,13 @@
-let courses = []; //ADDED DONGYEON
-let currCourse = new Object(); //ADDED DONGYEON
+let courses = []; 
+let currCourse = new Object(); 
 
 //Prefrences Dropdown Bar 
 async function main() {
   if (document.querySelector('#tester_option').text === "") {
   //Yomi's function that gets the departments for the dropdown 
-  await getDepartments();
-  console.log(document.querySelector('#tester_option').text);
+    getDepartments();
   } 
     // STUFF ISABEAU ADDED FOR STRING FORMATTING THE URL
-    const dept_id_here = document.forms[0].elements[0];
-    //No longer Spaghetti code yay!
-    const dept_id_for_data = dept_id_here.value.substring(0,4);
-    console.log("Selected Department Code:", dept_id_for_data);
-    // Just stringing together the API url here before we fetch the data 
-    const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
-    console.log("API url is", pref_api)
-    const availCourses = await fetch(pref_api); 
-    // PREVIOUSLY"https://api.umd.io/v1/courses?semester=202008");
-      
-    console.log(availCourses, "THIS IS WHERE THE MATCH HAPPENS")
-    
-    //parses api data into json value
-    courses = await availCourses.json(); 
-    console.log("Courses within selected department", courses)
-    
     const favbutton = document.querySelector("#fav_button");
     const form = document.querySelector(".course_select");
     const program = document.querySelector("#program");
@@ -35,27 +18,42 @@ async function main() {
     const method = document.querySelector("#method");
     const description = document.querySelector("#description");
 
-    form.addEventListener("submit", (event) => {
+    form.addEventListener("submit", async(event) => {
       event.preventDefault();
-      refreshPage();
-      
+      await loadCourses();
+      await refreshPage();
+    
       const formdata = $(event.target).serializeArray();
       // Grad programs have a name of "grad-program" in this array
-      console.log("department selected: ", formdata);      
+      //console.log("department selected: ", formdata);      
     });
 }
+async function loadCourses(){
+  const dept_id_here = document.forms[0].elements[0];
+  //No longer Spaghetti code yay!
+  const dept_id_for_data = dept_id_here.value.substring(0,4);
+  // Just stringing together the API url here before we fetch the data 
+  //const pref_api = "https://api.umd.io/v1/courses?dept_id=" + dept_id_for_data
+  await fetch('/getCourses/'+ dept_id_for_data, {
+    method: 'GET'
+  })
+  .then((fromServer) => fromServer.json())
+  .then((fromServer) => {
+    courses = fromServer;
+  });
+}
 
-function refreshPage(){
+async function refreshPage(){
   if (courses.length === 0) {
     const no_courses_message = document.querySelector(".course-rec");
     no_courses_message.innerHTML = `<p class="no_courses" id="no_courses">We're sorry for any inconvienience. This isn't an error. It looks like our API doesn't have courses for that department. We want you to have access to all of our data, so we kept this department in the list. If you want to see if Testudo has more information on whether this department has classes you can go here:</p>
     <a href="https://app.testudo.umd.edu/soc/202101">Link to Testudo's Schedule of Classes</a>`
   }
-  
+
   const random = Math.floor(Math.random() * courses.length); 
-  
-  currCourse = courses[random];    
-  const avgGPAitem = avgGPA(courses[random].course_id)
+  currCourse = courses[random];  
+  const avgGPAitem =  await avgGPA(courses[random].course_id);
+  console.log(avgGPAitem)
   const course_popup = document.querySelector(".course-rec");
   course_popup.innerHTML = 
     `<!-- Course Code and Title -->
@@ -117,17 +115,16 @@ function refreshPage(){
     
 }
 
-function avgGPA(course_id) {
+async function avgGPA(course_id) {
   //Fetching PlanetTerp API
   const proxyurl = "https://cors-anywhere.herokuapp.com/";
   const urlTerp = "https://api.planetterp.com/v1/grades?course=" + course_id ; // site that doesn’t send Access-Control-*
   let TotalClassGPA = 0.0;
 
-  fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
-
+  await fetch(proxyurl + urlTerp) // https://cors-anywhere.herokuapp.com/https://example.com
   .then((response) => response.json())
   .then((data) => { // i know you've done this with data but alex explicitly said it needs to be avail courses
-    data.forEach((item) => { 
+    data.forEach((item) => {   
       let total =
         item["A+"] * 4.0 +
         item["A"] * 4.0 +
@@ -161,7 +158,6 @@ function avgGPA(course_id) {
     });
 
     TotalClassGPA /= data.length;
-    console.log(TotalClassGPA.toFixed(2));
     return TotalClassGPA.toFixed(2)
     // document.getElementById("avgGrade").innerHTML =
     //   "<b>" + "Average Grade: " + "</b>" + TotalClassGPA.toFixed(2);
@@ -174,7 +170,6 @@ function NewRecFromFave(){
   if (!document.getElementById(`${currCourse.course_id}`)){
     const favbutton = document.querySelector("#fav_button");
 
-    console.log(`${currCourse.course_id}`)
       //Kennedy's attempt to format the boomarks properly
       const saves = document.querySelector(".saves");
       saves.innerHTML += `
@@ -228,7 +223,6 @@ function DetailsPage(book_item_id){
   const item_details_page = document.getElementById("item_details");
   
   const specific_fave_deat = document.getElementById(book_item_id);
-  console.log(specific_fave_deat, "THIS IS THE ITEM BEING MOVE TO DETAILS")
   item_details_page.append(specific_fave_deat)
   // item_details_page.innerHTML = `
   //   <li id=${currCourse.course_id}>
@@ -309,7 +303,6 @@ function displayMatches() {
   const matchArray = findMatches(this.value, courses);
   // NEED TO MAKE SURE THIS ONLY RUNS if the person has clicked the button 3 times
   if (matchArray.length === 0) {
-    console.log("no matches");
     return [];
   }
   const HTMLmatches = matchArray.map((course) => {
@@ -331,9 +324,6 @@ async function getDepartments() {
   //get department data from api
   const response = await fetch(dep_api_url);
   const json = await response.json();
-
-  console.log(json);
-
 
   //create a list of departments
   var departments = json;
@@ -358,8 +348,6 @@ async function getDepartments() {
 
 //Removing saved course when you click the bookmark button
 function removeSavedCourse(book_item_id) {
-  console.log("removing course warning");
-  console.log(book_item_id);
   book_item_id.remove();
 }
 
@@ -376,7 +364,6 @@ function show(shown, hidden1, hidden2) {
 };
 
 function loadBookMarks(){
-  console.log("bookmarks page ----")
     for(i = 0; i <bookmark.length; i++){
       document.write(JSON.stringify(bookmark[i]));
     };
