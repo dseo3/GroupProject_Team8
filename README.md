@@ -18,7 +18,7 @@ While developing Course Connector we aimed to consider our audience (University 
 
 ## Link to User Manual: [User Manual Link](#user-manual)
  
-## Link to Developer Manual:[Developer Manual Link](#developer-manual)
+## Link to Developer Manual: [Developer Manual Link](#developer-manual)
  
  
  
